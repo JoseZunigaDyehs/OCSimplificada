@@ -1,8 +1,9 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 
 //GENERAR DATA DE LOS FIELDS
 function OC() {
-  return <h1>kjasdlkñjsakladj</h1>
+  return <Typography>kjasdlkñjsakladj</Typography>
 }
 
 export default OC
