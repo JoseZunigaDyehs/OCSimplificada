@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 //import API from 'config/api'
 import { Loader } from 'components'
-import { ordenDataMock } from 'mockup/orden'
+import { ordenDataMock } from 'mockup'
 
 const OrdenContext = React.createContext()
 

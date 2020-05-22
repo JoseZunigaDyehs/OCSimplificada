@@ -12,7 +12,7 @@ function Header() {
     <Grid container justify="space-between" alignItems="flex-start">
       <Grid>
         <Typography variant="h1">{`Orden de compra ${ordenId}`}</Typography>
-        <Typography variant="subtitle1">{convenioMarco}</Typography>
+        <Typography variant="subtitle1">{`${convenioMarco}.`}</Typography>
       </Grid>
       <Button>Volver</Button>
     </Grid>
