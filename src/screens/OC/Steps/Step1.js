@@ -3,9 +3,10 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { capitalize } from 'utils'
 import { useRegionComunas, useOrden } from 'context'
+import { TextArea } from 'components/fieldsForm'
 
 //TEXTAREA
-function Step1({ title = '', fieldsById }) {
+function Step1({ title = '', fieldsById, onChange }) {
   const {
     orden: { regionId },
   } = useOrden()
@@ -18,7 +19,7 @@ function Step1({ title = '', fieldsById }) {
       <Grid>
         <Grid item md={9}></Grid>
         <Grid item md={3}>
-          q 67
+          <TextArea {...fieldsById.despacho_observacion} onChange={onChange} />
         </Grid>
       </Grid>
     </Grid>

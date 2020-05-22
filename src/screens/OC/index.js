@@ -11,13 +11,12 @@ function OC() {
     return validator[rule.type]({ ...rule, value })
   }
   const onChangefield = ({ name, value }) => {
-    debugger
     const nextField = fieldsById[name]
     nextField.value = value
-    const isValid = validate(nextField)
+    nextField.isValid = validate(nextField)
     setFieldsById((prev) => ({
       ...prev,
-      [name]: { ...[name], value, isValid },
+      [name]: { ...[name], ...nextField },
     }))
   }
   const isAllValid = () => {}

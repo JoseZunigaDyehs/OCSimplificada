@@ -2,19 +2,18 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import InputWrapper from './InputWrapper'
 
-function TextAreaWrapper(inputProps) {
+function TextArea({ name, value, isRequired, onChange, ...rest }) {
   return (
-    <InputWrapper {...inputProps}>
+    <InputWrapper name={name} value={value} isRequired={isRequired} {...rest}>
       <TextField
-        id="outlined-multiline-static"
-        label="Multiline"
+        onChange={({ target: { name, value } }) => onChange({ name, value })}
+        id={name}
         multiline
         rows={4}
-        defaultValue="Default Value"
-        variant="outlined"
+        name={name}
       />
     </InputWrapper>
   )
 }
 
-export default TextAreaWrapper
+export default TextArea
