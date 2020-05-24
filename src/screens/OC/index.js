@@ -21,7 +21,7 @@ function OC() {
   }
   const isAllValid = () => {}
   return (
-    <Grid>
+    <Grid container>
       <Step1
         title="1. Despacho"
         onChange={onChangefield}

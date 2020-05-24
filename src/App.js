@@ -5,6 +5,7 @@ import theme from 'config/theme'
 import { routes } from 'routes'
 import { OrdenProvider, RegionComunasProvider } from 'context'
 import Layout from 'screens/Layout'
+import './assets/main.css'
 
 function App() {
   return (

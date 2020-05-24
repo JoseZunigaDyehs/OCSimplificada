@@ -1,7 +1,5 @@
 import Header from './Header'
 import Loader from './Loader'
+import TextWrapper from './TextWrapper'
 
-export {
-    Header,
-    Loader,
-}
+export { Header, TextWrapper, Loader }

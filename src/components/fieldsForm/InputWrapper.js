@@ -19,10 +19,12 @@ function InputWrapper({
   children,
   type,
 }) {
-  const message = rule.message ? rule.message : getMessage({ type, label })
+  const message = rule.message || getMessage({ type, label })
   return (
     <Grid>
-      <Typography>{`${label} ${isRequired && `(*)`}`}</Typography>
+      <Typography color="secondary">{`${label} ${
+        isRequired && `(*)`
+      }`}</Typography>
       {children}
       {!isValid && <Typography>{message}</Typography>}
     </Grid>
