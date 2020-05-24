@@ -76,7 +76,7 @@ function TextInput({
         name={name}
         disabled={disabled}
         placeholder={placeholder}
-        value={value}
+        value={value === null ? '' : value}
         endAdornment={<IconInput status={status} />}
         onFocus={({ target: { name } }) => {
           onFocusHandle({ name, isFocused: true })

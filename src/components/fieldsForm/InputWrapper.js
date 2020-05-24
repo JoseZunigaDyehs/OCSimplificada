@@ -75,7 +75,7 @@ function InputWrapper({
           {status === 'error' && message}
         </Typography>
         {type === 'textarea' && (
-          <Typography className={classes.invalidText} item>
+          <Typography className={classes.invalidText}>
             {getRestCharsValid()}
           </Typography>
         )}
