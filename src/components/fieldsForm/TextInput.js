@@ -1,50 +1,92 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import InputWrapper from './InputWrapper'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { colors } from 'config/theme'
+import {
+  faExclamationCircle,
+  faCheckCircle,
+} from '@fortawesome/free-solid-svg-icons'
 
-//TODO: ESTILOS PARA STATUS
-const styles = ({ palette }) => ({
+const styles = makeStyles(() => ({
   root: {
+    '& input:valid + fieldset': {
+      borderWidth: 0,
+    },
     '& $notchedOutline': {
-      borderWidth: 1,
-      borderColor: palette.secondary.light,
+      borderWidth: 0,
     },
     '&:hover $notchedOutline': {
-      borderWidth: 1,
-      borderColor: palette.secondary.light,
+      borderWidth: 0,
     },
     '&$focused $notchedOutline': {
-      borderWidth: 1,
-      borderColor: palette.primary.main,
+      borderWidth: 0,
     },
   },
   focused: {},
-  notchedOutline: {},
-})
+  notchedOutline: {
+    borderWidth: 0,
+  },
+}))
+
+function IconInput({ status }) {
+  if (status === 'default' || status === 'focused') return null
+  return (
+    <InputAdornment>
+      <FontAwesomeIcon
+        color={status === 'error' ? colors.error.main : colors.success.main}
+        icon={status === 'error' ? faExclamationCircle : faCheckCircle}
+      />
+    </InputAdornment>
+  )
+}
 
 function TextInput({
   name,
   value,
-  placeholder = 'kasdhkjashdkjsadh',
-  isRequired,
+  placeholder = 'placeholder',
+  required,
   onChange,
-  classes,
+  disabled,
+  isValid,
+  type,
+  status,
+  onFocusHandle,
   ...rest
 }) {
+  const classes = styles(isValid)
   return (
-    <InputWrapper name={name} value={value} isRequired={isRequired} {...rest}>
+    <InputWrapper
+      name={name}
+      value={value}
+      required={required}
+      isValid={isValid}
+      type={type}
+      status={status}
+      {...rest}
+    >
       <OutlinedInput
         onChange={({ target: { name, value } }) => onChange({ name, value })}
         id={name}
         classes={classes}
-        //multiline
+        multiline={type === 'textarea'}
         rows={6}
         name={name}
+        disabled={disabled}
         placeholder={placeholder}
+        value={value}
+        endAdornment={<IconInput status={status} />}
+        onFocus={({ target: { name } }) => {
+          onFocusHandle({ name, isFocused: true })
+        }}
+        onBlur={({ target: { name } }) => {
+          onFocusHandle({ name, isFocused: false })
+        }}
       />
     </InputWrapper>
   )
 }
 
-export default withStyles(styles)(TextInput)
+export default TextInput

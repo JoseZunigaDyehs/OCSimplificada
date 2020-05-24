@@ -49,6 +49,7 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
   fontWeights,
+  fontSizes,
   typography: {
     htmlFontSize: 10,
     useNextVariants: true,
@@ -85,7 +86,7 @@ const theme = createMuiTheme({
       fontFamily: familyRoboto,
       color: colors.secondary.dark,
     },
-    body1: {
+    body2: {
       fontSize: fontSizes[1],
       fontWeight: fontWeights[1],
       lineHeight: `1.8rem`,
@@ -126,7 +127,7 @@ theme.overrides = {
   },
   MuiOutlinedInput: {
     input: {
-      padding: ' 0 1.6rem',
+      padding: ' 0 .8rem',
       '&::placeholder': {
         color: colors.secondary.light,
         opacity: 1,
@@ -137,6 +138,11 @@ theme.overrides = {
     root: {
       width: '100%',
       minHeight: inputHeight,
+    },
+    disabled: {
+      background: '#F4F7FF',
+      color: colors.secondary.light,
+      opacity: 1,
     },
     input: {
       height: 'auto',
@@ -149,7 +155,7 @@ theme.overrides = {
       backgroundColor: colors.secondary.main,
       minWidth: 50,
       minHeight: 50,
-      borderRadius: `4px`,
+      borderRadius: `5px`,
       textTransform: `none`,
       fontWeight: fontWeights[3],
       fontSize: `16px`,

@@ -14,12 +14,12 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
   wrapperOutlined: {
     marginRight: spacing(4),
     border: `1px solid ${palette.secondary.light}`,
-    borderRadius: '6px',
-    padding: spacing(2),
+    borderRadius: '5px',
+    padding: spacing(3),
   },
 }))
 
-function Step1({ title = '', fieldsById, onChange }) {
+function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
   const classes = useStyles()
   const {
     orden: { regionId },
@@ -52,7 +52,11 @@ function Step1({ title = '', fieldsById, onChange }) {
           </Grid>
         </Grid>
         <Grid item md={4}>
-          <TextInput {...fieldsById.despacho_observacion} onChange={onChange} />
+          <TextInput
+            {...fieldsById.despacho_observacion}
+            onChange={onChange}
+            onFocusHandle={onFocusHandle}
+          />
         </Grid>
       </Grid>
     </Grid>

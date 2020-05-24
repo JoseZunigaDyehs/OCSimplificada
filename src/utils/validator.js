@@ -23,7 +23,7 @@ export const validator = {
   //pasandole un atributo ranges
   //ranges: Number Array [min,max]
   range: ({ value, min, max }) => {
-    return value && value.length > min && value.length < max
+    return value !== '' && value.length > min && value.length < max
   },
   //String / valida Money
   money: ({ value }) => {
