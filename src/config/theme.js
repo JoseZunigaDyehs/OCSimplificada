@@ -152,29 +152,24 @@ theme.overrides = {
   MuiButton: {
     root: {
       color: `white`,
-      backgroundColor: colors.secondary.main,
-      minWidth: 50,
-      minHeight: 50,
-      borderRadius: `5px`,
+      minWidth: 200,
+      minHeight: 40,
       textTransform: `none`,
-      fontWeight: fontWeights[3],
-      fontSize: `16px`,
-      letterSpacing: `0.6px`,
+      fontWeight: fontWeights[1],
+      fontSize: fontSizes[1],
+      borderRadius: '2rem',
       '&:hover': {
-        textDecoration: `underline`,
-        backgroundColor: `${colors.secondary.main}`,
-        color: `white`,
         '&:disabled': {
-          textDecoration: `none`,
-          backgroundColor: colors.terniary,
+          backgroundColor: '#D5D7DB',
+          color: 'white',
         },
       },
       '&:disabled': {
         cursor: `not-allowed`,
         pointerEvents: `auto`,
-        color: `white`,
-        opacity: 0.5,
-        backgroundColor: colors.terniary,
+        backgroundColor: '#D5D7DB',
+        color: 'white',
+        border: 'none !important',
       },
     },
     text: {
@@ -182,20 +177,20 @@ theme.overrides = {
       paddingRight: theme.spacing(3),
     },
     contained: {
-      backgroundColor: colors.secondary.dark,
-      color: colors.primary.main,
+      backgroundColor: colors.secondary.light,
+      color: 'white',
       '&:hover': {
-        textDecoration: `underline`,
         backgroundColor: `${colors.secondary.main}`,
         color: `white`,
         '&:disabled': {
-          textDecoration: `none`,
-          backgroundColor: colors.terniary,
+          backgroundColor: '#D5D7DB',
+          color: 'white',
         },
       },
-    },
-    disabled: {
-      opacity: 0.5,
+      '&:disabled': {
+        backgroundColor: '#D5D7DB',
+        color: 'white',
+      },
     },
   },
   MuiSvgIcon: {

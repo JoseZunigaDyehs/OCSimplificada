@@ -5,7 +5,7 @@ import { capitalize } from 'utils'
 import { useRegionComunas, useOrden } from 'context'
 import { TextInput } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextWrapper } from 'components'
+import { TextWrapper, Button } from 'components'
 
 const useStyles = makeStyles(({ spacing, palette }) => ({
   title: {
@@ -16,6 +16,9 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
     border: `1px solid ${palette.secondary.light}`,
     borderRadius: '5px',
     padding: spacing(3),
+  },
+  button: {
+    margin: spacing(1, 0, 2, 0),
   },
 }))
 
@@ -37,15 +40,22 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
           <Grid className={classes.wrapperOutlined}>
             <TextWrapper
               label="Dirección"
-              subLabel="Dirección no aplica para productos virtuales"
+              subLabel="Dirección no aplica para productos virtuales (VARIABLE)"
             />
+            <Button
+              className={classes.button}
+              type="primary"
+              variant="outlined"
+            >
+              Cambiar dirección
+            </Button>
             <TextWrapper
               label="Plazo de entrega"
               subLabel={
                 <Typography>
-                  Tu producto será entregado en un plazo de{' '}
-                  <strong>0 días hábiles</strong>, según condiciones de despacho
-                  para esta región
+                  Tu producto será entregado en un plazo de
+                  <strong>{` 0 días hábiles (VARIABLE)`}</strong>, según
+                  condiciones de despacho para esta región
                 </Typography>
               }
             />

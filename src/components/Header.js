@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
+import { Button } from 'components'
 import { useOrden } from 'context/OrdenContext'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -25,9 +25,11 @@ function Header() {
     >
       <Grid>
         <Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
-        <Typography variant="subtitle1">{`${convenioMarco}.`}</Typography>
+        <Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
       </Grid>
-      <Button>Volver</Button>
+      <Button type="secondary" variant="outlined">
+        Volver
+      </Button>
     </Grid>
   )
 }
