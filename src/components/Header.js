@@ -16,6 +16,9 @@ function Header() {
   const {
     orden: { ordenId, convenioMarco },
   } = useOrden()
+  const goBack = () => {
+    window.history.back()
+  }
   return (
     <Grid
       container
@@ -27,7 +30,7 @@ function Header() {
         <Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
         <Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
       </Grid>
-      <Button type="secondary" variant="outlined">
+      <Button type="secondary" variant="outlined" onClick={goBack}>
         Volver
       </Button>
     </Grid>

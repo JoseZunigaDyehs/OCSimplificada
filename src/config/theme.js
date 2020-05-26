@@ -2,7 +2,6 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 const fontWeights = [300, 400, 500, 700]
 const inputHeight = `4rem`
-
 export const colors = {
   primary: {
     main: `#0064FF`,
@@ -35,7 +34,7 @@ const fontSizes = [
   48, //7
 ]
 const familyRoboto = [`Roboto`, `sans-serif`].join(`,`)
-const familyRobotoSlab = [`Roboto Slab`, `Roboto`].join(`,`)
+//const familyRobotoSlab = [`Roboto Slab`, `Roboto`].join(`,`)
 
 const theme = createMuiTheme({
   palette: {
@@ -156,7 +155,7 @@ theme.overrides = {
       minHeight: 40,
       textTransform: `none`,
       fontWeight: fontWeights[1],
-      fontSize: fontSizes[1],
+      fontSize: fontSizes[2],
       borderRadius: '2rem',
       '&:hover': {
         '&:disabled': {

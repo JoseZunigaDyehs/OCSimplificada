@@ -22,13 +22,25 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
   },
 }))
 
-function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
+function Step1({
+  title = '',
+  fieldsById,
+  onChange,
+  onFocusHandle,
+  onClose,
+  setModalConfig,
+}) {
   const classes = useStyles()
   const {
     orden: { regionId },
   } = useOrden()
   const { regiones } = useRegionComunas()
   const region = regiones.find(({ id }) => id === regionId).label
+  //TODO: Dejar lógica acá de lo que se llena en la modal
+  const openModal = () => {
+    //TODO: Llenar direcciones
+    setModalConfig({ show: true, type: 'direction' })
+  }
   return (
     <Grid container direction="column">
       <Typography className={classes.title}>{title}</Typography>
@@ -46,6 +58,7 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
               className={classes.button}
               type="primary"
               variant="outlined"
+              onClick={openModal}
             >
               Cambiar dirección
             </Button>
