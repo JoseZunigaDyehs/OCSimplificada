@@ -172,8 +172,12 @@ theme.overrides = {
       },
     },
     text: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
+      backgroundColor: `transparent`,
+      color: colors.secondary.light,
+      '&:hover': {
+        backgroundColor: `transparent`,
+        textDecoration: `underline`,
+      },
     },
     contained: {
       backgroundColor: colors.secondary.light,

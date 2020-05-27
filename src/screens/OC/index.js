@@ -18,6 +18,7 @@ function OC() {
   const onClose = () => {
     setModalConfig(modalConfigInit)
   }
+  console.log(modalConfig)
   return (
     <Grid container>
       <Step1
@@ -28,7 +29,7 @@ function OC() {
         setModalConfig={setModalConfig}
       />
       {modalConfig.show && (
-        <ModalConfig modalConfig={modalConfig} onClose={onClose} />
+        <ModalConfig modal={modalConfig} onClose={onClose} />
       )}
     </Grid>
   )

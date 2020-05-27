@@ -18,7 +18,7 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
     padding: spacing(3),
   },
   button: {
-    margin: spacing(1, 0, 2, 0),
+    margin: spacing(1, 0, 4, 0),
   },
 }))
 
@@ -27,7 +27,6 @@ function Step1({
   fieldsById,
   onChange,
   onFocusHandle,
-  onClose,
   setModalConfig,
 }) {
   const classes = useStyles()
@@ -36,10 +35,15 @@ function Step1({
   } = useOrden()
   const { regiones } = useRegionComunas()
   const region = regiones.find(({ id }) => id === regionId).label
+  const direcciones = [{ id: 1, name: 'Primera direccion 1111' }]
   //TODO: Dejar lógica acá de lo que se llena en la modal
   const openModal = () => {
     //TODO: Llenar direcciones
-    setModalConfig({ show: true, type: 'direction' })
+    setModalConfig({
+      show: true,
+      type: 'direction',
+      data: { region, direcciones },
+    })
   }
   return (
     <Grid container direction="column">
