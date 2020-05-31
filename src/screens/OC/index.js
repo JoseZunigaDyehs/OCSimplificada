@@ -18,7 +18,6 @@ function OC() {
   const onClose = () => {
     setModalConfig(modalConfigInit)
   }
-  console.log(modalConfig)
   return (
     <Grid container>
       <Step1

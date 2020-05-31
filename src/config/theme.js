@@ -132,6 +132,9 @@ theme.overrides = {
         opacity: 1,
       },
     },
+    notchedOutline: {
+      borderWidth: '0px !important',
+    },
   },
   MuiInputBase: {
     root: {
@@ -146,6 +149,16 @@ theme.overrides = {
     input: {
       height: 'auto',
       color: colors.secondary.dark,
+    },
+  },
+  MuiSelect: {
+    select: {
+      '&:focus': {
+        backgroundColor: 'transparent',
+      },
+    },
+    icon: {
+      color: 'transparent',
     },
   },
   MuiButton: {
@@ -174,8 +187,9 @@ theme.overrides = {
     text: {
       backgroundColor: `transparent`,
       color: colors.secondary.light,
+      minWidth: 'auto',
       '&:hover': {
-        backgroundColor: `transparent`,
+        backgroundColor: `transparent !important`,
         textDecoration: `underline`,
       },
     },

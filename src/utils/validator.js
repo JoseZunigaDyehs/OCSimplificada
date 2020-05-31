@@ -20,8 +20,7 @@ export const validator = {
     return value && regex.test(value.trim())
   },
   //String / min y max del string,
-  //pasandole un atributo ranges
-  //ranges: Number Array [min,max]
+  //pasandole un atributo min y max
   range: ({ value, min, max }) => {
     return value !== '' && value.length > min && value.length < max
   },

@@ -32,6 +32,9 @@ const useStyles = makeStyles(
     focused: {
       borderColor: palette.primary.main,
     },
+    wrapper: {
+      marginBottom: spacing(3),
+    },
   }),
 )
 
@@ -42,6 +45,7 @@ function InputWrapper({
   type,
   status = 'default',
   value,
+  md = 12,
   children,
 }) {
   const classes = useStyles()
@@ -53,6 +57,7 @@ function InputWrapper({
         return `* Escribe ${label.toLowerCase()}`
     }
   }
+
   const message = rule.message || getMessage({ type, label })
   const getRestCharsValid = () => {
     const { max } = rule
@@ -63,7 +68,7 @@ function InputWrapper({
     return `${rest}/${max}`
   }
   return (
-    <Grid>
+    <Grid item md={md} className={classes.wrapper}>
       <Typography color="secondary" className={classes.label}>{`${label} ${
         required ? `(*)` : ``
       }`}</Typography>

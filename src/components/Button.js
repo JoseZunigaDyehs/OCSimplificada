@@ -2,8 +2,6 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
-//TODO: OUTLINED
-//TODO: COLOR
 const useStyles = makeStyles(({ palette }) => ({
   primary: {
     '&:hover': {
@@ -31,29 +29,54 @@ const useStyles = makeStyles(({ palette }) => ({
     },
   },
 }))
+const useTextStyles = makeStyles(({ palette }) => ({
+  primary: {
+    '&:hover': {
+      backgroundColor: palette.primary.dark,
+    },
+  },
+  secondary: {
+    '&:hover': {
+      color: palette.primary.main,
+      borderColor: palette.primary.main,
+    },
+  },
+  success: {
+    '&:hover': {
+      color: palette.success.dark,
+    },
+  },
+  error: {
+    color: palette.error.main,
+    '&:hover': {
+      color: palette.error.dark,
+    },
+  },
+}))
 
 /**
  *
- * VARIANT =  'contained' (DEFAULT) 'outlined'
- * TYPE = primary, secondary(VOLVER), success, error
+ * VARIANT =  'contained' (DEFAULT) 'outlined', 'text
+ * COLOR = primary, secondary, success, error, default
  */
-
 function ButtonWrapper({
   onClick,
   disabled,
   variant = 'contained',
-  type = 'default',
+  color = 'default',
   className = '',
   children,
 }) {
   const classes = useStyles()
-
+  const textClasses = useTextStyles()
   return (
     <Button
       variant={variant}
-      color={type}
+      color={color}
       disabled={disabled}
-      className={`${classes[type]} ${className}`}
+      className={`${
+        variant === 'text' ? textClasses[color] : classes[color]
+      } ${className}`}
       onClick={onClick}
     >
       {children}

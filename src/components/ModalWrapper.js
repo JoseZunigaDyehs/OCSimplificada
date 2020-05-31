@@ -121,7 +121,7 @@ function ModalWrapper({
                     alignItems="center"
                     className={classes.buttonWrapper}
                   >
-                    <Button type="primary" onClick={onAccept}>
+                    <Button color="primary" onClick={onAccept}>
                       {onAcceptText}
                     </Button>
                     {onCancelText && (

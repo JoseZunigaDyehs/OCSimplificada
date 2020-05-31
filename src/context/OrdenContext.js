@@ -9,6 +9,13 @@ function OrdenProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [orden, setOrden] = useState(null)
 
+  const setDireccionDespacho = (direccionDespacho) => {
+    setOrden((prev) => ({ ...prev, direccionDespacho }))
+  }
+  const setDireccionesDespacho = (direccionesDespacho) => {
+    setOrden((prev) => ({ ...prev, direccionesDespacho }))
+  }
+
   useEffect(() => {
     const getOrden = async () => {
       try {
@@ -24,7 +31,9 @@ function OrdenProvider({ children }) {
   }, [])
 
   return (
-    <OrdenContext.Provider value={{ orden }}>
+    <OrdenContext.Provider
+      value={{ orden, setDireccionesDespacho, setDireccionDespacho }}
+    >
       {loading ? <Loader /> : children}
     </OrdenContext.Provider>
   )

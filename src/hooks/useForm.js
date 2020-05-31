@@ -3,18 +3,7 @@ import { validator } from 'utils'
 
 function useForm({ defaultFieldsById }) {
   const [fieldsById, setFieldsById] = useState(defaultFieldsById)
-  const validate = ({ value, rule }) => {
-    const isValid = validator[rule.type]({ ...rule, value })
-    return isValid
-  }
-  const onFocusHandle = ({ name, isFocused }) => {
-    const nextField = fieldsById[name]
-    nextField.status = isFocused ? 'focused' : 'default'
-    setFieldsById((prev) => ({
-      ...prev,
-      [name]: { ...[name], ...nextField },
-    }))
-  }
+
   const getStatus = ({ isValid, required, type, value, status }) => {
     if (required) {
       return isValid ? 'success' : 'error'
@@ -37,6 +26,18 @@ function useForm({ defaultFieldsById }) {
       return 'success'
     }
   }
+  const validate = ({ value, rule }) => {
+    const isValid = validator[rule.type]({ ...rule, value })
+    return isValid
+  }
+  const onFocusHandle = ({ name, isFocused }) => {
+    const nextField = fieldsById[name]
+    nextField.status = isFocused ? 'focused' : getStatus({ ...nextField })
+    setFieldsById((prev) => ({
+      ...prev,
+      [name]: { ...[name], ...nextField },
+    }))
+  }
   const onChangefield = ({ name, value }) => {
     const nextField = fieldsById[name]
     nextField.value = value
@@ -47,7 +48,7 @@ function useForm({ defaultFieldsById }) {
       [name]: { ...[name], ...nextField },
     }))
   }
-  return { fieldsById, onFocusHandle, onChangefield }
+  return { fieldsById, onFocusHandle, onChangefield, setFieldsById }
 }
 
 export default useForm

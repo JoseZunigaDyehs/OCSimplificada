@@ -46,7 +46,7 @@ function IconInput({ status }) {
 function TextInput({
   name,
   value,
-  placeholder = 'placeholder',
+  placeholder = '',
   required,
   onChange,
   disabled,

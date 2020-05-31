@@ -30,7 +30,7 @@ function Header() {
         <Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
         <Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
       </Grid>
-      <Button type="secondary" variant="outlined" onClick={goBack}>
+      <Button color="secondary" variant="outlined" onClick={goBack}>
         Volver
       </Button>
     </Grid>

@@ -3,7 +3,7 @@ import DirectionModal from './DirectionModal'
 
 const modalType = {
   direction: (props) => {
-    return <DirectionModal maxWidth="800px" {...props} />
+    return <DirectionModal typeDirection="direccionesDespacho" {...props} />
   },
 }
 

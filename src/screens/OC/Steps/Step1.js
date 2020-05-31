@@ -30,26 +30,27 @@ function Step1({
   setModalConfig,
 }) {
   const classes = useStyles()
-  const {
-    orden: { regionId },
-  } = useOrden()
-  const { regiones } = useRegionComunas()
-  const region = regiones.find(({ id }) => id === regionId).label
-  const direcciones = [{ id: 1, name: 'Primera direccion 1111' }]
-  //TODO: Dejar lógica acá de lo que se llena en la modal
-  const openModal = () => {
-    //TODO: Llenar direcciones
+  const { orden } = useOrden()
+  const { regiones, getComunas } = useRegionComunas()
+  const regionLabel = regiones.find(({ id }) => id === orden.regionId).label
+  const openModal = async () => {
+    const nextComunas = await getComunas(orden.regionId)
     setModalConfig({
       show: true,
       type: 'direction',
-      data: { region, direcciones },
+      data: {
+        regionLabel,
+        direcciones: orden.direccionesDespacho,
+        comunas: nextComunas,
+      },
     })
   }
+
   return (
     <Grid container direction="column">
       <Typography className={classes.title}>{title}</Typography>
       <Typography className={classes.title}>{`Región ${capitalize(
-        region,
+        regionLabel,
       )}`}</Typography>
       <Grid container>
         <Grid item md={8}>
@@ -60,7 +61,7 @@ function Step1({
             />
             <Button
               className={classes.button}
-              type="primary"
+              color="primary"
               variant="outlined"
               onClick={openModal}
             >
