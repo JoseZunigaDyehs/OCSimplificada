@@ -68,6 +68,7 @@ function Step1({
 			}
 		}
 		getcomunasAPI()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	useEffect(() => {
 		if (comunas.length > 0) {
