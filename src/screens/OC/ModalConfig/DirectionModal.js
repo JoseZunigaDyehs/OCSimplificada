@@ -10,135 +10,210 @@ import { TextInput, Select } from 'components/fieldsForm'
 //import API from 'config/api'
 
 const useStyles = makeStyles(({ spacing }) => ({
-  direccionesWrapper: {
-    padding: spacing(2, 0),
-  },
+	direccionesWrapper: {
+		padding: spacing(2, 0),
+	},
 }))
 
-function UpsertDireccion({ direccionId, comunas, orden }) {
-  const upsertFormInit = () => {
-    let nextFieldsById = {
-      comunas: {
-        name: 'comunas',
-        required: true,
-        rule: { type: 'select', min: 5, max: 50 },
-        label: 'Comunas',
-        isValid: true,
-        type: 'select',
-        value: -1,
-        status: 'default',
-        items: comunas,
-      },
-      direccion: {
-        name: 'direccion',
-        required: true,
-        rule: { type: 'empty' },
-        label: 'Dirección',
-        isValid: true,
-        status: 'default',
-        type: 'text',
-        value: '',
-      },
-    }
-    if (direccionId) {
-      const { direccionesDespacho } = orden
-      const direccion = direccionesDespacho.find((x) => x.id === direccionId)
-      nextFieldsById = {
-        comunas: {
-          ...nextFieldsById.comunas,
-          value: direccion.comunaId,
-          status: 'success',
-        },
-        direccion: {
-          ...nextFieldsById.direccion,
-          value: direccion.name,
-          status: 'success',
-        },
-      }
-    }
-    return nextFieldsById
-  }
-  const { fieldsById, onFocusHandle, onChangefield } = useForm({
-    defaultFieldsById: upsertFormInit(),
-  })
-  return (
-    <Grid container>
-      <Select
-        onFocusHandle={onFocusHandle}
-        onChange={onChangefield}
-        {...fieldsById.comunas}
-      />
-      <TextInput
-        onFocusHandle={onFocusHandle}
-        onChange={onChangefield}
-        {...fieldsById.direccion}
-      />
-      <Grid container justify="center">
-        <Button variant="text">Cancelar</Button>
-        <Button color="primary">Aceptar</Button>
-      </Grid>
-    </Grid>
-  )
+function UpsertDireccion({
+	direccionId,
+	comunas,
+	orden,
+	goBack,
+	edit,
+	create,
+}) {
+	const upsertFormInit = () => {
+		let nextFieldsById = {
+			comunas: {
+				name: 'comunas',
+				required: true,
+				rule: { type: 'select', min: 5, max: 50 },
+				label: 'Comunas',
+				isValid: true,
+				type: 'select',
+				value: -1,
+				status: 'default',
+				items: comunas,
+				md: 6,
+			},
+			direccion: {
+				name: 'direccion',
+				required: true,
+				rule: { type: 'empty' },
+				label: 'Dirección',
+				isValid: true,
+				status: 'default',
+				type: 'text',
+				value: '',
+				md: 6,
+			},
+		}
+		if (direccionId) {
+			const { direccionesDespacho } = orden
+			const direccion = direccionesDespacho.find(x => x.id === direccionId)
+			nextFieldsById = {
+				comunas: {
+					...nextFieldsById.comunas,
+					value: direccion.comunaId,
+					status: 'success',
+				},
+				direccion: {
+					...nextFieldsById.direccion,
+					value: direccion.label,
+					status: 'success',
+				},
+			}
+		}
+		return nextFieldsById
+	}
+	const { fieldsById, onFocusHandle, onChangefield, format } = useForm({
+		defaultFieldsById: upsertFormInit(),
+	})
+	const upsertHandle = () => {
+		const nextData = format()
+		if (direccionId) {
+			edit(nextData)
+		} else {
+			create(nextData)
+		}
+	}
+	return (
+		<Grid container>
+			<Grid container>
+				<Select
+					paddingPosition={'right'}
+					onFocusHandle={onFocusHandle}
+					onChange={onChangefield}
+					{...fieldsById.comunas}
+				/>
+				<TextInput
+					paddingPosition={'left'}
+					onFocusHandle={onFocusHandle}
+					onChange={onChangefield}
+					{...fieldsById.direccion}
+				/>
+			</Grid>
+			<Grid container justify="center">
+				<Button variant="text" onClick={goBack}>
+					Volver
+				</Button>
+				<Button onClick={upsertHandle} color="success">
+					{direccionId ? 'Editar' : 'Crear'}
+				</Button>
+			</Grid>
+		</Grid>
+	)
 }
 
-function DirectionModal({ modal: { data }, typeDirection, ...props }) {
-  const classes = useStyles()
-  const [direccionSelectId, setDireccionSelectId] = useState(null)
-  const [isUpserting, setIsUpserting] = useState(false)
-  const [upsertId, setUpsertId] = useState(null)
-  const { setDireccionDespacho, setDireccionesDespacho, orden } = useOrden()
-  const { regionLabel, comunas } = data
+function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
+	const classes = useStyles()
+	const { setDireccionDespacho, setDireccionesDespacho, orden } = useOrden()
+	const [direccionSelectId, setDireccionSelectId] = useState(
+		orden.direccionDespacho ? orden.direccionDespacho.id : null
+	)
+	const [isUpserting, setIsUpserting] = useState(false)
+	const [upsertId, setUpsertId] = useState(null)
+	const { regionLabel, comunas } = data
 
-  const onSelectDireccion = (id) => {
-    if (id === direccionSelectId) {
-      return setDireccionSelectId(null)
-    }
-    setDireccionSelectId(id)
-  }
-  const openUpsert = (id = null) => {
-    setUpsertId(id)
-    setIsUpserting(true)
-  }
-  const onAcceptHandle = () => {
-    setDireccionDespacho()
-  }
-  useEffect(() => {
-    if (orden[typeDirection].length === 0) {
-      //API.getDireccionesDespacho(orden.ordenId)
-      setDireccionesDespacho(direccionesDespacho)
-    }
-  }, [])
-  return (
-    <ModalWrapper
-      title="Direcciones de despacho"
-      onAccept={onAcceptHandle}
-      withButtons={!isUpserting}
-      {...props}
-    >
-      <Grid container>
-        <Typography variant="h4">{`Región ${regionLabel}`}</Typography>
-        <Grid container className={classes.direccionesWrapper}>
-          {isUpserting ? (
-            <UpsertDireccion
-              direccionId={upsertId}
-              comunas={comunas}
-              orden={orden}
-            />
-          ) : (
-            orden[typeDirection].map((direccion, index) => (
-              <ItemList
-                key={index}
-                {...direccion}
-                onChange={onSelectDireccion}
-                checkedId={direccionSelectId}
-                openUpsert={openUpsert}
-              />
-            ))
-          )}
-        </Grid>
-      </Grid>
-    </ModalWrapper>
-  )
+	const onSelectDireccion = id => {
+		if (id === direccionSelectId) {
+			return setDireccionSelectId(null)
+		}
+		setDireccionSelectId(id)
+	}
+	const openUpsert = (id = null) => {
+		setUpsertId(id)
+		setIsUpserting(true)
+	}
+	const onAcceptHandle = () => {
+		const nextDireccion = orden[typeDirection].find(
+			x => x.id === direccionSelectId
+		)
+		setDireccionDespacho(nextDireccion)
+		onClose()
+	}
+	const goBack = () => {
+		setIsUpserting(false)
+		setUpsertId(null)
+	}
+	const edit = nextData => {
+		const direcciones = orden[typeDirection]
+		const nextDirecciones = direcciones.map(x => {
+			if (x.id === upsertId) {
+				return {
+					...x,
+					label: nextData.direccion,
+					comunaId: nextData.comunas,
+				}
+			}
+			return x
+		})
+		setDireccionesDespacho(nextDirecciones)
+		goBack()
+	}
+	const create = nextData => {
+		const nextDirecciones = orden[typeDirection]
+		nextDirecciones.push({
+			id: nextDirecciones.length + 1,
+			label: nextData.direccion,
+			comunaId: nextData.comunas,
+		})
+		debugger
+		setDireccionesDespacho(nextDirecciones)
+		goBack()
+	}
+	useEffect(() => {
+		if (orden[typeDirection].length === 0) {
+			//API.getDireccionesDespacho(orden.ordenId)
+			setDireccionesDespacho(direccionesDespacho)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+	return (
+		<ModalWrapper
+			title="Direcciones de despacho"
+			onAccept={onAcceptHandle}
+			withButtons={!isUpserting}
+			maxWidth="800px"
+			onClose={onClose}
+			{...props}
+		>
+			<Grid container>
+				<Grid container alignItems="center" justify="space-between">
+					<Typography variant="body1">{`Región ${regionLabel}`}</Typography>
+					{!isUpserting && (
+						<Button color="primary" variant="text" onClick={() => openUpsert()}>
+							+ Nueva dirección
+						</Button>
+					)}
+				</Grid>
+				<Grid container className={classes.direccionesWrapper}>
+					{isUpserting ? (
+						<UpsertDireccion
+							direccionId={upsertId}
+							comunas={comunas}
+							orden={orden}
+							goBack={goBack}
+							edit={edit}
+							create={create}
+						/>
+					) : (
+						orden[typeDirection].map((direccion, index) => (
+							<ItemList
+								key={index}
+								{...direccion}
+								onChange={onSelectDireccion}
+								checkedId={direccionSelectId}
+								openUpsert={openUpsert}
+								comunas={comunas}
+							/>
+						))
+					)}
+				</Grid>
+			</Grid>
+		</ModalWrapper>
+	)
 }
 
 export default DirectionModal

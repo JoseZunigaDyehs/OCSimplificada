@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { capitalize } from 'utils'
@@ -8,87 +8,123 @@ import { makeStyles } from '@material-ui/core/styles'
 import { TextWrapper, Button } from 'components'
 
 const useStyles = makeStyles(({ spacing, palette }) => ({
-  title: {
-    paddingBottom: spacing(2),
-  },
-  wrapperOutlined: {
-    marginRight: spacing(4),
-    border: `1px solid ${palette.secondary.light}`,
-    borderRadius: '5px',
-    padding: spacing(3),
-  },
-  button: {
-    margin: spacing(1, 0, 4, 0),
-  },
+	title: {
+		paddingBottom: spacing(2),
+	},
+	wrapperOutlined: {
+		marginRight: spacing(4),
+		border: `1px solid ${palette.secondary.light}`,
+		borderRadius: '5px',
+		padding: spacing(3),
+	},
+	plazoEntrega: {
+		margin: spacing(4, 0, 0, 0),
+	},
+	button: {
+		marginTop: spacing(1),
+	},
 }))
 
 function Step1({
-  title = '',
-  fieldsById,
-  onChange,
-  onFocusHandle,
-  setModalConfig,
+	title = '',
+	fieldsById,
+	onChange,
+	onFocusHandle,
+	setModalConfig,
 }) {
-  const classes = useStyles()
-  const { orden } = useOrden()
-  const { regiones, getComunas } = useRegionComunas()
-  const regionLabel = regiones.find(({ id }) => id === orden.regionId).label
-  const openModal = async () => {
-    const nextComunas = await getComunas(orden.regionId)
-    setModalConfig({
-      show: true,
-      type: 'direction',
-      data: {
-        regionLabel,
-        direcciones: orden.direccionesDespacho,
-        comunas: nextComunas,
-      },
-    })
-  }
-
-  return (
-    <Grid container direction="column">
-      <Typography className={classes.title}>{title}</Typography>
-      <Typography className={classes.title}>{`Región ${capitalize(
-        regionLabel,
-      )}`}</Typography>
-      <Grid container>
-        <Grid item md={8}>
-          <Grid className={classes.wrapperOutlined}>
-            <TextWrapper
-              label="Dirección"
-              subLabel="Dirección no aplica para productos virtuales (VARIABLE)"
-            />
-            <Button
-              className={classes.button}
-              color="primary"
-              variant="outlined"
-              onClick={openModal}
-            >
-              Cambiar dirección
-            </Button>
-            <TextWrapper
-              label="Plazo de entrega"
-              subLabel={
-                <Typography>
-                  Tu producto será entregado en un plazo de
-                  <strong>{` 0 días hábiles (VARIABLE)`}</strong>, según
-                  condiciones de despacho para esta región
-                </Typography>
-              }
-            />
-          </Grid>
-        </Grid>
-        <Grid item md={4}>
-          <TextInput
-            {...fieldsById.despacho_observacion}
-            onChange={onChange}
-            onFocusHandle={onFocusHandle}
-          />
-        </Grid>
-      </Grid>
-    </Grid>
-  )
+	const classes = useStyles()
+	const [comunas, setComunas] = useState([])
+	const [comunaLabel, setComunaLabel] = useState('')
+	const {
+		orden: {
+			regionId,
+			regionLabel,
+			direccionDespacho,
+			direccionesDespacho,
+			withDireccionDespacho,
+			diasHabiles,
+		},
+	} = useOrden()
+	const { getComunas } = useRegionComunas()
+	const openModal = () => {
+		setModalConfig({
+			show: true,
+			type: 'direction',
+			data: {
+				regionLabel,
+				direcciones: direccionesDespacho,
+				comunas,
+			},
+		})
+	}
+	useEffect(() => {
+		const getcomunasAPI = async () => {
+			try {
+				const nextComunas = await getComunas(regionId)
+				setComunas(nextComunas)
+			} catch (e) {
+				console.log(e)
+				//ERROR
+			}
+		}
+		getcomunasAPI()
+	}, [])
+	useEffect(() => {
+		if (comunas.length > 0) {
+			const nextComunaLabel = direccionDespacho
+				? comunas.find(x => x.id === direccionDespacho.comunaId).label
+				: ''
+			setComunaLabel(nextComunaLabel)
+		}
+	}, [direccionDespacho, comunas])
+	const direccion = withDireccionDespacho
+		? direccionDespacho
+			? `${direccionDespacho.label}, ${comunaLabel}`
+			: 'No existe dirección.'
+		: 'No aplica para productos virtuales.'
+	return (
+		<Grid container direction="column">
+			<Typography className={classes.title}>{title}</Typography>
+			<Typography className={classes.title}>{`Región ${capitalize(
+				regionLabel
+			)}`}</Typography>
+			<Grid container>
+				<Grid item md={8}>
+					<Grid className={classes.wrapperOutlined}>
+						<TextWrapper label="Dirección" subLabel={direccion} />
+						{withDireccionDespacho && (
+							<Button
+								className={classes.button}
+								color="primary"
+								variant="outlined"
+								onClick={openModal}
+							>
+								Cambiar dirección
+							</Button>
+						)}
+						<TextWrapper
+							className={classes.plazoEntrega}
+							label="Plazo de entrega"
+							subLabel={
+								<Typography>
+									Tu producto será entregado en un plazo de
+									<strong>{` ${diasHabiles} días hábiles`}</strong>, según
+									condiciones de despacho para esta región
+								</Typography>
+							}
+						/>
+					</Grid>
+				</Grid>
+				<Grid item md={4}>
+					<TextInput
+						{...fieldsById.despacho_observacion}
+						onChange={onChange}
+						onFocusHandle={onFocusHandle}
+					/>
+				</Grid>
+			</Grid>
+		</Grid>
+	)
 }
 
 export default Step1
