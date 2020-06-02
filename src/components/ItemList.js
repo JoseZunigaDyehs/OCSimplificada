@@ -31,6 +31,7 @@ function ItemList({
 	checkedId,
 	openUpsert,
 	comunas,
+	withUpsert,
 }) {
 	const classes = useStyles()
 	const comunaLabel = comunas.find(x => x.id === comunaId).label
@@ -50,14 +51,16 @@ function ItemList({
 				<Typography variant="subtitle1">{`${label}, ${comunaLabel}`}</Typography>
 			</Grid>
 			<Grid item sm={2} container justify="flex-end">
-				<Button
-					variant="text"
-					color="primary"
-					className={classes.buttonEdit}
-					onClick={() => openUpsert(id)}
-				>
-					Editar
-				</Button>
+				{withUpsert && (
+					<Button
+						variant="text"
+						color="primary"
+						className={classes.buttonEdit}
+						onClick={() => openUpsert(id)}
+					>
+						Editar
+					</Button>
+				)}
 			</Grid>
 		</Grid>
 	)

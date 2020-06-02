@@ -114,7 +114,7 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 	)
 	const [isUpserting, setIsUpserting] = useState(false)
 	const [upsertId, setUpsertId] = useState(null)
-	const { regionLabel, comunas } = data
+	const { regionLabel, comunas, withUpsert = true } = data
 
 	const onSelectDireccion = id => {
 		if (id === direccionSelectId) {
@@ -182,7 +182,7 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 			<Grid container>
 				<Grid container alignItems="center" justify="space-between">
 					<Typography variant="body1">{`Región ${regionLabel}`}</Typography>
-					{!isUpserting && (
+					{withUpsert && !isUpserting && (
 						<Button color="primary" variant="text" onClick={() => openUpsert()}>
 							+ Nueva dirección
 						</Button>
@@ -207,6 +207,7 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 								checkedId={direccionSelectId}
 								openUpsert={openUpsert}
 								comunas={comunas}
+								withUpsert={withUpsert}
 							/>
 						))
 					)}
