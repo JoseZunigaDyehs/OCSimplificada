@@ -21,6 +21,9 @@ const useStyles = makeStyles(
 			borderRadius: '5px',
 			width: '100%',
 		},
+		noBorder: {
+			borderColor: 'transparent',
+		},
 		default: {
 			borderColor: palette.secondary.light,
 		},
@@ -93,7 +96,11 @@ function InputWrapper({
 			<Typography color="secondary" className={classes.label}>{`${label} ${
 				required ? `(*)` : ``
 			}`}</Typography>
-			<Grid className={`${classes.inputWrapper} ${classes[status]}`}>
+			<Grid
+				className={`${classes.inputWrapper} ${
+					type === 'radio' ? classes.noBorder : classes[status]
+				}`}
+			>
 				{children}
 			</Grid>
 			<Grid container justify="space-between">

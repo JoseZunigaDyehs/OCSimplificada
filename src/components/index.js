@@ -4,5 +4,6 @@ import TextWrapper from './TextWrapper'
 import ModalWrapper from './ModalWrapper'
 import Button from './Button'
 import ItemList from './ItemList'
+import Divider from './Divider'
 
-export { Header, ModalWrapper, TextWrapper, Loader, Button, ItemList }
+export { Divider, Header, ModalWrapper, TextWrapper, Loader, Button, ItemList }

@@ -7,7 +7,7 @@ import { TextInput } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
 import { TextWrapper, Button } from 'components'
 
-const useStyles = makeStyles(({ spacing, palette }) => ({
+const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	title: {
 		paddingBottom: spacing(2),
 	},
@@ -16,12 +16,18 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
 		border: `1px solid ${palette.secondary.light}`,
 		borderRadius: '5px',
 		padding: spacing(3),
+		[breakpoints.down(`sm`)]: {
+			marginRight: spacing(0),
+		},
 	},
 	plazoEntrega: {
 		margin: spacing(4, 0, 0, 0),
 	},
 	button: {
 		marginTop: spacing(1),
+	},
+	wrapper: {
+		marginBottom: spacing(3),
 	},
 }))
 
@@ -85,13 +91,15 @@ function Step1({
 			: 'No existe dirección.'
 		: 'No aplica para productos virtuales.'
 	return (
-		<Grid container direction="column">
-			<Typography className={classes.title}>{title}</Typography>
+		<Grid container direction="column" className={classes.wrapper}>
+			<Typography variant="h5" className={classes.title}>
+				{title}
+			</Typography>
 			<Typography className={classes.title}>{`Región ${capitalize(
 				regionLabel
 			)}`}</Typography>
 			<Grid container>
-				<Grid item md={8}>
+				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapperOutlined}>
 						<TextWrapper label="Dirección" subLabel={direccion} />
 						{withDireccionDespacho && (
@@ -117,7 +125,7 @@ function Step1({
 						/>
 					</Grid>
 				</Grid>
-				<Grid item md={4}>
+				<Grid item md={4} xs={12}>
 					<TextInput
 						{...fieldsById.despacho_observacion}
 						onChange={onChange}
