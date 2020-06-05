@@ -39,6 +39,11 @@ const useStyles = makeStyles(
 		wrapper: {
 			marginBottom: spacing(3),
 			flexBasis: 'auto',
+			position: 'relative',
+		},
+		bottomWrapper: {
+			position: 'absolute',
+			bottom: '-20px',
 		},
 		//PADDING POSITION
 		left: {
@@ -103,7 +108,7 @@ function InputWrapper({
 			>
 				{children}
 			</Grid>
-			<Grid container justify="space-between">
+			<Grid container justify="space-between" className={classes.bottomWrapper}>
 				<Typography color="error" className={classes.invalidText}>
 					{status === 'error' && message}
 				</Typography>

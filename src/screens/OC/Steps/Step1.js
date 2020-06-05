@@ -5,19 +5,20 @@ import { capitalize } from 'utils'
 import { useRegionComunas, useOrden } from 'context'
 import { TextInput } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextWrapper, Button } from 'components'
+import { TextWrapper, Button, Divider } from 'components'
 
-const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
+const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	title: {
-		paddingBottom: spacing(2),
+		fontWeight: fontWeights[0],
 	},
-	wrapperOutlined: {
+	wrapperInputs: {
 		marginRight: spacing(4),
-		border: `1px solid ${palette.secondary.light}`,
-		borderRadius: '5px',
-		padding: spacing(3),
+		// borderRadius: '5px',
+		// border: `1px solid ${palette.secondary.light}`,
+		// padding: spacing(3),
 		[breakpoints.down(`sm`)]: {
 			marginRight: spacing(0),
+			marginBottom: spacing(3),
 		},
 	},
 	plazoEntrega: {
@@ -92,15 +93,14 @@ function Step1({
 		: 'No aplica para productos virtuales.'
 	return (
 		<Grid container direction="column" className={classes.wrapper}>
-			<Typography variant="h5" className={classes.title}>
+			<Typography className={classes.title} variant="h3">
 				{title}
 			</Typography>
-			<Typography className={classes.title}>{`Región ${capitalize(
-				regionLabel
-			)}`}</Typography>
+			<Typography>{`Región ${capitalize(regionLabel)}`}</Typography>
 			<Grid container>
 				<Grid item md={8} xs={12}>
-					<Grid className={classes.wrapperOutlined}>
+					<Grid className={classes.wrapperInputs}>
+						<Divider />
 						<TextWrapper label="Dirección" subLabel={direccion} />
 						{withDireccionDespacho && (
 							<Button

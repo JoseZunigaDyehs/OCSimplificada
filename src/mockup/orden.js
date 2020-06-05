@@ -12,4 +12,5 @@ export const ordenDataMock = {
 	diasHabiles: 10,
 	direccionesDespacho: [], //Llena al abrir componente
 	direccionDespacho: direccionesDespacho[0],
+	direccionEnvioFactura: '',
 }
