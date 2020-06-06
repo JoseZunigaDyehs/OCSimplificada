@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Step1 from './Steps/Step1'
+import Step2 from './Steps/Step2'
+import Step3 from './Steps/Step3'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
-import Step2 from './Steps/Step2'
 import { useOrden } from 'context'
 
 const modalConfigInit = {
@@ -45,6 +46,13 @@ function OC() {
 			/>
 			<Step2
 				title="2. Pago"
+				onChange={onChangefield}
+				fieldsById={fieldsById}
+				onFocusHandle={onFocusHandle}
+				setModalConfig={setModalConfig}
+			/>
+			<Step3
+				title="3. Plan de compra"
 				onChange={onChangefield}
 				fieldsById={fieldsById}
 				onFocusHandle={onFocusHandle}

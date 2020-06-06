@@ -151,5 +151,22 @@ export const OCForm = {
 			rule: { type: 'email' },
 			md: 6,
 		},
+		asociar_plan_compra: {
+			name: 'asociar_plan_compra',
+			label: '¿Desea asociar al Plan de compras?',
+			required: false,
+			isValid: true,
+			status: 'default',
+			type: 'radio',
+			value: '2',
+			items: [
+				{
+					id: '1',
+					label: 'Sí',
+				},
+				{ id: '2', label: 'No, esta compra está fuera del Plan de compras' },
+			],
+			rule: { type: 'null' },
+		},
 	},
 }
