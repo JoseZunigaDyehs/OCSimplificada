@@ -30,11 +30,12 @@ function ItemList({
 	onChange,
 	checkedId,
 	openUpsert,
-	comunas,
+	comunas = [],
 	withUpsert,
 }) {
 	const classes = useStyles()
-	const comunaLabel = comunas.find(x => x.id === comunaId).label
+	const comunaLabel =
+		comunas.length > 0 ? comunas.find(x => x.id === comunaId).label : ''
 	return (
 		<Grid
 			container

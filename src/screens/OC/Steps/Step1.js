@@ -13,9 +13,6 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	},
 	wrapperInputs: {
 		marginRight: spacing(4),
-		// borderRadius: '5px',
-		// border: `1px solid ${palette.secondary.light}`,
-		// padding: spacing(3),
 		[breakpoints.down(`sm`)]: {
 			marginRight: spacing(0),
 			marginBottom: spacing(3),
@@ -56,12 +53,12 @@ function Step1({
 	const openModal = () => {
 		setModalConfig({
 			show: true,
-			type: 'direction',
+			type: 'direccionesDespacho',
 			data: {
 				regionLabel,
 				direcciones: direccionesDespacho,
 				comunas,
-				withUpsert: false,
+				withUpsert: true,
 			},
 		})
 	}

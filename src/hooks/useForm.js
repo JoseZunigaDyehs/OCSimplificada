@@ -4,23 +4,16 @@ import { validator } from 'utils'
 function useForm({ defaultFieldsById }) {
 	const [fieldsById, setFieldsById] = useState(defaultFieldsById)
 
-	const getStatus = ({ isValid, required, type, value, status }) => {
+	const getStatus = ({ required, type, value, rule, isFocused }) => {
+		const nextIsValid = validate({ rule, value })
 		if (required) {
-			return isValid ? 'success' : 'error'
+			return nextIsValid ? 'success' : 'error'
 		} else {
-			if (!isValid) {
+			if (!nextIsValid) {
 				if (type === 'select') {
-					return value !== -1
-						? 'error'
-						: status === 'focused'
-						? 'focused'
-						: 'default'
+					return value !== -1 ? 'error' : isFocused ? 'focused' : 'default'
 				} else {
-					return value !== ''
-						? 'error'
-						: status === 'focused'
-						? 'focused'
-						: 'default'
+					return value !== '' ? 'error' : isFocused ? 'focused' : 'default'
 				}
 			}
 			return 'success'
@@ -43,7 +36,9 @@ function useForm({ defaultFieldsById }) {
 	}
 	const onFocusHandle = ({ name, isFocused }) => {
 		const nextField = fieldsById[name]
-		nextField.status = isFocused ? 'focused' : getStatus({ ...nextField })
+		nextField.status = isFocused
+			? 'focused'
+			: getStatus({ ...nextField, isFocused })
 		setFieldsById(prev => ({
 			...prev,
 			[name]: { ...[name], ...nextField },

@@ -2,13 +2,16 @@ import React from 'react'
 import DirectionModal from './DirectionModal'
 
 const modalType = {
-	direction: props => {
+	direccionesDespacho: props => {
 		return <DirectionModal typeDirection="direccionesDespacho" {...props} />
+	},
+	direccionesFactura: props => {
+		return <DirectionModal typeDirection="direccionesFactura" {...props} />
 	},
 }
 
-function ModalConfig({ type = 'direction', ...rest }) {
-	return modalType[type](rest)
+function ModalConfig(props) {
+	return modalType[props.modal.type](props)
 }
 
 export default ModalConfig

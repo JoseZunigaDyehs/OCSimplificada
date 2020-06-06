@@ -16,6 +16,12 @@ function OrdenProvider({ children }) {
 	const setDireccionesDespacho = direccionesDespacho => {
 		setOrden(prev => ({ ...prev, direccionesDespacho }))
 	}
+	const setPago30Dias = pago30Dias => {
+		setOrden(prev => ({ ...prev, pago30Dias }))
+	}
+	const setDireccionEnvioFactura = direccionEnvioFactura => {
+		setOrden(prev => ({ ...prev, direccionEnvioFactura }))
+	}
 
 	useEffect(() => {
 		const getOrden = async () => {
@@ -33,7 +39,13 @@ function OrdenProvider({ children }) {
 
 	return (
 		<OrdenContext.Provider
-			value={{ orden, setDireccionesDespacho, setDireccionDespacho }}
+			value={{
+				orden,
+				setDireccionesDespacho,
+				setDireccionDespacho,
+				setPago30Dias,
+				setDireccionEnvioFactura,
+			}}
 		>
 			{loading ? <Loader /> : children}
 		</OrdenContext.Provider>

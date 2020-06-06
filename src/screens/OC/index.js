@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Step1 from './Steps/Step1'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
 import Step2 from './Steps/Step2'
+import { useOrden } from 'context'
 
 const modalConfigInit = {
 	show: false,
@@ -13,12 +14,26 @@ const modalConfigInit = {
 }
 function OC() {
 	const [modalConfig, setModalConfig] = useState(modalConfigInit)
-	const { fieldsById, onFocusHandle, onChangefield } = useForm({
+	const { fieldsById, onFocusHandle, onChangefield, setFieldsById } = useForm({
 		defaultFieldsById: OCForm.fieldsById,
 	})
+	const { setPago30Dias } = useOrden()
 	const onClose = () => {
 		setModalConfig(modalConfigInit)
 	}
+
+	//USE EFFECT INPUTS
+	useEffect(() => {
+		const togglePago30Dias = () => {
+			const isPago30Dias = fieldsById.plazo_pago.value === '2'
+			const { pago_justificacion } = fieldsById
+			setPago30Dias(isPago30Dias)
+			pago_justificacion.required = isPago30Dias
+			setFieldsById({ ...fieldsById, pago_justificacion })
+		}
+		togglePago30Dias()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [fieldsById.plazo_pago.value])
 	return (
 		<Grid container>
 			<Step1

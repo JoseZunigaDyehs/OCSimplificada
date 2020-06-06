@@ -6,7 +6,7 @@ import { TextInput, RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
 import { Divider, TextWrapper } from 'components'
 import MarginWrapperInput from 'components/fieldsForm/MarginWrapperInputs'
-import { useRegionComunas, useOrden } from 'context'
+import { useOrden } from 'context'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	title: {
@@ -40,16 +40,14 @@ function Step2({
 	const classes = useStyles()
 
 	const {
-		orden: { direccionEnvioFactura },
+		orden: { direccionEnvioFactura, pago30Dias, direccionesFactura },
 	} = useOrden()
 	const openModal = () => {
 		setModalConfig({
 			show: true,
-			type: 'direction',
+			type: 'direccionesFactura',
 			data: {
-				regionLabel: '',
-				direcciones: [],
-				comunas: [],
+				direcciones: direccionesFactura,
 				withUpsert: false,
 			},
 		})
@@ -68,6 +66,13 @@ function Step2({
 							onChange={onChange}
 							onFocusHandle={onFocusHandle}
 						/>
+						{pago30Dias && (
+							<TextInput
+								{...fieldsById.pago_justificacion}
+								onChange={onChange}
+								onFocusHandle={onFocusHandle}
+							/>
+						)}
 						<Grid container direction="column">
 							<Typography variant="h3" className={classes.title}>
 								Contacto para esta compra
@@ -137,15 +142,14 @@ function Step2({
 								<Typography variant="h3" className={classes.title}>
 									Información para envío de factura
 								</Typography>
-								{/* <Grid> */}
 								<Grid container className={classes.wrapperDirection}>
 									<Grid item md={6}>
 										<TextWrapper
 											label="Dirección"
 											subLabel={
 												direccionEnvioFactura
-													? 'No tiene dirección'
-													: direccionEnvioFactura
+													? direccionEnvioFactura.label
+													: 'No tiene dirección'
 											}
 										/>
 										<Button
@@ -163,7 +167,6 @@ function Step2({
 										onFocusHandle={onFocusHandle}
 									/>
 								</Grid>
-								{/* </Grid> */}
 							</Grid>
 						</Grid>
 					</Grid>

@@ -108,13 +108,18 @@ function UpsertDireccion({
 
 function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 	const classes = useStyles()
-	const { setDireccionDespacho, setDireccionesDespacho, orden } = useOrden()
+	const {
+		setDireccionDespacho,
+		setDireccionesDespacho,
+		setDireccionEnvioFactura,
+		orden,
+	} = useOrden()
 	const [direccionSelectId, setDireccionSelectId] = useState(
 		orden.direccionDespacho ? orden.direccionDespacho.id : null
 	)
 	const [isUpserting, setIsUpserting] = useState(false)
 	const [upsertId, setUpsertId] = useState(null)
-	const { regionLabel, comunas, withUpsert = true } = data
+	const { regionLabel = '', comunas, withUpsert = true } = data
 
 	const onSelectDireccion = id => {
 		if (id === direccionSelectId) {
@@ -130,7 +135,11 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 		const nextDireccion = orden[typeDirection].find(
 			x => x.id === direccionSelectId
 		)
-		setDireccionDespacho(nextDireccion)
+		if (typeDirection === 'direccionesDespacho') {
+			setDireccionDespacho(nextDireccion)
+		} else {
+			setDireccionEnvioFactura(nextDireccion)
+		}
 		onClose()
 	}
 	const goBack = () => {
@@ -159,7 +168,6 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 			label: nextData.direccion,
 			comunaId: nextData.comunas,
 		})
-		debugger
 		setDireccionesDespacho(nextDirecciones)
 		goBack()
 	}
@@ -170,9 +178,13 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+	console.log(orden)
+	debugger
 	return (
 		<ModalWrapper
-			title="Direcciones de despacho"
+			title={`Direcciones de ${
+				typeDirection === 'direccionesFactura' ? `envío factura` : `despacho`
+			}`}
 			onAccept={onAcceptHandle}
 			withButtons={!isUpserting}
 			maxWidth="800px"
@@ -181,7 +193,9 @@ function DirectionModal({ modal: { data }, typeDirection, onClose, ...props }) {
 		>
 			<Grid container>
 				<Grid container alignItems="center" justify="space-between">
-					<Typography variant="body1">{`Región ${regionLabel}`}</Typography>
+					{regionLabel && (
+						<Typography variant="body1">{`Región ${regionLabel}`}</Typography>
+					)}
 					{withUpsert && !isUpserting && (
 						<Button color="primary" variant="text" onClick={() => openUpsert()}>
 							+ Nueva dirección
