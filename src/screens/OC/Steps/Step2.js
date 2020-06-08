@@ -52,6 +52,11 @@ function Step2({
 			},
 		})
 	}
+	const inputProps = {
+		onChange: onChange,
+		onFocusHandle: onFocusHandle,
+	}
+
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
@@ -61,17 +66,9 @@ function Step2({
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapper}>
 						<Divider />
-						<RadioButton
-							{...fieldsById.plazo_pago}
-							onChange={onChange}
-							onFocusHandle={onFocusHandle}
-						/>
+						<RadioButton {...fieldsById.plazo_pago} {...inputProps} />
 						{pago30Dias && (
-							<TextInput
-								{...fieldsById.pago_justificacion}
-								onChange={onChange}
-								onFocusHandle={onFocusHandle}
-							/>
+							<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
 						)}
 						<Grid container direction="column">
 							<Typography variant="h3" className={classes.title}>
@@ -85,23 +82,19 @@ function Step2({
 								<MarginWrapperInput>
 									<TextInput
 										{...fieldsById.nombre_contacto_compra}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.apellido_contacto_compra}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.telefono_contacto_compra}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.email_contacto_compra}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 								</MarginWrapperInput>
 							</Grid>
@@ -117,23 +110,19 @@ function Step2({
 								<MarginWrapperInput>
 									<TextInput
 										{...fieldsById.nombre_contacto_pago}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.apellido_contacto_pago}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.telefono_contacto_pago}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 									<TextInput
 										{...fieldsById.email_contacto_pago}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 								</MarginWrapperInput>
 							</Grid>
@@ -163,8 +152,7 @@ function Step2({
 									</Grid>
 									<TextInput
 										{...fieldsById.email_envio_factura}
-										onChange={onChange}
-										onFocusHandle={onFocusHandle}
+										{...inputProps}
 									/>
 								</Grid>
 							</Grid>
@@ -172,11 +160,7 @@ function Step2({
 					</Grid>
 				</Grid>
 				<Grid item md={4} xs={12}>
-					<TextInput
-						{...fieldsById.pago_observacion}
-						onChange={onChange}
-						onFocusHandle={onFocusHandle}
-					/>
+					<TextInput {...fieldsById.pago_observacion} {...inputProps} />
 				</Grid>
 			</Grid>
 		</Grid>

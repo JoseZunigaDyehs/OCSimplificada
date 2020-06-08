@@ -35,29 +35,18 @@ function OC() {
 		togglePago30Dias()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.plazo_pago.value])
+
+	const props = {
+		onChange: onChangefield,
+		fieldsById: fieldsById,
+		onFocusHandle: onFocusHandle,
+		setModalConfig: setModalConfig,
+	}
 	return (
 		<Grid container>
-			<Step1
-				title="1. Despacho"
-				onChange={onChangefield}
-				fieldsById={fieldsById}
-				onFocusHandle={onFocusHandle}
-				setModalConfig={setModalConfig}
-			/>
-			<Step2
-				title="2. Pago"
-				onChange={onChangefield}
-				fieldsById={fieldsById}
-				onFocusHandle={onFocusHandle}
-				setModalConfig={setModalConfig}
-			/>
-			<Step3
-				title="3. Plan de compra"
-				onChange={onChangefield}
-				fieldsById={fieldsById}
-				onFocusHandle={onFocusHandle}
-				setModalConfig={setModalConfig}
-			/>
+			<Step1 title="1. Despacho" {...props} />
+			<Step2 title="2. Pago" {...props} />
+			<Step3 title="3. Plan de compra" {...props} />
 			{modalConfig.show && (
 				<ModalConfig modal={modalConfig} onClose={onClose} />
 			)}

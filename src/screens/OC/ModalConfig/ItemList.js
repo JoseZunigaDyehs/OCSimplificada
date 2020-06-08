@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from './Button'
+import { Button } from 'components'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
-import { CheckBox } from './fieldsForm'
+import { CheckBox } from 'components/fieldsForm'
 
 const useStyles = makeStyles(
 	({ spacing, breakpoints, fontSizes, fontWeights }) => ({

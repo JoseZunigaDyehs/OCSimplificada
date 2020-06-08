@@ -3,17 +3,7 @@ import Loader from './Loader'
 import TextWrapper from './TextWrapper'
 import ModalWrapper from './ModalWrapper'
 import Button from './Button'
-import ItemList from './ItemList'
 import Divider from './Divider'
-import PlanDeCompra from './PlanDeCompra'
+import Table from './Table'
 
-export {
-	Divider,
-	Header,
-	ModalWrapper,
-	TextWrapper,
-	Loader,
-	Button,
-	ItemList,
-	PlanDeCompra,
-}
+export { Divider, Header, ModalWrapper, TextWrapper, Loader, Button, Table }

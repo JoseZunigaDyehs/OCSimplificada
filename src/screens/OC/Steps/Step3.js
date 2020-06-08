@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { Divider, PlanDeCompra } from 'components'
+import { Divider } from 'components'
+import PlanDeCompra from '../PlanDeCompra'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	title: {

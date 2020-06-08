@@ -1,3 +1,5 @@
+import { anios, unidadCompra } from 'mockup'
+
 export const OCForm = {
 	fieldsById: {
 		despacho_observacion: {
@@ -168,5 +170,32 @@ export const OCForm = {
 			],
 			rule: { type: 'null' },
 		},
+	},
+}
+
+export const planDeCompraFieldsById = {
+	anios: {
+		name: 'anios',
+		label: 'Año del proyecto',
+		required: true,
+		isValid: true,
+		status: 'default',
+		type: 'select',
+		value: -1,
+		rule: { type: 'select' },
+		items: anios,
+		md: 6,
+	},
+	unidad_compra: {
+		name: 'unidad_compra',
+		label: 'Unidad de compra',
+		required: true,
+		isValid: true,
+		status: 'default',
+		type: 'select',
+		value: -1,
+		rule: { type: 'select' },
+		items: unidadCompra,
+		md: 6,
 	},
 }
