@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { useOrden } from 'context'
 import { Select, MarginWrapperInputs } from 'components/fieldsForm'
-import { Table, Divider } from 'components'
+import { Table, Divider, ListItems } from 'components'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { planDeCompraFieldsById } from './data'
 import useForm from 'hooks/useForm'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles(({ spacing, palette }) => ({
+const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	wrapper: {
 		border: `1px solid ${palette.terniary.dark}`,
 		borderRadius: '5px',
@@ -16,6 +16,12 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
 	},
 	title: {
 		paddingBottom: spacing(2),
+	},
+	wrapperSectionTable: {
+		paddingRight: spacing(3),
+		[breakpoints.down(`sm`)]: {
+			paddingRight: spacing(0),
+		},
 	},
 }))
 
@@ -53,41 +59,65 @@ function Header({ title = '', fieldsById, onFocusHandle, onChangefield }) {
 	)
 }
 
-function PlanDeCompra() {
+const tableInit = {
+	columns: [],
+	datasource: [],
+	pagination: null,
+}
+
+function PlanDeCompra({
+	title = 'Selecciona año del proyecto y Unidad de compra',
+	subTitle = 'Selecciona Proyecto',
+	tableCategories: tableCategoriesParent = tableInit,
+	tableItems: tableItemsParent = tableInit,
+}) {
 	const classes = useStyles()
-	const [tableCategories, setTableCategories] = useState({
-		columns: [],
-		datasource: [],
-		pagination: null,
-	})
-	const [tableItems, setTableItems] = useState({
-		columns: [],
-		datasource: [],
-		pagination: null,
-	})
+	const [tableCategories, setTableCategories] = useState(tableCategoriesParent)
+	const [tableItems, setTableItems] = useState(tableItemsParent)
 	const [selected, setSelected] = useState([])
 	const [isCategories, setIsCategories] = useState(true)
 	const { fieldsById, onFocusHandle, onChangefield } = useForm({
 		defaultFieldsById: planDeCompraFieldsById,
 	})
-	const { orden } = useOrden()
+	const {
+		orden: { itemsPlanCompra },
+	} = useOrden()
+	const removeItem = idItem => {
+		console.log(idItem)
+	}
 	return (
 		<Grid container className={classes.wrapper}>
 			<Header
 				fieldsById={fieldsById}
 				onFocusHandle={onFocusHandle}
 				onChangefield={onChangefield}
-				title="Selecciona año del proyecto y Unidad de compra"
+				title={title}
 			/>
 			<Grid md={8} sm={12}>
-				<Typography>
-					{isCategories
-						? `Selecciona Proyecto`
-						: `Selecciona uno o más ítems del proyecto `}
-				</Typography>
-				<Table />
+				<Grid
+					container
+					item
+					direction="column"
+					className={classes.wrapperSectionTable}
+				>
+					<Typography>
+						{isCategories
+							? subTitle
+							: `Selecciona uno o más ítems del proyecto `}
+					</Typography>
+					<Table {...tableCategories} />
+				</Grid>
 			</Grid>
-			<Grid md={4} sm={12}></Grid>
+			<Grid md={4} sm={12}>
+				{itemsPlanCompra.map(({ nombre, items }) => (
+					<React.Fragment>
+						<Typography variant="h4" className={classes.title}>
+							{nombre}
+						</Typography>
+						<ListItems items={items} removeItem={removeItem} />
+					</React.Fragment>
+				))}
+			</Grid>
 		</Grid>
 	)
 }

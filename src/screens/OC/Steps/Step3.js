@@ -4,8 +4,9 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { Divider } from 'components'
+import { Divider, Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
+import { proyectos } from 'mockup'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	title: {
@@ -29,12 +30,44 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	},
 }))
 
+//TODO: Mover lógica de PlanDeCompra acá para ambas tablas, etc......
 function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
 
 	const {
 		orden: { direccionesFactura },
 	} = useOrden()
+
+	const proyectoOnClickHandle = id => {
+		console.log(id)
+		//TODO: Cambiar de tabla
+	}
+
+	const tableProyectos = {
+		columns: [
+			{
+				title: 'Nombre proyecto',
+				index: 'nombre',
+			},
+			{
+				title: 'Acción',
+				align: 'right',
+				render: row => {
+					return (
+						<Button
+							variant="text"
+							color="primary"
+							onClick={() => proyectoOnClickHandle(row.id)}
+						>
+							Ver Ítems
+						</Button>
+					)
+				},
+			},
+		],
+		dataSource: proyectos,
+	}
+
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
@@ -51,7 +84,11 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 						/>
 					</Grid>
 				</Grid>
-				<PlanDeCompra />
+				<PlanDeCompra
+					tableCategories={tableProyectos}
+					title="Selecciona año del proyecto y Unidad de compra"
+					subTitle="Selecciona Proyecto"
+				/>
 			</Grid>
 		</Grid>
 	)

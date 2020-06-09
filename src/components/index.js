@@ -5,5 +5,15 @@ import ModalWrapper from './ModalWrapper'
 import Button from './Button'
 import Divider from './Divider'
 import Table from './Table'
+import ListItems from './ListItems'
 
-export { Divider, Header, ModalWrapper, TextWrapper, Loader, Button, Table }
+export {
+	Divider,
+	Header,
+	ModalWrapper,
+	TextWrapper,
+	Loader,
+	Button,
+	Table,
+	ListItems,
+}

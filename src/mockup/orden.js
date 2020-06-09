@@ -71,4 +71,14 @@ export const ordenDataMock = {
 	pago30Dias: true,
 	direccionesFactura,
 	direccionEnvioFactura: direccionesFactura[0],
+	itemsPlanCompra: [
+		{
+			id: '1',
+			nombre: 'Proyecto 1',
+			items: [
+				{ id: '1', nombre: 'Item 1' },
+				{ id: '2', nombre: 'Item 2' },
+			],
+		},
+	],
 }
