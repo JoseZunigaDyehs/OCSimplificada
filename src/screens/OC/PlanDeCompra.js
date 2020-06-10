@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from 'components/fieldsForm'
-import { Table, Divider, ListItems } from 'components'
+import { Table, Divider, ListItems, Button } from 'components'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { planDeCompraFieldsById } from './data'
@@ -10,6 +10,9 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	title: {
 		paddingBottom: spacing(2),
+	},
+	titleProject: {
+		paddingBottom: spacing(1),
 	},
 	wrapperSectionTable: {
 		paddingRight: spacing(3),
@@ -25,6 +28,9 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 		borderRadius: '5px',
 		padding: spacing(2),
 	},
+	button: {
+		marginBottom: spacing(1),
+	},
 }))
 
 //TODO:
@@ -35,14 +41,18 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 // List By Categories
 // Button Volver
 
-function PlanDeCompra({ title = '', subTitle = '', table = {}, items }) {
+function PlanDeCompra({
+	title = '',
+	subTitle = '',
+	table = {},
+	items,
+	goBack = null,
+	removeItem,
+}) {
 	const classes = useStyles()
 	const { fieldsById, onFocusHandle, onChangefield } = useForm({
 		defaultFieldsById: planDeCompraFieldsById,
 	})
-	const removeItem = idItem => {
-		console.log(idItem)
-	}
 	return (
 		<Grid item sm={12}>
 			<Grid container className={classes.wrapper} spacing={3}>
@@ -78,9 +88,19 @@ function PlanDeCompra({ title = '', subTitle = '', table = {}, items }) {
 					</Grid>
 				</Grid>
 				<Grid item md={4} sm={12}>
+					{goBack && (
+						<Button
+							className={classes.button}
+							variant="text"
+							color="primary"
+							onClick={goBack}
+						>
+							Volver a proyectos
+						</Button>
+					)}
 					{items.map(({ nombre, items }) => (
 						<React.Fragment>
-							<Typography variant="h4" className={classes.title}>
+							<Typography variant="h5" className={classes.titleProject}>
 								{nombre}
 							</Typography>
 							<ListItems items={items} removeItem={removeItem} />

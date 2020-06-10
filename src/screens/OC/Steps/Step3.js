@@ -30,11 +30,13 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 
 const tableInit = {
 	columns: [],
-	datasource: [],
+	dataSource: [],
 	pagination: null,
 }
 
 //TODO: Mover lógica de PlanDeCompra acá para ambas tablas, etc......
+//VOLVER
+//ELIMINAR
 function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
 	const [isItem, setIsItem] = useState(false)
@@ -45,14 +47,30 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 		setItemsPlanCompra,
 	} = useOrden()
 
-	//TODO: USEREFF
 	const asociarHandle = id => {
-		debugger
 		const { dataSource } = tableItems.current
 		const nextItemsPlanCompra = itemsPlanCompra
-		//TODO: agregar bien esto
-		nextItemsPlanCompra.push(dataSource.find(x => x.id === id))
+		const itemToAdd = dataSource.find(x => x.id === id)
+		const index = nextItemsPlanCompra.findIndex(
+			({ id }) => itemToAdd.proyectoId === id
+		)
+		if (index !== -1) {
+			nextItemsPlanCompra[index].items.push(itemToAdd)
+		} else {
+			nextItemsPlanCompra.push({
+				id: itemToAdd.proyectoId,
+				nombre: itemToAdd.proyectoNombre,
+				items: [itemToAdd],
+			})
+		}
 		setItemsPlanCompra(nextItemsPlanCompra)
+		const nextDataSource = dataSource.filter(
+			({ id: idDataSource }) => idDataSource !== id
+		)
+		tableItems.current = {
+			...tableItems.current,
+			dataSource: nextDataSource,
+		}
 	}
 	const proyectoOnClickHandle = id => {
 		const nextTableItems = {
@@ -83,6 +101,19 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 		tableItems.current = nextTableItems
 		setIsItem(true)
 	}
+	const goBack = () => {
+		setIsItem(false)
+	}
+	const removeItem = item => {
+		const { dataSource } = tableItems.current
+		const nextDataSource = [...dataSource]
+		nextDataSource.push(item)
+		tableItems.current = {
+			...tableItems.current,
+			dataSource: nextDataSource,
+		}
+		//REMOVER DEL LOS ITEMS
+	}
 	useEffect(() => {
 		const nextTableProyectos = {
 			columns: [
@@ -111,7 +142,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 		}
 		tableProyectos.current = nextTableProyectos
 	}, [])
-	console.log(tableItems)
+	console.log(tableItems.current.dataSource)
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
@@ -134,6 +165,8 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 						title="Selecciona año del proyecto y Unidad de compra"
 						subTitle={isItem ? 'Selecciona Ítem' : 'Selecciona Proyecto'}
 						items={itemsPlanCompra}
+						goBack={isItem ? goBack : null}
+						removeItem={removeItem}
 					/>
 				)}
 			</Grid>

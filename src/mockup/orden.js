@@ -39,23 +39,88 @@ export const proyectos = [
 ]
 export const itemsByProyectoId = {
 	'1': [
-		{ id: '1', nombre: 'Item 1' },
-		{ id: '2', nombre: 'Item 2' },
-		{ id: '3', nombre: 'Item 3' },
-		{ id: '4', nombre: 'Item 4' },
-		{ id: '5', nombre: 'Item 5' },
+		{
+			id: '1',
+			nombre: 'Item 1',
+			proyectoId: '1',
+			proyectoNombre: 'Proyecto 1',
+		},
+		{
+			id: '2',
+			nombre: 'Item 2',
+			proyectoId: '1',
+			proyectoNombre: 'Proyecto 1',
+		},
+		{
+			id: '3',
+			nombre: 'Item 3',
+			proyectoId: '1',
+			proyectoNombre: 'Proyecto 1',
+		},
+		{
+			id: '4',
+			nombre: 'Item 4',
+			proyectoId: '1',
+			proyectoNombre: 'Proyecto 1',
+		},
+		{
+			id: '5',
+			nombre: 'Item 5',
+			proyectoId: '1',
+			proyectoNombre: 'Proyecto 1',
+		},
 	],
 	'2': [
-		{ id: '6', nombre: 'Item 6' },
-		{ id: '7', nombre: 'Item 7' },
-		{ id: '8', nombre: 'Item 8' },
+		{
+			id: '6',
+			nombre: 'Item 6',
+			proyectoId: '2',
+			proyectoNombre: 'Proyecto 2',
+		},
+		{
+			id: '7',
+			nombre: 'Item 7',
+			proyectoId: '2',
+			proyectoNombre: 'Proyecto 2',
+		},
+		{
+			id: '8',
+			nombre: 'Item 8',
+			proyectoId: '2',
+			proyectoNombre: 'Proyecto 2',
+		},
 	],
 	'3': [
-		{ id: '11', nombre: 'Item 11' },
-		{ id: '12', nombre: 'Item 12' },
-		{ id: '13', nombre: 'Item 13' },
-		{ id: '14', nombre: 'Item 14' },
-		{ id: '15', nombre: 'Item 15' },
+		{
+			id: '11',
+			nombre: 'Item 11',
+			proyectoId: '3',
+			proyectoNombre: 'Proyecto 3',
+		},
+		{
+			id: '12',
+			nombre: 'Item 12',
+			proyectoId: '3',
+			proyectoNombre: 'Proyecto 3',
+		},
+		{
+			id: '13',
+			nombre: 'Item 13',
+			proyectoId: '3',
+			proyectoNombre: 'Proyecto 3',
+		},
+		{
+			id: '14',
+			nombre: 'Item 14',
+			proyectoId: '3',
+			proyectoNombre: 'Proyecto 3',
+		},
+		{
+			id: '15',
+			nombre: 'Item 15',
+			proyectoId: '3',
+			proyectoNombre: 'Proyecto 3',
+		},
 	],
 }
 
@@ -71,14 +136,5 @@ export const ordenDataMock = {
 	pago30Dias: true,
 	direccionesFactura,
 	direccionEnvioFactura: direccionesFactura[0],
-	itemsPlanCompra: [
-		{
-			id: '1',
-			nombre: 'Proyecto 1',
-			items: [
-				{ id: '1', nombre: 'Item 1' },
-				{ id: '2', nombre: 'Item 2' },
-			],
-		},
-	],
+	itemsPlanCompra: [],
 }
