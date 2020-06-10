@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useOrden } from 'context'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
@@ -6,7 +6,7 @@ import { RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
-import { proyectos } from 'mockup'
+import { proyectos, itemsByProyectoId } from 'mockup'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	title: {
@@ -14,9 +14,6 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	},
 	wrapper: {
 		marginRight: spacing(4),
-		// borderRadius: '5px',
-		// border: `1px solid ${palette.secondary.light}`,
-		// padding: spacing(3),
 		[breakpoints.down(`sm`)]: {
 			marginRight: spacing(0),
 			marginBottom: spacing(3),
@@ -28,52 +25,99 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	wrapperDirection: {
 		margin: spacing(3, 0, 3, 0),
 	},
+	root: { flexGrow: 1 },
 }))
+
+const tableInit = {
+	columns: [],
+	datasource: [],
+	pagination: null,
+}
 
 //TODO: Mover lógica de PlanDeCompra acá para ambas tablas, etc......
 function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
-
+	const [isItem, setIsItem] = useState(false)
+	const tableProyectos = useRef(tableInit)
+	const tableItems = useRef(tableInit)
 	const {
-		orden: { direccionesFactura },
+		orden: { direccionesFactura, itemsPlanCompra },
+		setItemsPlanCompra,
 	} = useOrden()
 
+	//TODO: USEREFF
+	const asociarHandle = id => {
+		debugger
+		const { dataSource } = tableItems.current
+		const nextItemsPlanCompra = itemsPlanCompra
+		//TODO: agregar bien esto
+		nextItemsPlanCompra.push(dataSource.find(x => x.id === id))
+		setItemsPlanCompra(nextItemsPlanCompra)
+	}
 	const proyectoOnClickHandle = id => {
-		console.log(id)
-		//TODO: Cambiar de tabla
-	}
-
-	const tableProyectos = {
-		columns: [
-			{
-				title: 'Nombre proyecto',
-				index: 'nombre',
-			},
-			{
-				title: 'Acción',
-				align: 'right',
-				render: row => {
-					return (
-						<Button
-							variant="text"
-							color="primary"
-							onClick={() => proyectoOnClickHandle(row.id)}
-						>
-							Ver Ítems
-						</Button>
-					)
+		const nextTableItems = {
+			columns: [
+				{
+					title: 'Nombre ítem',
+					index: 'nombre',
 				},
-			},
-		],
-		dataSource: proyectos,
+				{
+					title: 'Acción',
+					align: 'right',
+					index: 'accion',
+					render: row => {
+						return (
+							<Button
+								variant="text"
+								color="primary"
+								onClick={() => asociarHandle(row.id)}
+							>
+								Asociar
+							</Button>
+						)
+					},
+				},
+			],
+			dataSource: itemsByProyectoId[id],
+		}
+		tableItems.current = nextTableItems
+		setIsItem(true)
 	}
-
+	useEffect(() => {
+		const nextTableProyectos = {
+			columns: [
+				{
+					title: 'Nombre proyecto',
+					index: 'nombre',
+				},
+				{
+					title: 'Acción',
+					align: 'right',
+					index: 'accion',
+					render: row => {
+						return (
+							<Button
+								variant="text"
+								color="primary"
+								onClick={() => proyectoOnClickHandle(row.id)}
+							>
+								Ver Ítems
+							</Button>
+						)
+					},
+				},
+			],
+			dataSource: proyectos,
+		}
+		tableProyectos.current = nextTableProyectos
+	}, [])
+	console.log(tableItems)
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>
-			<Grid container>
+			<Grid container className={classes.root} spacing={3}>
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapper}>
 						<Divider />
@@ -84,11 +128,14 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 						/>
 					</Grid>
 				</Grid>
-				<PlanDeCompra
-					tableCategories={tableProyectos}
-					title="Selecciona año del proyecto y Unidad de compra"
-					subTitle="Selecciona Proyecto"
-				/>
+				{fieldsById.asociar_plan_compra.value === '1' && (
+					<PlanDeCompra
+						table={isItem ? tableItems.current : tableProyectos.current}
+						title="Selecciona año del proyecto y Unidad de compra"
+						subTitle={isItem ? 'Selecciona Ítem' : 'Selecciona Proyecto'}
+						items={itemsPlanCompra}
+					/>
+				)}
 			</Grid>
 		</Grid>
 	)

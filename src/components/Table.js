@@ -62,6 +62,9 @@ function Table({ dataSource = [], columns = [] }) {
 		}
 		getFilteredData(fieldsById.search.value)
 	}, [fieldsById.search.value])
+	useEffect(() => {
+		setDataFiltered(dataSource)
+	}, [dataSource])
 	return (
 		<Grid>
 			<TextInput

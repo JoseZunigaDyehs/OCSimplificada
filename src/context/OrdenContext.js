@@ -22,6 +22,9 @@ function OrdenProvider({ children }) {
 	const setDireccionEnvioFactura = direccionEnvioFactura => {
 		setOrden(prev => ({ ...prev, direccionEnvioFactura }))
 	}
+	const setItemsPlanCompra = itemsPlanCompra => {
+		setOrden(prev => ({ ...prev, itemsPlanCompra }))
+	}
 
 	useEffect(() => {
 		const getOrden = async () => {
@@ -45,6 +48,7 @@ function OrdenProvider({ children }) {
 				setDireccionDespacho,
 				setPago30Dias,
 				setDireccionEnvioFactura,
+				setItemsPlanCompra,
 			}}
 		>
 			{loading ? <Loader /> : children}

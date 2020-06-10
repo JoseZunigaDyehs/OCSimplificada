@@ -24,8 +24,8 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	button: {
 		marginTop: spacing(1),
 	},
-	wrapper: {
-		marginBottom: spacing(3),
+	root: {
+		flexGrow: 1,
 	},
 }))
 
@@ -94,7 +94,7 @@ function Step1({
 				{title}
 			</Typography>
 			<Typography>{`Región ${capitalize(regionLabel)}`}</Typography>
-			<Grid container>
+			<Grid container spacing={3} className={classes.root}>
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapperInputs}>
 						<Divider />

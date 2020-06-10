@@ -5,18 +5,17 @@ import Button from '@material-ui/core/Button'
 import { TextInput, RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
 import { Divider, TextWrapper } from 'components'
-import MarginWrapperInput from 'components/fieldsForm/MarginWrapperInputs'
 import { useOrden } from 'context'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
+	root: {
+		flexGrow: 1,
+	},
 	title: {
 		fontWeight: fontWeights[0],
 	},
 	wrapper: {
 		marginRight: spacing(4),
-		// borderRadius: '5px',
-		// border: `1px solid ${palette.secondary.light}`,
-		// padding: spacing(3),
 		[breakpoints.down(`sm`)]: {
 			marginRight: spacing(0),
 			marginBottom: spacing(3),
@@ -26,7 +25,8 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 		marginTop: spacing(1),
 	},
 	wrapperDirection: {
-		margin: spacing(3, 0, 3, 0),
+		flexGrow: 1,
+		padding: spacing(3, 0),
 	},
 }))
 
@@ -62,7 +62,7 @@ function Step2({
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>
-			<Grid container>
+			<Grid container spacing={3} className={classes.root}>
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapper}>
 						<Divider />
@@ -78,25 +78,23 @@ function Step2({
 								Ingresa el responsable de la recepción del producto o servicio
 							</Typography>
 							<Divider />
-							<Grid container>
-								<MarginWrapperInput>
-									<TextInput
-										{...fieldsById.nombre_contacto_compra}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.apellido_contacto_compra}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.telefono_contacto_compra}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.email_contacto_compra}
-										{...inputProps}
-									/>
-								</MarginWrapperInput>
+							<Grid container className={classes.root} spacing={3}>
+								<TextInput
+									{...fieldsById.nombre_contacto_compra}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.apellido_contacto_compra}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.telefono_contacto_compra}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.email_contacto_compra}
+									{...inputProps}
+								/>
 							</Grid>
 						</Grid>
 						<Grid container direction="column">
@@ -106,32 +104,34 @@ function Step2({
 							</Typography>
 							<Typography>Ingresa el responsable del pago</Typography>
 							<Divider />
-							<Grid container>
-								<MarginWrapperInput>
-									<TextInput
-										{...fieldsById.nombre_contacto_pago}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.apellido_contacto_pago}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.telefono_contacto_pago}
-										{...inputProps}
-									/>
-									<TextInput
-										{...fieldsById.email_contacto_pago}
-										{...inputProps}
-									/>
-								</MarginWrapperInput>
+							<Grid container className={classes.root} spacing={3}>
+								<TextInput
+									{...fieldsById.nombre_contacto_pago}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.apellido_contacto_pago}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.telefono_contacto_pago}
+									{...inputProps}
+								/>
+								<TextInput
+									{...fieldsById.email_contacto_pago}
+									{...inputProps}
+								/>
 							</Grid>
 							<Grid container direction="column">
 								<Divider />
 								<Typography variant="h3" className={classes.title}>
 									Información para envío de factura
 								</Typography>
-								<Grid container className={classes.wrapperDirection}>
+								<Grid
+									container
+									className={classes.wrapperDirection}
+									spacing={3}
+								>
 									<Grid item md={6}>
 										<TextWrapper
 											label="Dirección"
