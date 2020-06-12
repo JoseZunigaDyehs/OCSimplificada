@@ -43,7 +43,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const tableProyectos = useRef(tableInit)
 	const tableItems = useRef(tableInit)
 	const {
-		orden: { direccionesFactura, itemsPlanCompra },
+		orden: { itemsPlanCompra },
 		setItemsPlanCompra,
 	} = useOrden()
 
@@ -141,6 +141,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 			dataSource: proyectos,
 		}
 		tableProyectos.current = nextTableProyectos
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	console.log(tableItems.current.dataSource)
 	return (

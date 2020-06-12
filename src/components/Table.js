@@ -61,6 +61,7 @@ function Table({ dataSource = [], columns = [] }) {
 			setDataFiltered(nextData)
 		}
 		getFilteredData(fieldsById.search.value)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.search.value])
 	useEffect(() => {
 		setDataFiltered(dataSource)
