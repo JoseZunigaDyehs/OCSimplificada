@@ -43,33 +43,35 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const [tableItemsColumns, setTableItemsColumns] = useState([])
 	const proyectoSelected = useRef(null)
 	const {
-		orden: { itemsPlanCompra, proyectos, itemsByProyectoId },
-		setOrderState,
-		setItemsByProyectoId,
+		orden: { proyectosPlanCompra, itemsByProyectoId, proyectos },
+		asociarRemoveItem,
 	} = useOrden()
 
-	const asociarHandle = id => {
-		const nextItemsPlanCompra = itemsPlanCompra
+	const handleAsociar = id => {
+		const nextProyectosPlanCompra = proyectosPlanCompra
 		const itemToAdd = itemsByProyectoId[proyectoSelected.current].find(
 			x => x.id === id
 		)
-		const index = nextItemsPlanCompra.findIndex(
+		const indexProyecto = nextProyectosPlanCompra.findIndex(
 			({ id }) => itemToAdd.proyectoId === id
 		)
-		if (index !== -1) {
-			nextItemsPlanCompra[index].items.push(itemToAdd)
+		if (indexProyecto !== -1) {
+			nextProyectosPlanCompra[indexProyecto].items.push(itemToAdd)
 		} else {
-			nextItemsPlanCompra.push({
+			nextProyectosPlanCompra.push({
 				id: itemToAdd.proyectoId,
 				nombre: itemToAdd.proyectoNombre,
 				items: [itemToAdd],
 			})
 		}
-		setOrderState({ itemsPlanCompra: nextItemsPlanCompra })
 		const nextDataSource = itemsByProyectoId[proyectoSelected.current].filter(
 			({ id: idDataSource }) => idDataSource !== id
 		)
-		setItemsByProyectoId(nextDataSource, proyectoSelected.current)
+		asociarRemoveItem({
+			proyectosPlanCompra: nextProyectosPlanCompra,
+			nextItems: nextDataSource,
+			proyectoId: proyectoSelected.current,
+		})
 	}
 	const proyectoOnClickHandle = id => {
 		proyectoSelected.current = id
@@ -78,21 +80,25 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const goBack = () => {
 		setIsItem(false)
 	}
-	const removeItem = item => {
-		const nextDataSource = itemsByProyectoId[proyectoSelected.current]
-		const { proyectoId } = item
+	const handleRemoveItem = item => {
+		const { proyectoId, id: itemId } = item
+		const nextDataSource = itemsByProyectoId[proyectoId]
 		//Obtener los items del proyecto
-		const { items } = itemsPlanCompra.find(({ id }) => id === proyectoId)
-		//verificar si es el último
-		let nextItemsPlanCompra = itemsPlanCompra
+		const indexProyecto = proyectosPlanCompra.findIndex(
+			({ id }) => id === proyectoId
+		)
+		const { items } = proyectosPlanCompra[indexProyecto]
+		let nextProyectosPlanCompra = proyectosPlanCompra
+		//verificar si es el último item
+		//REMOVER PROYECTO
 		if (items.length === 1) {
-			nextItemsPlanCompra = itemsPlanCompra.filter(
-				({ id }) => id !== proyectoId
+			nextProyectosPlanCompra = proyectosPlanCompra.filter(
+				x => x.id !== proyectoId
 			)
 		} else {
-			nextItemsPlanCompra = itemsPlanCompra.map(x => {
+			nextProyectosPlanCompra = proyectosPlanCompra.map(x => {
 				if (x.id === proyectoId) {
-					const nextItems = x.items.filter(({ id }) => id !== item.id)
+					const nextItems = x.items.filter(({ id }) => id !== itemId)
 					return {
 						...x,
 						items: nextItems,
@@ -101,9 +107,12 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 				return x
 			})
 		}
-		setOrderState({ itemsPlanCompra: nextItemsPlanCompra })
 		nextDataSource.push(item)
-		setItemsByProyectoId(nextDataSource, proyectoSelected.current)
+		asociarRemoveItem({
+			proyectosPlanCompra: nextProyectosPlanCompra,
+			nextItems: nextDataSource,
+			proyectoId,
+		})
 	}
 	const getTableProyectos = () => {
 		return {
@@ -152,7 +161,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 						<Button
 							variant="text"
 							color="primary"
-							onClick={() => asociarHandle(row.id)}
+							onClick={() => handleAsociar(row.id)}
 						>
 							Asociar
 						</Button>
@@ -161,8 +170,9 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 			},
 		])
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [proyectoSelected.current, itemsByProyectoId[proyectoSelected.current]])
-
+	}, [proyectoSelected.current, itemsByProyectoId])
+	const project = proyectos.find(x => x.id === proyectoSelected.current)
+	const projectName = project ? project.nombre : ''
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
@@ -188,10 +198,14 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 						}
 						columns={isItem ? tableItemsColumns : tableProyectos.columns}
 						title="Selecciona año del proyecto y Unidad de compra"
-						subTitle={isItem ? 'Selecciona Ítem' : 'Selecciona Proyecto'}
-						items={itemsPlanCompra}
+						subTitle={
+							isItem
+								? `Selecciona Ítems del proyecto ${projectName}`
+								: 'Selecciona Proyecto'
+						}
+						projects={proyectosPlanCompra}
 						goBack={isItem ? goBack : null}
-						removeItem={removeItem}
+						removeItem={handleRemoveItem}
 					/>
 				)}
 			</Grid>
