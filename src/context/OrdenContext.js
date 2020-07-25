@@ -7,61 +7,57 @@ const OrdenContext = React.createContext()
 
 //DEJAR COMUNAS Y REGION LABEL EN ESTE ESTADO
 function OrdenProvider({ children }) {
-	const [loading, setLoading] = useState(true)
-	const [orden, setOrden] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [orden, setOrden] = useState(null)
 
-	const setDireccionDespacho = direccionDespacho => {
-		setOrden(prev => ({ ...prev, direccionDespacho }))
-	}
-	const setDireccionesDespacho = direccionesDespacho => {
-		setOrden(prev => ({ ...prev, direccionesDespacho }))
-	}
-	const setPago30Dias = pago30Dias => {
-		setOrden(prev => ({ ...prev, pago30Dias }))
-	}
-	const setDireccionEnvioFactura = direccionEnvioFactura => {
-		setOrden(prev => ({ ...prev, direccionEnvioFactura }))
-	}
-	const setItemsPlanCompra = itemsPlanCompra => {
-		setOrden(prev => ({ ...prev, itemsPlanCompra }))
-	}
+  const setOrderState = nextState => {
+    setOrden(prev => ({ ...prev, ...nextState }))
+  }
+  const setItemsByProyectoId = (nextItems, id) => {
+    const { itemsByProyectoId } = orden
+    const nextItemsByProyectoId = {
+      ...itemsByProyectoId,
+      [id]: nextItems,
+    }
+    setOrden(prev => ({
+      ...prev,
+      itemsByProyectoId: nextItemsByProyectoId,
+    }))
+  }
 
-	useEffect(() => {
-		const getOrden = async () => {
-			try {
-				setLoading(true)
-				//const nextUser = await API.me(null)
-				setOrden(ordenDataMock)
-				setLoading(false)
-			} catch (error) {
-				setLoading(false)
-			}
-		}
-		getOrden()
-	}, [])
+  useEffect(() => {
+    const getOrden = async () => {
+      try {
+        setLoading(true)
+        //const nextUser = await API.me(null)
+        setOrden(ordenDataMock)
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+      }
+    }
+    getOrden()
+  }, [])
 
-	return (
-		<OrdenContext.Provider
-			value={{
-				orden,
-				setDireccionesDespacho,
-				setDireccionDespacho,
-				setPago30Dias,
-				setDireccionEnvioFactura,
-				setItemsPlanCompra,
-			}}
-		>
-			{loading ? <Loader /> : children}
-		</OrdenContext.Provider>
-	)
+  return (
+    <OrdenContext.Provider
+      value={{
+        orden,
+        setItemsByProyectoId,
+        setOrderState,
+      }}
+    >
+      {loading ? <Loader /> : children}
+    </OrdenContext.Provider>
+  )
 }
 
 function useOrden() {
-	const context = useContext(OrdenContext)
-	if (!context) {
-		throw new Error(`useOrden must be used within a OrdenProvider`)
-	}
-	return context
+  const context = useContext(OrdenContext)
+  if (!context) {
+    throw new Error('useOrden must be used within a OrdenProvider')
+  }
+  return context
 }
 
 export { OrdenProvider, useOrden }
