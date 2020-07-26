@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from 'components/fieldsForm'
 import { Table, Divider, ListItems, Button } from 'components'
 import Grid from '@material-ui/core/Grid'
@@ -33,14 +33,6 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	},
 }))
 
-//TODO:
-//HEADER
-//	Parametrizar todo
-//BODY
-// Search table // Toggle
-// List By Categories
-// Button Volver
-
 function PlanDeCompra({
 	title = '',
 	subTitle = '',
@@ -51,9 +43,36 @@ function PlanDeCompra({
 	removeItem,
 }) {
 	const classes = useStyles()
-	const { fieldsById, onFocusHandle, onChangefield } = useForm({
+	const { fieldsById, onFocusHandle, onChangefield, setFieldsById } = useForm({
 		defaultFieldsById: planDeCompraFieldsById,
 	})
+
+	useEffect(() => {
+		const {
+			anios: { value },
+			unidad_compra,
+		} = fieldsById
+		if (value !== -1) {
+			if (unidad_compra.value !== -1) {
+				//TODO: Buscar DATA (API)
+			}
+			setFieldsById({
+				...fieldsById,
+				unidad_compra: {
+					...fieldsById.unidad_compra,
+					disabled: false,
+				},
+			})
+		}
+	}, [fieldsById.anios.value])
+	useEffect(() => {
+		const {
+			unidad_compra: { value },
+		} = fieldsById
+		if (value !== -1) {
+			//TODO: Traer DATA por búsqueda (API)
+		}
+	}, [fieldsById.unidad_compra.value])
 	return (
 		<Grid item sm={12}>
 			<Grid container className={classes.wrapper} spacing={3}>

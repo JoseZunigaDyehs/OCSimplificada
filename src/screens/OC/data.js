@@ -190,6 +190,7 @@ export const planDeCompraFieldsById = {
 		name: 'unidad_compra',
 		label: 'Unidad de compra',
 		required: true,
+		disabled: true,
 		isValid: true,
 		status: 'default',
 		type: 'select',
