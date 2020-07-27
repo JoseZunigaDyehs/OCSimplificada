@@ -13,6 +13,6 @@ export const sortBy = ({ array, key }) => {
 	return array.sort((x, y) => {
 		let a = x[key].toUpperCase(),
 			b = y[key].toUpperCase()
-		return a == b ? 0 : a > b ? 1 : -1
+		return a === b ? 0 : a > b ? 1 : -1
 	})
 }

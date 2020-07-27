@@ -33,6 +33,7 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	},
 }))
 
+//Esta wea tiene que servir para dos cosas, pasarle un type
 function PlanDeCompra({
 	title = '',
 	subTitle = '',
@@ -64,6 +65,7 @@ function PlanDeCompra({
 				},
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.anios.value])
 	useEffect(() => {
 		const {
@@ -72,7 +74,9 @@ function PlanDeCompra({
 		if (value !== -1) {
 			//TODO: Traer DATA por búsqueda (API)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.unidad_compra.value])
+
 	return (
 		<Grid item sm={12}>
 			<Grid container className={classes.wrapper} spacing={3}>
@@ -118,14 +122,20 @@ function PlanDeCompra({
 							Volver a proyectos
 						</Button>
 					)}
-					{projects.map(({ nombre, items }) => (
-						<React.Fragment>
-							<Typography variant="h5" className={classes.titleProject}>
-								{nombre}
-							</Typography>
-							<ListItems items={items} removeItem={removeItem} />
-						</React.Fragment>
-					))}
+					{projects.length > 0 ? (
+						projects.map(({ nombre, items }) => (
+							<React.Fragment>
+								<Typography variant="h5" className={classes.titleProject}>
+									{nombre}
+								</Typography>
+								<ListItems items={items} removeItem={removeItem} />
+							</React.Fragment>
+						))
+					) : (
+						<Typography variant="h5" className={classes.titleProject}>
+							No existen asociados a esta Orden de Compra
+						</Typography>
+					)}
 				</Grid>
 			</Grid>
 		</Grid>

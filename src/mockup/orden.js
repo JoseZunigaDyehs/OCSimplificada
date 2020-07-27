@@ -139,4 +139,5 @@ export const ordenDataMock = {
 	proyectosPlanCompra: [],
 	proyectos,
 	itemsByProyectoId,
+	documentosAdjuntos: [],
 }

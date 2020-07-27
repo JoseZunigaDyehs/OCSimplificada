@@ -141,7 +141,6 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 			dataSource: proyectos,
 		}
 	}
-
 	useEffect(() => {
 		setTableProyectos(getTableProyectos())
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -170,6 +170,23 @@ export const OCForm = {
 			],
 			rule: { type: 'null' },
 		},
+		documentos_adjuntar: {
+			name: 'documentos_adjuntar',
+			label: '¿Qué documentos desea adjuntar?',
+			required: true,
+			isValid: true,
+			status: 'default',
+			type: 'radio',
+			value: '1',
+			items: [
+				{
+					id: '1',
+					label: 'Resolución o decreto',
+				},
+				{ id: '2', label: 'Otro documento anexo' },
+			],
+			rule: { type: 'null' },
+		},
 	},
 }
 
