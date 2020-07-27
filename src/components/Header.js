@@ -4,37 +4,35 @@ import Typography from '@material-ui/core/Typography'
 import { Button } from 'components'
 import { useOrden } from 'context/OrdenContext'
 import { makeStyles } from '@material-ui/core/styles'
+import { goBack } from 'utils'
 
 const useStyles = makeStyles(({ spacing }) => ({
-  wrapper: {
-    paddingBottom: spacing(3),
-  },
+	wrapper: {
+		paddingBottom: spacing(3),
+	},
 }))
 
 function Header() {
-  const classes = useStyles()
-  const {
-    orden: { ordenId, convenioMarco },
-  } = useOrden()
-  const goBack = () => {
-    window.history.back()
-  }
-  return (
-    <Grid
-      container
-      justify="space-between"
-      alignItems="flex-start"
-      className={classes.wrapper}
-    >
-      <Grid>
-        <Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
-        <Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
-      </Grid>
-      <Button color="secondary" variant="outlined" onClick={goBack}>
-        Volver
-      </Button>
-    </Grid>
-  )
+	const classes = useStyles()
+	const {
+		orden: { ordenId, convenioMarco },
+	} = useOrden()
+	return (
+		<Grid
+			container
+			justify="space-between"
+			alignItems="flex-start"
+			className={classes.wrapper}
+		>
+			<Grid>
+				<Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
+				<Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
+			</Grid>
+			<Button color="secondary" variant="outlined" onClick={goBack}>
+				Volver
+			</Button>
+		</Grid>
+	)
 }
 
 export default Header

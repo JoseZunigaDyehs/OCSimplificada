@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
-import Step1 from './Steps/Step1'
-import Step2 from './Steps/Step2'
-import Step3 from './Steps/Step3'
-import Step4 from './Steps/Step4'
+import { Step1, Step2, Step3, Step4, Step5 } from './Steps'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
 import { useOrden } from 'context'
+import { Button } from 'components'
+import { goBack } from 'utils'
+import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from 'react-router-dom'
 
+const useStyles = makeStyles(({ spacing }) => ({
+	root: {
+		paddingTop: spacing(6),
+	},
+}))
+
+//TODO: La idea es cargar toda la data desde un principio
+
+//TODO: Aceptar que valide todo y envíe a otra ruta
 const modalConfigInit = {
 	show: false,
 	type: '',
 	data: null,
 }
 function OC() {
+	const classes = useStyles()
 	const [modalConfig, setModalConfig] = useState(modalConfigInit)
-	const { fieldsById, onFocusHandle, onChangefield, setFieldsById } = useForm({
+	const {
+		fieldsById,
+		onFocusHandle,
+		onChangefield,
+		setFieldsById,
+		isAllValid,
+	} = useForm({
 		defaultFieldsById: OCForm.fieldsById,
 	})
 	const { setOrderState } = useOrden()
+	let history = useHistory()
+
 	const onClose = () => {
 		setModalConfig(modalConfigInit)
+	}
+	const handleOnAccept = () => {
+		history.push('/autorizar')
 	}
 
 	//USE EFFECT INPUTS
@@ -49,6 +71,25 @@ function OC() {
 			<Step2 title="2. Pago" {...props} />
 			<Step3 title="3. Plan de compra" {...props} />
 			<Step4 title="4. Documentos asociados a la orden de compra" {...props} />
+			<Step5 title="5. Autorizadores" {...props} />
+			<Grid
+				item
+				xs={12}
+				justify="space-between"
+				container
+				className={classes.root}
+			>
+				<Button color="secondary" variant="outlined" onClick={goBack}>
+					Volver
+				</Button>
+				<Button
+					color="primary"
+					onClick={handleOnAccept}
+					disabled={!isAllValid()}
+				>
+					Aceptar
+				</Button>
+			</Grid>
 			{modalConfig.show && (
 				<ModalConfig modal={modalConfig} onClose={onClose} />
 			)}

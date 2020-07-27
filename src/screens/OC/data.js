@@ -187,10 +187,27 @@ export const OCForm = {
 			],
 			rule: { type: 'null' },
 		},
+		autoriza: {
+			name: 'autoriza',
+			label: '¿Quién autoriza esta Orden de Compra?',
+			required: false,
+			isValid: true,
+			status: 'default',
+			type: 'radio',
+			value: '2',
+			items: [
+				{
+					id: '1',
+					label: 'Yo autorizo esta Orden de Compra',
+				},
+				{ id: '2', label: 'Otros autorizadores lo harán' },
+			],
+			rule: { type: 'null' },
+		},
 	},
 }
 
-export const planDeCompraFieldsById = {
+export const itemsAsociadosfiltersFieldsById = {
 	anios: {
 		name: 'anios',
 		label: 'Año del proyecto',
@@ -208,6 +225,21 @@ export const planDeCompraFieldsById = {
 		label: 'Unidad de compra',
 		required: true,
 		disabled: true,
+		isValid: true,
+		status: 'default',
+		type: 'select',
+		value: -1,
+		rule: { type: 'select' },
+		items: unidadCompra,
+		md: 6,
+	},
+}
+
+export const autorizadoresfiltersFieldsById = {
+	unidad_compra: {
+		name: 'unidad_compra',
+		label: 'Unidad de compra',
+		required: true,
 		isValid: true,
 		status: 'default',
 		type: 'select',

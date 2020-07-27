@@ -44,7 +44,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const proyectoSelected = useRef(null)
 	const {
 		orden: { proyectosPlanCompra, itemsByProyectoId, proyectos },
-		asociarRemoveItem,
+		removeProyectosPlanDeCompra,
 	} = useOrden()
 
 	const handleAsociar = id => {
@@ -67,7 +67,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 		const nextDataSource = itemsByProyectoId[proyectoSelected.current].filter(
 			({ id: idDataSource }) => idDataSource !== id
 		)
-		asociarRemoveItem({
+		removeProyectosPlanDeCompra({
 			proyectosPlanCompra: nextProyectosPlanCompra,
 			nextItems: nextDataSource,
 			proyectoId: proyectoSelected.current,
@@ -108,7 +108,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 			})
 		}
 		nextDataSource.push(item)
-		asociarRemoveItem({
+		removeProyectosPlanDeCompra({
 			proyectosPlanCompra: nextProyectosPlanCompra,
 			nextItems: nextDataSource,
 			proyectoId,
@@ -202,9 +202,10 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 								? `Selecciona Ítems del proyecto ${projectName}`
 								: 'Selecciona Proyecto'
 						}
-						projects={proyectosPlanCompra}
+						items={proyectosPlanCompra}
 						goBack={isItem ? goBack : null}
 						removeItem={handleRemoveItem}
+						isAutorizadores={false}
 					/>
 				)}
 			</Grid>

@@ -16,3 +16,7 @@ export const sortBy = ({ array, key }) => {
 		return a === b ? 0 : a > b ? 1 : -1
 	})
 }
+
+export const goBack = () => {
+	window.history.back()
+}

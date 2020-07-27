@@ -34,6 +34,19 @@ function useForm({ defaultFieldsById }) {
 		const isValid = validator[rule.type]({ ...rule, value })
 		return isValid
 	}
+	const isAllValid = () => {
+		const fieldsIds = Object.keys(fieldsById)
+		const isValid = []
+		fieldsIds.forEach(field => {
+			const { isRequired, value, rule } = field
+			if (isRequired) {
+				if (!validate({ value, rule })) {
+					isValid.push(field)
+				}
+			}
+		})
+		return isValid.length > 0
+	}
 	const onFocusHandle = ({ name, isFocused }) => {
 		const nextField = fieldsById[name]
 		nextField.status = isFocused
@@ -54,7 +67,14 @@ function useForm({ defaultFieldsById }) {
 			[name]: { ...[name], ...nextField },
 		}))
 	}
-	return { fieldsById, onFocusHandle, onChangefield, setFieldsById, format }
+	return {
+		fieldsById,
+		onFocusHandle,
+		onChangefield,
+		setFieldsById,
+		format,
+		isAllValid,
+	}
 }
 
 export default useForm

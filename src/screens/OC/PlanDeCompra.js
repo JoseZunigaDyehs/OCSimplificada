@@ -3,9 +3,13 @@ import { Select } from 'components/fieldsForm'
 import { Table, Divider, ListItems, Button } from 'components'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { planDeCompraFieldsById } from './data'
+import {
+	itemsAsociadosfiltersFieldsById,
+	autorizadoresfiltersFieldsById,
+} from './data'
 import useForm from 'hooks/useForm'
 import { makeStyles } from '@material-ui/core/styles'
+import { sortBy } from 'utils'
 
 const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	title: {
@@ -39,34 +43,39 @@ function PlanDeCompra({
 	subTitle = '',
 	dataSource = [],
 	columns = [],
-	projects,
+	items,
 	goBack = null,
 	removeItem,
+	isAutorizadores = true,
 }) {
 	const classes = useStyles()
 	const { fieldsById, onFocusHandle, onChangefield, setFieldsById } = useForm({
-		defaultFieldsById: planDeCompraFieldsById,
+		defaultFieldsById: isAutorizadores
+			? autorizadoresfiltersFieldsById
+			: itemsAsociadosfiltersFieldsById,
 	})
 
 	useEffect(() => {
-		const {
-			anios: { value },
-			unidad_compra,
-		} = fieldsById
-		if (value !== -1) {
-			if (unidad_compra.value !== -1) {
-				//TODO: Buscar DATA (API)
+		if (!isAutorizadores) {
+			const {
+				anios: { value },
+				unidad_compra,
+			} = fieldsById
+			if (value !== -1) {
+				if (unidad_compra.value !== -1) {
+					//TODO: Buscar DATA (API)
+				}
+				setFieldsById({
+					...fieldsById,
+					unidad_compra: {
+						...fieldsById.unidad_compra,
+						disabled: false,
+					},
+				})
 			}
-			setFieldsById({
-				...fieldsById,
-				unidad_compra: {
-					...fieldsById.unidad_compra,
-					disabled: false,
-				},
-			})
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fieldsById.anios.value])
+	}, [fieldsById.anios])
 	useEffect(() => {
 		const {
 			unidad_compra: { value },
@@ -77,6 +86,8 @@ function PlanDeCompra({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.unidad_compra.value])
 
+	const nextDataSource = sortBy({ array: dataSource, key: 'nombre' })
+
 	return (
 		<Grid item sm={12}>
 			<Grid container className={classes.wrapper} spacing={3}>
@@ -85,11 +96,13 @@ function PlanDeCompra({
 						{title}
 					</Typography>
 					<Grid item md={12} container className={classes.root} spacing={3}>
-						<Select
-							{...fieldsById.anios}
-							onChange={onChangefield}
-							onFocusHandle={onFocusHandle}
-						/>
+						{!isAutorizadores && (
+							<Select
+								{...fieldsById.anios}
+								onChange={onChangefield}
+								onFocusHandle={onFocusHandle}
+							/>
+						)}
 						<Select
 							{...fieldsById.unidad_compra}
 							onChange={onChangefield}
@@ -107,8 +120,8 @@ function PlanDeCompra({
 						direction="column"
 						className={classes.wrapperSectionTable}
 					>
-						<Typography>{subTitle}</Typography>
-						<Table columns={columns} dataSource={dataSource} />
+						{subTitle && <Typography>{subTitle}</Typography>}
+						<Table columns={columns} dataSource={nextDataSource} />
 					</Grid>
 				</Grid>
 				<Grid item md={4} sm={12}>
@@ -122,18 +135,24 @@ function PlanDeCompra({
 							Volver a proyectos
 						</Button>
 					)}
-					{projects.length > 0 ? (
-						projects.map(({ nombre, items }) => (
-							<React.Fragment>
-								<Typography variant="h5" className={classes.titleProject}>
-									{nombre}
-								</Typography>
-								<ListItems items={items} removeItem={removeItem} />
-							</React.Fragment>
-						))
+					{items.length > 0 ? (
+						isAutorizadores ? (
+							<ListItems items={items} removeItem={removeItem} />
+						) : (
+							items.map(({ nombre, items }) => (
+								<React.Fragment>
+									<Typography variant="h5" className={classes.titleProject}>
+										{nombre}
+									</Typography>
+									<ListItems items={items} removeItem={removeItem} />
+								</React.Fragment>
+							))
+						)
 					) : (
-						<Typography variant="h5" className={classes.titleProject}>
-							No existen asociados a esta Orden de Compra
+						<Typography className={classes.titleProject}>
+							{isAutorizadores
+								? 'No existen autorizadores a esta Orden de Compra'
+								: 'No existen asociados a esta Orden de Compra'}
 						</Typography>
 					)}
 				</Grid>

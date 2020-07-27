@@ -23,7 +23,7 @@ function OrdenProvider({ children }) {
 		}
 		return nextItemsByProyectoId
 	}
-	const asociarRemoveItem = ({
+	const removeProyectosPlanDeCompra = ({
 		proyectosPlanCompra,
 		nextItems,
 		proyectoId,
@@ -53,7 +53,7 @@ function OrdenProvider({ children }) {
 			value={{
 				orden,
 				setOrderState,
-				asociarRemoveItem,
+				removeProyectosPlanDeCompra,
 			}}
 		>
 			{loading ? <Loader /> : children}

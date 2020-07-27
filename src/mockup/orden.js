@@ -124,6 +124,13 @@ export const itemsByProyectoId = {
 	],
 }
 
+const autorizadoresData = [
+	{ id: '1', nombre: 'Nombre 1', apellido: 'Apellido 1', cargo: 'Cargo 1' },
+	{ id: '2', nombre: 'Nombre 2', apellido: 'Apellido 2', cargo: 'Cargo 2' },
+	{ id: '3', nombre: 'Nombre 3', apellido: 'Apellido 3', cargo: 'Cargo 3' },
+	{ id: '4', nombre: 'Nombre 4', apellido: 'Apellido 4', cargo: 'Cargo 4' },
+]
+
 export const ordenDataMock = {
 	ordenId: '500977-140-CM20',
 	convenioMarco: 'CM 18/2006-TTO, INTEGRAL DE VITRECTOMÍA Y OTROS',
@@ -140,4 +147,6 @@ export const ordenDataMock = {
 	proyectos,
 	itemsByProyectoId,
 	documentosAdjuntos: [],
+	autorizadoresData,
+	autorizadores: [],
 }
