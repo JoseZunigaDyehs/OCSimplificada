@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { Button } from 'components'
@@ -7,6 +7,7 @@ import { goBack } from 'utils'
 import Resume from './Resume'
 import Pago from './Pago'
 import Totals from './Totals'
+import NotifyModal from './NotifyModal'
 
 const useStyles = makeStyles(({ spacing, palette, fontWeights }) => ({
 	root: {
@@ -50,6 +51,10 @@ const useStyles = makeStyles(({ spacing, palette, fontWeights }) => ({
 //TODO: Levantar Modal de Notificación
 function Autorizar() {
 	const classes = useStyles()
+	const [modal, setModal] = useState(false)
+	const onAccept = () => {
+		setModal(true)
+	}
 	return (
 		<Grid container className={classes.root}>
 			<Grid item sm={12}>
@@ -69,10 +74,11 @@ function Autorizar() {
 				<Button color="secondary" variant="outlined" onClick={goBack}>
 					Volver
 				</Button>
-				<Button color="success" onClick={null}>
+				<Button color="success" onClick={onAccept}>
 					Autorizar Orden de Compra
 				</Button>
 			</Grid>
+			{modal && <NotifyModal />}
 		</Grid>
 	)
 }
