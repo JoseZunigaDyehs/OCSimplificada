@@ -1,4 +1,4 @@
-import { OC } from 'screens'
+import { OC, Autorizar } from 'screens'
 
 export const routes = [
 	{
@@ -11,6 +11,6 @@ export const routes = [
 		key: 2,
 		path: `/autorizar`,
 		title: `Autorizar`,
-		component: OC,
+		component: Autorizar,
 	},
 ]

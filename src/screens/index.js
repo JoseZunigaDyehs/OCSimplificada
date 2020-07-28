@@ -1,3 +1,4 @@
 import OC from './OC'
+import Autorizar from './Autorizar'
 
-export { OC }
+export { OC, Autorizar }

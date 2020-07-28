@@ -83,7 +83,7 @@ function OC() {
 				<Button color="secondary" variant="outlined" onClick={goBack}>
 					Volver
 				</Button>
-				<Button color="primary" onClick={handleOnAccept} disabled={isDisabled}>
+				<Button color="primary" onClick={handleOnAccept} disabled={false}>
 					Aceptar
 				</Button>
 			</Grid>
