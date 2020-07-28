@@ -17,7 +17,6 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 
 //TODO: La idea es cargar toda la data desde un principio
-
 //TODO: Aceptar que valide todo y envíe a otra ruta
 const modalConfigInit = {
 	show: false,
@@ -36,7 +35,7 @@ function OC() {
 	} = useForm({
 		defaultFieldsById: OCForm.fieldsById,
 	})
-	const { setOrderState } = useOrden()
+	const { setOrderState, isDisabledForm } = useOrden()
 	let history = useHistory()
 
 	const onClose = () => {
@@ -65,6 +64,8 @@ function OC() {
 		onFocusHandle: onFocusHandle,
 		setModalConfig: setModalConfig,
 	}
+	const isInvalid = isAllValid()
+	const isDisabled = isDisabledForm({ fieldsById, isInvalid })
 	return (
 		<Grid container>
 			<Step1 title="1. Despacho" {...props} />
@@ -82,11 +83,7 @@ function OC() {
 				<Button color="secondary" variant="outlined" onClick={goBack}>
 					Volver
 				</Button>
-				<Button
-					color="primary"
-					onClick={handleOnAccept}
-					disabled={!isAllValid()}
-				>
+				<Button color="primary" onClick={handleOnAccept} disabled={isDisabled}>
 					Aceptar
 				</Button>
 			</Grid>

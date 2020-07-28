@@ -8,6 +8,9 @@ import { Divider, Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
 
 const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
+	rootWrapper: {
+		marginTop: spacing(3),
+	},
 	title: {
 		fontWeight: fontWeights[0],
 	},
@@ -106,7 +109,7 @@ function Step5({ title = '', fieldsById, onChange, onFocusHandle }) {
 	}, [autorizadores.length])
 
 	return (
-		<Grid container direction="column">
+		<Grid container direction="column" className={classes.rootWrapper}>
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>

@@ -11,6 +11,9 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	root: {
 		flexGrow: 1,
 	},
+	rootWrapper: {
+		marginTop: spacing(3),
+	},
 	title: {
 		fontWeight: fontWeights[0],
 	},
@@ -58,7 +61,7 @@ function Step2({
 	}
 
 	return (
-		<Grid container direction="column">
+		<Grid container direction="column" className={classes.rootWrapper}>
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>

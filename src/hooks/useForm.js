@@ -38,8 +38,8 @@ function useForm({ defaultFieldsById }) {
 		const fieldsIds = Object.keys(fieldsById)
 		const isValid = []
 		fieldsIds.forEach(field => {
-			const { isRequired, value, rule } = field
-			if (isRequired) {
+			const { required, value, rule } = fieldsById[field]
+			if (required) {
 				if (!validate({ value, rule })) {
 					isValid.push(field)
 				}
