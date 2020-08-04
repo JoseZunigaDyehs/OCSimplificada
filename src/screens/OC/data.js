@@ -173,7 +173,7 @@ export const OCForm = {
 		documentos_adjuntar: {
 			name: 'documentos_adjuntar',
 			label: '¿Qué documentos desea adjuntar?',
-			required: true,
+			required: false,
 			isValid: true,
 			status: 'default',
 			type: 'radio',

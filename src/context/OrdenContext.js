@@ -41,12 +41,9 @@ function OrdenProvider({ children }) {
 		}
 		const isValid = []
 		const { asociar_plan_compra, autoriza } = fieldsById
-		const { proyectosPlanCompra, documentosAdjuntos, autorizadores } = orden
+		const { proyectosPlanCompra, autorizadores } = orden
 		if (asociar_plan_compra.value === '1' && proyectosPlanCompra.length === 0) {
 			isValid.push('asociar_plan_compra')
-		}
-		if (documentosAdjuntos.length === 0) {
-			isValid.push('documentosAdjuntos')
 		}
 		if (autoriza.value === '2' && autorizadores.length === 0) {
 			isValid.push('autorizadores')
