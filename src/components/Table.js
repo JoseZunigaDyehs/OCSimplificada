@@ -6,6 +6,8 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { TextInput } from './fieldsForm'
@@ -19,10 +21,19 @@ const useStyles = makeStyles(({ spacing }) => ({
 	wrapper: {
 		padding: spacing(2),
 	},
+	input: {
+		display: 'none',
+	},
 }))
-function Table({ dataSource = [], columns = [] }) {
+function Table({
+	dataSource = [],
+	columns = [],
+	totalData = 100,
+	getData = () => {},
+}) {
 	const classes = useStyles()
 	const [dataFiltered, setDataFiltered] = useState(dataSource)
+	const [page, setPage] = useState(0)
 	const { fieldsById, onFocusHandle, onChangefield } = useForm({
 		defaultFieldsById: {
 			search: {
@@ -38,6 +49,11 @@ function Table({ dataSource = [], columns = [] }) {
 			},
 		},
 	})
+	const handleChangePage = (event, newPage) => {
+		//TODO: Ir a buscar data
+		//getData(newPage)
+		setPage(newPage)
+	}
 	useEffect(() => {
 		//Filtrar data y setear
 		const getFilteredData = search => {
@@ -107,6 +123,15 @@ function Table({ dataSource = [], columns = [] }) {
 					</TableBody>
 				</TableMui>
 			</TableContainer>
+			<TablePagination
+				component="div"
+				count={totalData}
+				rowsPerPage={10}
+				page={page}
+				onChangePage={handleChangePage}
+				labelRowsPerPage={null}
+				classes={{ input: classes.input }}
+			/>
 		</Grid>
 	)
 }

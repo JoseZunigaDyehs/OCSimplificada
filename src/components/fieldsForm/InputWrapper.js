@@ -13,6 +13,9 @@ const useStyles = makeStyles(
 			fontWeight: fontWeights[2],
 			letterSpacing: '.5px',
 		},
+		labelRadio: {
+			color: palette.secondary.dark,
+		},
 		invalidText: {
 			fontSize: fontSizes[0],
 		},
@@ -98,9 +101,14 @@ function InputWrapper({
 			container
 			className={`${classes.wrapper} ${classes[paddingPosition]}`}
 		>
-			<Typography color="secondary" className={classes.label}>{`${label} ${
-				required ? `(*)` : ``
-			}`}</Typography>
+			<Typography
+				color="secondary"
+				className={
+					type === 'radio'
+						? `${classes.labelRadio} ${classes.label}`
+						: classes.label
+				}
+			>{`${label} ${required ? `(*)` : ``}`}</Typography>
 			<Grid
 				className={`${classes.inputWrapper} ${
 					type === 'radio' ? classes.noBorder : classes[status]

@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import { esES } from '@material-ui/core/locale'
 
 const fontWeights = [300, 400, 500, 700]
 const inputHeight = `4rem`
@@ -36,89 +37,92 @@ const fontSizes = [
 const familyRoboto = [`Roboto`, `sans-serif`].join(`,`)
 //const familyRobotoSlab = [`Roboto Slab`, `Roboto`].join(`,`)
 
-const theme = createMuiTheme({
-	palette: {
-		...colors,
-		// Used by `getContrastText()` to maximize the contrast between
-		// the background and the text.
-		contrastThreshold: 3,
-		// Used by the functions below to shift a color's luminance by approximately
-		// two indexes within its tonal palette.
-		// E.g., shift from Red 500 to Red 300 or Red 700.
-		tonalOffset: 0.2,
-	},
-	fontWeights,
-	fontSizes,
-	typography: {
-		htmlFontSize: 10,
-		useNextVariants: true,
-		fontSize: fontSizes[1],
-		fontFamily: familyRoboto,
-		h1: {
-			fontSize: fontSizes[6],
-			fontWeight: fontWeights[2],
-			lineHeight: `3.8rem`,
-			letterSpacing: -0.21,
+const theme = createMuiTheme(
+	{
+		palette: {
+			...colors,
+			// Used by `getContrastText()` to maximize the contrast between
+			// the background and the text.
+			contrastThreshold: 3,
+			// Used by the functions below to shift a color's luminance by approximately
+			// two indexes within its tonal palette.
+			// E.g., shift from Red 500 to Red 300 or Red 700.
+			tonalOffset: 0.2,
 		},
-		h2: {
-			fontSize: fontSizes[5],
-			fontWeight: fontWeights[2],
-			lineHeight: `3.1rem`,
-			letterSpacing: -0.21,
-		},
-		h3: {
-			fontSize: fontSizes[4],
-			fontWeight: fontWeights[2],
-			lineHeight: `2.6rem`,
-			letterSpacing: -0.21,
-		},
-		h4: {
-			fontSize: fontSizes[3],
-			fontWeight: fontWeights[2],
-			lineHeight: `2.2rem`,
-			letterSpacing: -0.21,
-		},
-		h5: {
-			fontSize: fontSizes[2],
-			fontWeight: fontWeights[2],
-			lineHeight: `2.2rem`,
-			letterSpacing: -0.21,
-		},
-		body1: {
-			fontSize: fontSizes[2],
-			fontWeight: fontWeights[1],
-			lineHeight: `2rem`,
-			fontFamily: familyRoboto,
-			color: colors.secondary.dark,
-		},
-		body2: {
+		fontWeights,
+		fontSizes,
+		typography: {
+			htmlFontSize: 10,
+			useNextVariants: true,
 			fontSize: fontSizes[1],
-			fontWeight: fontWeights[1],
-			lineHeight: `1.8rem`,
 			fontFamily: familyRoboto,
-			color: colors.secondary.dark,
-		},
-		subtitle1: {
-			fontSize: fontSizes[0],
-			lineHeight: '1.6rem',
-			color: colors.secondary.light,
-		},
-		caption: {
-			fontWeight: fontWeights[1],
-			lineHeight: `1.8rem`,
-			fontFamily: familyRoboto,
-			color: colors.secondary.main,
-			textTransform: 'uppercase',
-		},
-		subtitle2: {
-			fontWeight: fontWeights[1],
-			lineHeight: `1.8rem`,
-			fontFamily: familyRoboto,
-			color: colors.secondary.light,
-			textTransform: 'uppercase',
+			h1: {
+				fontSize: fontSizes[6],
+				fontWeight: fontWeights[2],
+				lineHeight: `3.8rem`,
+				letterSpacing: -0.21,
+			},
+			h2: {
+				fontSize: fontSizes[5],
+				fontWeight: fontWeights[2],
+				lineHeight: `3.1rem`,
+				letterSpacing: -0.21,
+			},
+			h3: {
+				fontSize: fontSizes[4],
+				fontWeight: fontWeights[2],
+				lineHeight: `2.6rem`,
+				letterSpacing: -0.21,
+			},
+			h4: {
+				fontSize: fontSizes[3],
+				fontWeight: fontWeights[2],
+				lineHeight: `2.2rem`,
+				letterSpacing: -0.21,
+			},
+			h5: {
+				fontSize: fontSizes[2],
+				fontWeight: fontWeights[2],
+				lineHeight: `2.2rem`,
+				letterSpacing: -0.21,
+			},
+			body1: {
+				fontSize: fontSizes[2],
+				fontWeight: fontWeights[1],
+				lineHeight: `2rem`,
+				fontFamily: familyRoboto,
+				color: colors.secondary.dark,
+			},
+			body2: {
+				fontSize: fontSizes[1],
+				fontWeight: fontWeights[1],
+				lineHeight: `1.8rem`,
+				fontFamily: familyRoboto,
+				color: colors.secondary.dark,
+			},
+			subtitle1: {
+				fontSize: fontSizes[0],
+				lineHeight: '1.6rem',
+				color: colors.secondary.light,
+			},
+			caption: {
+				fontWeight: fontWeights[1],
+				lineHeight: `1.8rem`,
+				fontFamily: familyRoboto,
+				color: colors.secondary.main,
+				textTransform: 'uppercase',
+			},
+			subtitle2: {
+				fontWeight: fontWeights[1],
+				lineHeight: `1.8rem`,
+				fontFamily: familyRoboto,
+				color: colors.secondary.light,
+				textTransform: 'uppercase',
+			},
 		},
 	},
-})
+	esES
+)
 theme.overrides = {
 	MuiInput: {
 		root: {
