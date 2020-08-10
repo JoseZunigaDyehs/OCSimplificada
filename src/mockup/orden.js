@@ -132,14 +132,17 @@ const autorizadoresData = [
 ]
 
 export const ordenDataMock = {
-	ordenId: '500977-140-CM20',
-	convenioMarco: 'CM 18/2006-TTO, INTEGRAL DE VITRECTOMÍA Y OTROS',
+	ordenId: '2241-09-AG20',
+	convenioMarco: '123-12-COtoS',
 	regionId: `13`,
 	regionLabel: 'Metropolitana de Santiago',
 	withDireccionDespacho: true,
 	diasHabiles: 10,
-	direccionesDespacho: [], //Llena al abrir componente
-	direccionDespacho: direccionesDespacho[0],
+	direccionDespacho: {
+		id: 1,
+		label: 'Primera direccion 1111',
+		comunaId: '13110',
+	},
 	pago30Dias: true,
 	direccionesFactura,
 	direccionEnvioFactura: direccionesFactura[0],

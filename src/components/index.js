@@ -6,6 +6,7 @@ import Button from './Button'
 import Divider from './Divider'
 import Table from './Table'
 import ListItems from './ListItems'
+import DetalleProductos from './DetalleProductos'
 
 export {
 	Divider,
@@ -15,5 +16,6 @@ export {
 	Loader,
 	Button,
 	Table,
+	DetalleProductos,
 	ListItems,
 }

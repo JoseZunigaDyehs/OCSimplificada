@@ -7,15 +7,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Divider, TextWrapper } from 'components'
 import { useOrden } from 'context'
 
-const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
+const useStyles = makeStyles(({ spacing, fontSizes, breakpoints }) => ({
 	root: {
 		flexGrow: 1,
 	},
-	rootWrapper: {
-		marginTop: spacing(3),
-	},
 	title: {
-		fontWeight: fontWeights[0],
+		marginTop: spacing(3),
+		marginBottom: spacing(1),
 	},
 	wrapper: {
 		marginRight: spacing(4),
@@ -30,6 +28,9 @@ const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
 	wrapperDirection: {
 		flexGrow: 1,
 		padding: spacing(3, 0),
+	},
+	mb: {
+		marginBottom: spacing(1),
 	},
 }))
 
@@ -61,26 +62,25 @@ function Step2({
 	}
 
 	return (
-		<Grid container direction="column" className={classes.rootWrapper}>
-			<Typography variant="h3" className={classes.title}>
-				{title}
-			</Typography>
-			<Grid container spacing={3} className={classes.root}>
-				<Grid item md={8} xs={12}>
+		<Grid container direction="column">
+			<Grid container spacing={1} className={classes.root}>
+				<Grid item md={9} xs={12}>
+					<Divider />
+					<Typography variant="h3" className={classes.title}>
+						{title}
+					</Typography>
 					<Grid className={classes.wrapper}>
-						<Divider />
 						<RadioButton {...fieldsById.plazo_pago} {...inputProps} />
 						{pago30Dias && (
 							<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
 						)}
 						<Grid container direction="column">
-							<Typography variant="h3" className={classes.title}>
+							<Typography variant="h5" className={classes.title}>
 								Contacto para esta compra
 							</Typography>
-							<Typography>
+							<Typography className={classes.mb}>
 								Ingresa el responsable de la recepción del producto o servicio
 							</Typography>
-							<Divider />
 							<Grid container className={classes.root} spacing={3}>
 								<TextInput
 									{...fieldsById.nombre_contacto_compra}
@@ -102,7 +102,7 @@ function Step2({
 						</Grid>
 						<Grid container direction="column">
 							<Divider />
-							<Typography variant="h3" className={classes.title}>
+							<Typography variant="h5" className={classes.title}>
 								Contacto para pago
 							</Typography>
 							<Typography>Ingresa el responsable del pago</Typography>
@@ -127,7 +127,7 @@ function Step2({
 							</Grid>
 							<Grid container direction="column">
 								<Divider />
-								<Typography variant="h3" className={classes.title}>
+								<Typography variant="h5" className={classes.title}>
 									Información para envío de factura
 								</Typography>
 								<Grid

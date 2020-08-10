@@ -2,6 +2,17 @@ import { anios, unidadCompra } from 'mockup'
 
 export const OCForm = {
 	fieldsById: {
+		nombreOC: {
+			name: 'nombreOC',
+			label: 'Nombre',
+			required: true,
+			isValid: true,
+			status: 'default',
+			type: 'text',
+			value: '',
+			rule: { type: 'range', min: 1, max: 50 },
+			md: 8,
+		},
 		despacho_observacion: {
 			name: 'despacho_observacion',
 			label: 'Observación de despacho',
@@ -16,25 +27,27 @@ export const OCForm = {
 		plazo_pago: {
 			name: 'plazo_pago',
 			label: 'Plazo de pago',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'radio',
 			placeholder: 'Ingresar observaciones o indicaciones para el pago',
 			value: '1',
 			items: [
+				{ id: '1', label: '45 días contra la recepción de la factura' },
 				{
-					id: '1',
-					label: '30 días contra la recepción conforme de la factura',
+					id: '2',
+					label:
+						'45 días contra la recepción de la factura (para institución de salud)',
 				},
-				{ id: '2', label: 'Mayor a 30 días' },
+				{ id: '3', label: 'Mayor a 30 días' },
 			],
 			rule: { type: 'null' },
 		},
 		pago_observacion: {
 			name: 'pago_observacion',
 			label: 'Observación de pago',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'textarea',
@@ -46,7 +59,7 @@ export const OCForm = {
 			name: 'pago_justificacion',
 			label:
 				'Ha seleccionado plazo de entrega mayor a 30 días, debe ingresar una justificación',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'textarea',
@@ -63,7 +76,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		apellido_contacto_compra: {
 			name: 'apellido_contacto_compra',
@@ -74,7 +87,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		telefono_contacto_compra: {
 			name: 'telefono_contacto_compra',
@@ -85,7 +98,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		email_contacto_compra: {
 			name: 'email_contacto_compra',
@@ -96,7 +109,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'email' },
-			md: 6,
+			md: 3,
 		},
 		nombre_contacto_pago: {
 			name: 'nombre_contacto_pago',
@@ -107,7 +120,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		apellido_contacto_pago: {
 			name: 'apellido_contacto_pago',
@@ -118,7 +131,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		telefono_contacto_pago: {
 			name: 'telefono_contacto_pago',
@@ -129,7 +142,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'range', min: 1, max: 50 },
-			md: 6,
+			md: 3,
 		},
 		email_contacto_pago: {
 			name: 'email_contacto_pago',
@@ -140,7 +153,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'email' },
-			md: 6,
+			md: 3,
 		},
 		email_envio_factura: {
 			name: 'email_envio_factura',
@@ -156,7 +169,7 @@ export const OCForm = {
 		asociar_plan_compra: {
 			name: 'asociar_plan_compra',
 			label: '¿Desea asociar al Plan de compras?',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'radio',
@@ -173,7 +186,7 @@ export const OCForm = {
 		documentos_adjuntar: {
 			name: 'documentos_adjuntar',
 			label: '¿Qué documentos desea adjuntar?',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'radio',
@@ -190,7 +203,7 @@ export const OCForm = {
 		autoriza: {
 			name: 'autoriza',
 			label: '¿Quién autoriza esta Orden de Compra?',
-			required: false,
+			required: true,
 			isValid: true,
 			status: 'default',
 			type: 'radio',

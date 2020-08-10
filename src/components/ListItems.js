@@ -2,17 +2,24 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from './Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
+const useStyles = makeStyles(({ palette, spacing, fontSizes }) => ({
 	wrapperItem: {
 		'&:last-child': {
-			border: `1px solid #bfc5d26b`,
 			marginBottom: spacing(2),
 		},
-		border: `1px solid #bfc5d26b`,
-		borderBottom: 'none',
 		padding: spacing(1, 3),
+		backgroundColor: '#f4f7ff',
+	},
+	icon: {
+		color: palette.secondary.light,
+		fontSize: fontSizes[2],
+		cursor: 'pointer',
+	},
+	text: {
+		color: palette.primary.main,
 	},
 }))
 
@@ -29,14 +36,12 @@ function ListItems({ items = [], removeItem = null }) {
 					justify="space-between"
 					alignItems="center"
 				>
-					<Typography>{nombre}</Typography>
-					<Button
-						color="error"
-						variant="text"
+					<Typography className={classes.text}>{nombre}</Typography>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={classes.icon}
 						onClick={() => removeItem({ id, nombre, ...rest })}
-					>
-						Eliminar
-					</Button>
+					/>
 				</Grid>
 			))}
 		</Grid>

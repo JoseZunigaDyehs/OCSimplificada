@@ -48,7 +48,7 @@ function OC() {
 	//USE EFFECT INPUTS
 	useEffect(() => {
 		const togglePago30Dias = () => {
-			const isPago30Dias = fieldsById.plazo_pago.value === '2'
+			const isPago30Dias = fieldsById.plazo_pago.value === '3'
 			const { pago_justificacion } = fieldsById
 			setOrderState({ pago30Dias: isPago30Dias })
 			pago_justificacion.required = isPago30Dias
@@ -68,8 +68,8 @@ function OC() {
 	const isDisabled = isDisabledForm({ fieldsById, isInvalid })
 	return (
 		<Grid container>
-			<Step1 title="1. Despacho" {...props} />
-			<Step2 title="2. Pago" {...props} />
+			<Step1 title="Información de la orden de compra" {...props} />
+			<Step2 title="Información sobre el pago" {...props} />
 			<Step3 title="3. Plan de compra" {...props} />
 			<Step4 title="4. Documentos asociados a la orden de compra" {...props} />
 			<Step5 title="5. Autorizadores" {...props} />

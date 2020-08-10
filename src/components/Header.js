@@ -5,10 +5,17 @@ import { Button } from 'components'
 import { useOrden } from 'context/OrdenContext'
 import { makeStyles } from '@material-ui/core/styles'
 import { goBack } from 'utils'
+import { Divider } from '@material-ui/core'
 
 const useStyles = makeStyles(({ spacing }) => ({
 	wrapper: {
 		paddingBottom: spacing(3),
+	},
+	mb: {
+		marginBottom: spacing(1),
+	},
+	mb_1_3: {
+		marginBottom: spacing(1.3),
 	},
 }))
 
@@ -18,19 +25,18 @@ function Header() {
 		orden: { ordenId, convenioMarco },
 	} = useOrden()
 	return (
-		<Grid
-			container
-			justify="space-between"
-			alignItems="flex-start"
-			className={classes.wrapper}
-		>
-			<Grid>
-				<Typography variant="h2">{`Orden de compra ${ordenId}`}</Typography>
-				<Typography variant="subtitle2">{`${convenioMarco}.`}</Typography>
+		<Grid container alignItems="flex-start" className={classes.wrapper}>
+			<Grid item md={9}>
+				<Typography
+					className={classes.mb}
+					variant="h2"
+				>{`Orden de compra ${ordenId}`}</Typography>
+				<Typography
+					variant="subtitle2"
+					className={classes.mb_1_3}
+				>{`Proveniente desde Compra Ágil ${convenioMarco}.`}</Typography>
+				<Divider />
 			</Grid>
-			<Button color="secondary" variant="outlined" onClick={goBack}>
-				Volver
-			</Button>
 		</Grid>
 	)
 }

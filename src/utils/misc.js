@@ -20,3 +20,9 @@ export const sortBy = ({ array, key }) => {
 export const goBack = () => {
 	window.history.back()
 }
+
+export const formatThousand = value => {
+	const nfObject = new Intl.NumberFormat(`en-US`)
+	value = nfObject.format(value)
+	return value.replace(/,/g, `.`)
+}

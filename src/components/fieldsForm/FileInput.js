@@ -17,7 +17,7 @@ function FileInput({
 	return (
 		<React.Fragment>
 			<Button color="primary" variant="outlined" onClick={onClickUploadFile}>
-				Adjuntar
+				Adjuntar archivo
 			</Button>
 			<input
 				type="file"

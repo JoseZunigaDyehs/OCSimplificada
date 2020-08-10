@@ -64,7 +64,7 @@ const theme = createMuiTheme(
 			},
 			h2: {
 				fontSize: fontSizes[5],
-				fontWeight: fontWeights[2],
+				fontWeight: fontWeights[3],
 				lineHeight: `3.1rem`,
 				letterSpacing: -0.21,
 			},
@@ -117,7 +117,6 @@ const theme = createMuiTheme(
 				lineHeight: `1.8rem`,
 				fontFamily: familyRoboto,
 				color: colors.secondary.light,
-				textTransform: 'uppercase',
 			},
 		},
 	},
@@ -169,6 +168,11 @@ theme.overrides = {
 		},
 		icon: {
 			color: 'transparent',
+		},
+	},
+	MuiRadio: {
+		root: {
+			padding: '4px 12px 4px 8px',
 		},
 	},
 	MuiButton: {

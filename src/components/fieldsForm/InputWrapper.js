@@ -14,7 +14,11 @@ const useStyles = makeStyles(
 			letterSpacing: '.5px',
 		},
 		labelRadio: {
-			color: palette.secondary.dark,
+			color: '#000',
+			fontWeight: fontWeights[3],
+			textTransform: 'initial',
+			fontSize: fontSizes[1],
+			paddingBottom: 0,
 		},
 		invalidText: {
 			fontSize: fontSizes[0],
@@ -40,7 +44,6 @@ const useStyles = makeStyles(
 			borderColor: palette.primary.main,
 		},
 		wrapper: {
-			marginBottom: spacing(3),
 			flexBasis: 'auto',
 			position: 'relative',
 		},
@@ -108,7 +111,7 @@ function InputWrapper({
 						? `${classes.labelRadio} ${classes.label}`
 						: classes.label
 				}
-			>{`${label} ${required ? `(*)` : ``}`}</Typography>
+			>{`${label} ${required ? `` : `(opcional)`}`}</Typography>
 			<Grid
 				className={`${classes.inputWrapper} ${
 					type === 'radio' ? classes.noBorder : classes[status]
