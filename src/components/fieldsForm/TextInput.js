@@ -54,6 +54,7 @@ function TextInput({
 	type,
 	status,
 	onFocusHandle,
+	rows = 4,
 	...rest
 }) {
 	const classes = styles(isValid)
@@ -72,7 +73,7 @@ function TextInput({
 				id={name}
 				classes={classes}
 				multiline={type === 'textarea'}
-				rows={4}
+				rows={rows}
 				name={name}
 				disabled={disabled}
 				placeholder={placeholder}

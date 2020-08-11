@@ -46,6 +46,7 @@ const useStyles = makeStyles(
 		wrapper: {
 			flexBasis: 'auto',
 			position: 'relative',
+			paddingBottom: '0 !important',
 		},
 		bottomWrapper: {
 			position: 'absolute',

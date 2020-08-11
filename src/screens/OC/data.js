@@ -47,13 +47,15 @@ export const OCForm = {
 		pago_observacion: {
 			name: 'pago_observacion',
 			label: 'Observación de pago',
-			required: true,
+			required: false,
 			isValid: true,
 			status: 'default',
-			type: 'textarea',
-			placeholder: 'Ingresar observaciones o indicaciones para el despacho',
+			type: 'text',
+
 			value: '',
 			rule: { type: 'range', min: 5, max: 50 },
+			md: 6,
+			rows: 1,
 		},
 		pago_justificacion: {
 			name: 'pago_justificacion',
@@ -164,7 +166,7 @@ export const OCForm = {
 			type: 'text',
 			value: '',
 			rule: { type: 'email' },
-			md: 6,
+			md: 3,
 		},
 		asociar_plan_compra: {
 			name: 'asociar_plan_compra',

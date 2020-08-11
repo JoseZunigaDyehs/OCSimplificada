@@ -14,7 +14,7 @@ function TextWrapper({ label, subLabel, className = '' }) {
 	const classes = useStyles()
 	return (
 		<Grid className={className}>
-			<Typography className={classes.label}>{label}</Typography>
+			{label && <Typography className={classes.label}>{label}</Typography>}
 			{typeof subLabel === 'string' ? (
 				<Typography>{subLabel}</Typography>
 			) : (

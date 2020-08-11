@@ -7,12 +7,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
 
-const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
+const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 	title: {
-		fontWeight: fontWeights[0],
+		marginBottom: spacing(1),
 	},
 	wrapper: {
 		marginRight: spacing(4),
+		marginBottom: spacing(1),
 		[breakpoints.down(`sm`)]: {
 			marginRight: spacing(0),
 			marginBottom: spacing(3),
@@ -180,7 +181,6 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 			<Grid container className={classes.root} spacing={3}>
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapper}>
-						<Divider />
 						<RadioButton
 							{...fieldsById.asociar_plan_compra}
 							onChange={onChange}
@@ -209,6 +209,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 					/>
 				)}
 			</Grid>
+			<Divider />
 		</Grid>
 	)
 }

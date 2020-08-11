@@ -3,6 +3,15 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputWrapper from './InputWrapper'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(({ palette }) => ({
+	root: {
+		'&$checked': {
+			color: palette.primary.main,
+		},
+	},
+}))
 
 function RadioButton({
 	name,
@@ -15,6 +24,7 @@ function RadioButton({
 	status,
 	...rest
 }) {
+	const classes = useStyles()
 	return (
 		<InputWrapper
 			name={name}
@@ -26,6 +36,7 @@ function RadioButton({
 			{...rest}
 		>
 			<RadioGroup
+				color="primary"
 				aria-label="gender"
 				name={name}
 				value={value}
@@ -39,6 +50,7 @@ function RadioButton({
 						value={x.id.toString()}
 						control={<Radio />}
 						label={x.label}
+						classes={{ root: classes.label }}
 					/>
 				))}
 			</RadioGroup>

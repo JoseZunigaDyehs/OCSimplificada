@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
-import { Step1, Step2, Step3, Step4, Step5 } from './Steps'
+import { Step1, Step2, Step3, Step5 } from './Steps'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
@@ -13,6 +13,9 @@ import { useHistory } from 'react-router-dom'
 const useStyles = makeStyles(({ spacing }) => ({
 	root: {
 		paddingTop: spacing(6),
+	},
+	btnBack: {
+		marginRight: spacing(3),
 	},
 }))
 
@@ -41,6 +44,7 @@ function OC() {
 	const onClose = () => {
 		setModalConfig(modalConfigInit)
 	}
+	const saveOC = () => {}
 	const handleOnAccept = () => {
 		history.push('/autorizar')
 	}
@@ -70,9 +74,8 @@ function OC() {
 		<Grid container>
 			<Step1 title="Información de la orden de compra" {...props} />
 			<Step2 title="Información sobre el pago" {...props} />
-			<Step3 title="3. Plan de compra" {...props} />
-			<Step4 title="4. Documentos asociados a la orden de compra" {...props} />
-			<Step5 title="5. Autorizadores" {...props} />
+			<Step3 title="Plan de compras" {...props} />
+			<Step5 title="Autorización" {...props} />
 			<Grid
 				item
 				xs={12}
@@ -80,11 +83,21 @@ function OC() {
 				container
 				className={classes.root}
 			>
-				<Button color="secondary" variant="outlined" onClick={goBack}>
-					Volver
-				</Button>
-				<Button color="primary" onClick={handleOnAccept} disabled={false}>
-					Aceptar
+				<Grid>
+					<Button
+						color="secondary"
+						variant="outlined"
+						onClick={goBack}
+						className={classes.btnBack}
+					>
+						Volver
+					</Button>
+					<Button color="gray" variant="outlined" onClick={saveOC}>
+						Guardar
+					</Button>
+				</Grid>
+				<Button color="success" onClick={handleOnAccept} disabled={isDisabled}>
+					Autorizar y enviar
 				</Button>
 			</Grid>
 			{modalConfig.show && (

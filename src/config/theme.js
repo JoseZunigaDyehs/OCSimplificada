@@ -135,7 +135,7 @@ theme.overrides = {
 	},
 	MuiOutlinedInput: {
 		input: {
-			padding: ' 0 .8rem',
+			padding: '0 .8rem',
 			'&::placeholder': {
 				color: colors.secondary.light,
 				opacity: 1,
@@ -143,6 +143,9 @@ theme.overrides = {
 		},
 		notchedOutline: {
 			borderWidth: '0px !important',
+		},
+		multiline: {
+			padding: '0 .8rem',
 		},
 	},
 	MuiInputBase: {
@@ -172,6 +175,7 @@ theme.overrides = {
 	},
 	MuiRadio: {
 		root: {
+			color: `${colors.primary.main} !important`,
 			padding: '4px 12px 4px 8px',
 		},
 	},

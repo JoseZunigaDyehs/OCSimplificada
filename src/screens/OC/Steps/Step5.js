@@ -4,15 +4,12 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { Divider, Button } from 'components'
+import { Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
 
-const useStyles = makeStyles(({ spacing, fontWeights, breakpoints }) => ({
-	rootWrapper: {
-		marginTop: spacing(3),
-	},
+const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 	title: {
-		fontWeight: fontWeights[0],
+		marginBottom: spacing(1),
 	},
 	wrapper: {
 		marginRight: spacing(4),
@@ -109,14 +106,13 @@ function Step5({ title = '', fieldsById, onChange, onFocusHandle }) {
 	}, [autorizadores.length])
 
 	return (
-		<Grid container direction="column" className={classes.rootWrapper}>
+		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>
 			<Grid container className={classes.root} spacing={3}>
 				<Grid item md={8} xs={12}>
 					<Grid className={classes.wrapper}>
-						<Divider />
 						<RadioButton
 							{...fieldsById.autoriza}
 							onChange={onChange}

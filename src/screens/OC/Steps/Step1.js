@@ -183,14 +183,16 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 							>
 								Archivos adjuntados
 							</Typography>
-							{nextDocumentosAdjuntos.length > 0 ? (
-								<ListItems
-									items={nextDocumentosAdjuntos}
-									removeItem={handleRemoveFile}
-								/>
-							) : (
-								<Typography>No existen documentos asociados</Typography>
-							)}
+							<Grid item md={5} sm={12}>
+								{nextDocumentosAdjuntos.length > 0 ? (
+									<ListItems
+										items={nextDocumentosAdjuntos}
+										removeItem={handleRemoveFile}
+									/>
+								) : (
+									<Typography>No existen documentos asociados</Typography>
+								)}
+							</Grid>
 						</Grid>
 					</Grid>
 					<DetalleProductos />
