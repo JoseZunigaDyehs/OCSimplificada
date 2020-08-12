@@ -69,7 +69,8 @@ function OC() {
 		setModalConfig: setModalConfig,
 	}
 	const isInvalid = isAllValid()
-	const isDisabled = isDisabledForm({ fieldsById, isInvalid })
+	// const isDisabled = isDisabledForm({ fieldsById, isInvalid })
+	const isDisabled = false
 	return (
 		<Grid container>
 			<Step1 title="Información de la orden de compra" {...props} />

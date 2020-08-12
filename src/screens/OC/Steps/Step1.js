@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { TextWrapper, ListItems, DetalleProductos } from 'components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import ResumeOC from '../ResumeOC'
 
 const useStyles = makeStyles(
 	({ spacing, fontSizes, breakpoints, fontWeights, palette }) => ({
@@ -51,6 +52,21 @@ const useStyles = makeStyles(
 			textDecoration: 'underline',
 			cursor: 'pointer',
 			marginLeft: spacing(1),
+		},
+		wrapperResume: {
+			backgroundColor: palette.terniary.main,
+			padding: spacing(2),
+		},
+		mb3: {
+			marginBottom: spacing(3),
+		},
+		titleResume: {
+			fontWeight: fontWeights[3],
+			color: palette.secondary.light,
+			letterSpacing: 0.7,
+		},
+		fwLight: {
+			fontWeight: fontWeights[1],
 		},
 	})
 )
@@ -122,11 +138,11 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 	}
 	return (
 		<Grid container direction="column" className={classes.wrapper}>
-			<Typography className={classes.title} variant="h2">
-				{title}
-			</Typography>
 			<Grid container spacing={1} className={classes.root}>
 				<Grid item md={9} xs={12}>
+					<Typography className={classes.title} variant="h2">
+						{title}
+					</Typography>
 					<Grid className={classes.wrapperInputs}>
 						<Typography variant="h5" className={classes.titleInput}>
 							Nombre de la orden de compra
@@ -198,7 +214,7 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 					<DetalleProductos />
 				</Grid>
 				<Grid item md={3} xs={12}>
-					ACA VA LA WEAITA
+					<ResumeOC />
 				</Grid>
 			</Grid>
 		</Grid>
