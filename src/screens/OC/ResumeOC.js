@@ -43,7 +43,7 @@ const useStyles = makeStyles(
 function ResumeOC() {
 	const classes = useStyles()
 	return (
-		<Grid className={classes.wrapperResume} container>
+		<Grid className={classes.wrapperResume} container direction="column">
 			<Typography
 				variant="caption"
 				className={`${classes.titleResume} ${classes.mb3}`}

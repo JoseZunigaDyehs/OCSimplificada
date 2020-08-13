@@ -179,7 +179,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 				{title}
 			</Typography>
 			<Grid container className={classes.root} spacing={3}>
-				<Grid item md={8} xs={12}>
+				<Grid item md={9} xs={12}>
 					<Grid className={classes.wrapper}>
 						<RadioButton
 							{...fieldsById.asociar_plan_compra}
@@ -187,6 +187,7 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 							onFocusHandle={onFocusHandle}
 						/>
 					</Grid>
+					<Divider />
 				</Grid>
 				{fieldsById.asociar_plan_compra.value === '1' && (
 					<PlanDeCompra
@@ -209,7 +210,6 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 					/>
 				)}
 			</Grid>
-			<Divider />
 		</Grid>
 	)
 }

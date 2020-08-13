@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { RadioButton } from 'components/fieldsForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button } from 'components'
+import { Button, Divider } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
@@ -119,6 +119,7 @@ function Step5({ title = '', fieldsById, onChange, onFocusHandle }) {
 							onFocusHandle={onFocusHandle}
 						/>
 					</Grid>
+					<Divider />
 				</Grid>
 				{fieldsById.autoriza.value === '2' && (
 					<PlanDeCompra

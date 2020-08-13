@@ -7,14 +7,19 @@ const useStyles = makeStyles(({ spacing }) => ({
 	root: {
 		padding: spacing(3, 4),
 	},
+	wrapper: {
+		maxWidth: '1300px',
+	},
 }))
 
 function Layout({ children }) {
-	const { root } = useStyles()
+	const { root, wrapper } = useStyles()
 	return (
-		<Grid container className={root}>
-			<Header />
-			{children}
+		<Grid container className={root} justify="center">
+			<Grid className={wrapper}>
+				<Header />
+				{children}
+			</Grid>
 		</Grid>
 	)
 }

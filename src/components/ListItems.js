@@ -8,9 +8,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const useStyles = makeStyles(({ palette, spacing, fontSizes }) => ({
 	wrapperItem: {
-		'&:last-child': {
-			marginBottom: spacing(2),
-		},
+		'&:last-child': {},
+		marginBottom: spacing(2),
 		padding: spacing(1, 3),
 		backgroundColor: '#f4f7ff',
 	},

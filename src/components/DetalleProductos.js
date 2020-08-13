@@ -10,7 +10,7 @@ import { formatThousand } from 'utils'
 const useStyles = makeStyles(
 	({ spacing, fontSizes, breakpoints, fontWeights, palette }) => ({
 		wrapper: {
-			marginTop: spacing(2),
+			marginTop: spacing(3),
 			marginBottom: spacing(2),
 			border: `1px solid #e0e0e0`,
 			padding: spacing(3),

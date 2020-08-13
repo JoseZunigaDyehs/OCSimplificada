@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import { esES } from '@material-ui/core/locale'
 
-const fontWeights = [300, 400, 500, 700]
+const fontWeights = [300, 400, 500, 700, 900]
 const inputHeight = `4rem`
 export const colors = {
 	primary: {
@@ -70,7 +70,7 @@ const theme = createMuiTheme(
 			},
 			h3: {
 				fontSize: fontSizes[4],
-				fontWeight: fontWeights[2],
+				fontWeight: fontWeights[3],
 				lineHeight: `2.6rem`,
 				letterSpacing: -0.21,
 			},
@@ -87,7 +87,7 @@ const theme = createMuiTheme(
 				letterSpacing: -0.21,
 			},
 			body1: {
-				fontSize: fontSizes[2],
+				fontSize: fontSizes[1],
 				fontWeight: fontWeights[1],
 				lineHeight: `2rem`,
 				fontFamily: familyRoboto,

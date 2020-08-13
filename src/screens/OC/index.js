@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom'
 const useStyles = makeStyles(({ spacing }) => ({
 	root: {
 		paddingTop: spacing(6),
+		marginTop: spacing(4),
 	},
 	btnBack: {
 		marginRight: spacing(3),
@@ -79,6 +80,7 @@ function OC() {
 			<Step5 title="Autorización" {...props} />
 			<Grid
 				item
+				md={8}
 				xs={12}
 				justify="space-between"
 				container

@@ -44,9 +44,9 @@ export const OCForm = {
 			],
 			rule: { type: 'null' },
 		},
-		pago_observacion: {
-			name: 'pago_observacion',
-			label: 'Observación de pago',
+		indicaciones: {
+			name: 'indicaciones',
+			label: 'indicaciones',
 			required: false,
 			isValid: true,
 			status: 'default',

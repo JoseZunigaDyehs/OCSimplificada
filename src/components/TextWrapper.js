@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(({ spacing, fontWeights, fontSizes }) => ({
 	label: {
-		paddingBottom: spacing(1),
+		// paddingBottom: spacing(1),
 		fontWeight: fontWeights[3],
 		fontSize: fontSizes[1],
 	},

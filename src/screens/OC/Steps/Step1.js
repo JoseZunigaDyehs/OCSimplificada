@@ -4,72 +4,11 @@ import Grid from '@material-ui/core/Grid'
 import { capitalize } from 'utils'
 import { useRegionComunas, useOrden } from 'context'
 import { TextInput, FileInput } from 'components/fieldsForm'
-import { makeStyles } from '@material-ui/core/styles'
 import { TextWrapper, ListItems, DetalleProductos } from 'components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import ResumeOC from '../ResumeOC'
-
-const useStyles = makeStyles(
-	({ spacing, fontSizes, breakpoints, fontWeights, palette }) => ({
-		title: {
-			marginBottom: spacing(2),
-			fontSize: fontSizes[4],
-		},
-		titleInput: {
-			fontSize: fontSizes[1],
-			fontWeight: fontWeights[2],
-		},
-		wrapperInputs: {
-			marginRight: spacing(4),
-			[breakpoints.down(`sm`)]: {
-				marginRight: spacing(0),
-				marginBottom: spacing(3),
-			},
-		},
-		plazoEntrega: {
-			margin: spacing(4, 0, 0, 0),
-		},
-		root: {
-			flexGrow: 1,
-		},
-		mt: {
-			marginTop: spacing(3),
-		},
-		mb: {
-			marginBottom: spacing(1),
-		},
-		optional: {
-			marginTop: spacing(1),
-		},
-		icon: {
-			fontSize: fontSizes[4],
-			color: palette.primary.main,
-			marginLeft: spacing(1),
-			cursor: 'pointer',
-		},
-		link: {
-			textDecoration: 'underline',
-			cursor: 'pointer',
-			marginLeft: spacing(1),
-		},
-		wrapperResume: {
-			backgroundColor: palette.terniary.main,
-			padding: spacing(2),
-		},
-		mb3: {
-			marginBottom: spacing(3),
-		},
-		titleResume: {
-			fontWeight: fontWeights[3],
-			color: palette.secondary.light,
-			letterSpacing: 0.7,
-		},
-		fwLight: {
-			fontWeight: fontWeights[1],
-		},
-	})
-)
+import { useStyles } from '../styles/useStep1Styles'
 
 function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
@@ -160,24 +99,34 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 							alignItems="center"
 							className={classes.optional}
 						>
-							<Typography variant="subtitle2">
-								Agregar instrucciones de despacho (opcional)
-							</Typography>
-							<FontAwesomeIcon
-								icon={optional ? faAngleUp : faAngleDown}
-								className={classes.icon}
+							<Grid
+								container
 								onClick={() => setOptional(!optional)}
-							/>
-							{optional && (
-								<TextInput
-									{...fieldsById.despacho_observacion}
-									onChange={onChange}
-									onFocusHandle={onFocusHandle}
+								className={classes.pointer}
+							>
+								<Typography variant="subtitle2">
+									Agregar instrucciones de despacho (opcional)
+								</Typography>
+								<FontAwesomeIcon
+									icon={optional ? faAngleUp : faAngleDown}
+									className={classes.icon}
 								/>
+							</Grid>
+							{optional && (
+								<Grid container className={classes.wrapperOptional}>
+									<TextInput
+										{...fieldsById.despacho_observacion}
+										onChange={onChange}
+										onFocusHandle={onFocusHandle}
+									/>
+								</Grid>
 							)}
 						</Grid>
 						<Grid item md={12} className={classes.optional}>
-							<Typography variant="h5" className={classes.titleInput}>
+							<Typography
+								variant="h5"
+								className={`${classes.titleInput} ${classes.mt}`}
+							>
 								Documentos asociados a la orden de compra
 							</Typography>
 							<Grid item md={12} container wrap="nowrap" className={classes.mb}>
@@ -206,7 +155,9 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 										removeItem={handleRemoveFile}
 									/>
 								) : (
-									<Typography>No existen documentos asociados</Typography>
+									<Typography variant="body2">
+										No existen documentos asociados
+									</Typography>
 								)}
 							</Grid>
 						</Grid>

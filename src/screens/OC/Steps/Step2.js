@@ -7,12 +7,17 @@ import { Divider, TextWrapper } from 'components'
 import { useOrden } from 'context'
 
 const useStyles = makeStyles(
-	({ spacing, fontSizes, breakpoints, palette }) => ({
+	({ spacing, fontSizes, breakpoints, palette, fontWeights }) => ({
 		root: {
 			flexGrow: 1,
 		},
 		title: {
 			marginBottom: spacing(1),
+			marginTop: spacing(3),
+		},
+		titleInput: {
+			fontWeight: fontWeights[3],
+			color: '#000',
 		},
 		wrapper: {
 			marginRight: spacing(4),
@@ -24,11 +29,11 @@ const useStyles = makeStyles(
 		button: {
 			color: palette.primary.main,
 			cursor: 'pointer',
-			marginLeft: spacing(2),
+			marginLeft: spacing(1),
 		},
 		wrapperDirection: {
 			flexGrow: 1,
-			padding: spacing(1, 0, 0, 0),
+			padding: spacing(1.5, 0, 0, 0),
 			marginBottom: spacing(1),
 		},
 		mb: {
@@ -37,10 +42,13 @@ const useStyles = makeStyles(
 		mt: {
 			marginTop: spacing(2),
 		},
-		// noPaddingY: {
-		// 	paddingTop: `0 !important`,
-		// 	paddingBottom: `0 !important`,
-		// },
+		mt3: {
+			marginTop: spacing(3),
+		},
+		noPaddingY: {
+			paddingTop: `${spacing(0)} !important`,
+			paddingBottom: `0 !important`,
+		},
 	})
 )
 
@@ -85,7 +93,7 @@ function Step2({
 							<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
 						)}
 						<Grid container direction="column">
-							<Typography variant="h5" className={classes.mt}>
+							<Typography className={`${classes.titleInput} ${classes.mt3}`}>
 								Contacto para esta compra
 							</Typography>
 							<Typography className={classes.mb}>
@@ -112,8 +120,12 @@ function Step2({
 						</Grid>
 						<Grid container direction="column">
 							<Divider />
-							<Typography variant="h5">Contacto para pago</Typography>
-							<Typography>Ingresa el responsable del pago</Typography>
+							<Typography className={classes.titleInput}>
+								Contacto para pago
+							</Typography>
+							<Typography className={classes.mb}>
+								Ingresa el responsable del pago
+							</Typography>
 							<Grid container className={classes.mb} spacing={3}>
 								<TextInput
 									{...fieldsById.nombre_contacto_pago}
@@ -134,7 +146,7 @@ function Step2({
 							</Grid>
 							<Grid container direction="column">
 								<Divider />
-								<Typography variant="h5">
+								<Typography className={classes.titleInput}>
 									Información para envío de factura
 								</Typography>
 								<Grid
@@ -160,7 +172,7 @@ function Step2({
 											Cambiar dirección
 										</Typography>
 									</Grid>
-									<TextInput {...fieldsById.pago_observacion} {...inputProps} />
+									<TextInput {...fieldsById.indicaciones} {...inputProps} />
 									<TextInput
 										{...fieldsById.email_envio_factura}
 										{...inputProps}
