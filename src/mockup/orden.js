@@ -131,25 +131,61 @@ const autorizadoresData = [
 	{ id: '4', nombre: 'Nombre 4', apellido: 'Apellido 4', cargo: 'Cargo 4' },
 ]
 
+//TODO: LLenar la data (FILL) en el useEffect ([])
+
 export const ordenDataMock = {
 	ordenId: '2241-09-AG20',
 	convenioMarco: '123-12-COtoS',
 	regionId: `13`,
 	regionLabel: 'Metropolitana de Santiago',
-	withDireccionDespacho: true,
-	diasHabiles: 10,
+	withDireccionDespacho: true, // Si puede tener dirección de despacho
 	direccionDespacho: {
+		// TODO: Sacar  la modal
 		id: 1,
 		label: 'Primera direccion 1111',
 		comunaId: '13110',
 	},
-	pago30Dias: true,
-	direccionesFactura,
-	direccionEnvioFactura: direccionesFactura[0],
-	proyectosPlanCompra: [],
-	proyectos,
-	itemsByProyectoId,
-	documentosAdjuntos: [],
-	autorizadoresData,
-	autorizadores: [],
+	detalleProductos: {
+		productos: [
+			{ nombre: 'Producto  1', unitario: 58890 },
+			{ nombre: 'Producto  2', unitario: 58890 },
+			{ nombre: 'Producto  3', unitario: 58890 },
+		],
+		subtotal: 143667844, // TODO: ESTO SACARLO DESDE EL FRONT????
+	},
+	pago30Dias: true, // Si ha seleccionado pago mayor a 30 días //TODO: ESTO VERLO EN EL VALUE DEL INPUT SACARLO DE ARRIBA
+
+	nombreOC: 'Este es el nombre de la OC', // TODO: FILL
+	despachoObservacion: 'Este es la instruccion de despacho', //TODO: FILL
+	plazoPago: '1', //TODO: FILL
+	pagoJustificacion: 'Esta es la justificación',
+	nombreContactoCompra: 'Maite',
+	apellidoContactooCompra: 'Ignacy',
+	telefonoContactoCompra: '987675536', //TODO: Agregar el +56
+	emailContactoCompra: 'ma.ignacy@gmail.com',
+	nombreContactoPago: 'Maite',
+	apellidoContactoPago: 'Ignacy',
+	telefonoContactoPago: '987675536', //TODO: Agregar el +56
+	emailContactoPago: 'ma.ignacy@gmail.com',
+	indicacionesFactura: 'indicacion de la factura',
+	emailEnvioFactura: 'ma.ignacy@gmail.com',
+	asociarPlanCompra: '2',
+	documentosAdjuntar: '1',
+	autoriza: '2',
+	proyectosPlanCompra: [], // Listado Seleccionado
+	direccionEnvioFactura: direccionesFactura[0], // Listado Seleccionado
+	autorizadores: [], // Listado Seleccionado
+	documentosAdjuntos: [], // Listado y state
+
+	direccionesFactura, // Listado
+	proyectos, //Listado
+	autorizadoresData, // Listado
+	itemsByProyectoId, // Listado Items por proyecto (Plandecompras)
+	resumeOC: {
+		razonSocialProveedor: 'Razón Social Proveedor',
+		rut: '96.000.000-0',
+		neto: 5000133,
+		impuestos: 60987, // TODO: ESTO SACARLO DESDE EL FRONT????
+		total: 1080954, // TODO: ESTO SACARLO DESDE EL FRONT????
+	},
 }

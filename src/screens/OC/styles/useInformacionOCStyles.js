@@ -61,7 +61,7 @@ export const useStyles = makeStyles(
 			fontWeight: fontWeights[1],
 		},
 		wrapperOptional: {
-			padding: spacing(1, 0),
+			padding: spacing(3, 0, 0, 0),
 		},
 	})
 )

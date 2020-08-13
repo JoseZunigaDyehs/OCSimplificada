@@ -12,7 +12,7 @@ import { useStyles } from '../styles/useInformacionOCStyles'
 
 function InformacionOC({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
-	const [optional, setOptional] = useState(false)
+	const [optional, setOptional] = useState(fieldsById.despachoObservacion.value)
 	const [comunas, setComunas] = useState([])
 	const [comunaLabel, setComunaLabel] = useState('')
 	const {
@@ -117,7 +117,7 @@ function InformacionOC({ title = '', fieldsById, onChange, onFocusHandle }) {
 							{optional && (
 								<Grid container className={classes.wrapperOptional}>
 									<TextInput
-										{...fieldsById.despacho_observacion}
+										{...fieldsById.despachoObservacion}
 										onChange={onChange}
 										onFocusHandle={onFocusHandle}
 									/>

@@ -1,17 +1,19 @@
-import Header from './Header'
-import Loader from './Loader'
+//COMMON
+import Loader from './common/Loader'
+import ModalWrapper from './common/ModalWrapper'
+import Button from './common/Button'
+import Table from './common/Table'
+import Divider from './common/Divider'
+//
 import TextWrapper from './TextWrapper'
-import ModalWrapper from './ModalWrapper'
-import Button from './Button'
-import Divider from './Divider'
-import Table from './Table'
-import ListItems from './ListItems'
+import Header from './Header'
 import DetalleProductos from './DetalleProductos'
+import ListItems from './ListItems'
 
 export {
-	Divider,
 	Header,
 	ModalWrapper,
+	Divider,
 	TextWrapper,
 	Loader,
 	Button,

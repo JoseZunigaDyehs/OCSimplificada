@@ -152,6 +152,7 @@ function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 	}, [proyectoSelected.current, itemsByProyectoId])
 	const project = proyectos.find(x => x.id === proyectoSelected.current)
 	const projectName = project ? project.nombre : ''
+
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
@@ -161,14 +162,14 @@ function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 				<Grid item md={9} xs={12}>
 					<Grid className={classes.wrapper}>
 						<RadioButton
-							{...fieldsById.asociar_plan_compra}
+							{...fieldsById.asociarPlanCompra}
 							onChange={onChange}
 							onFocusHandle={onFocusHandle}
 						/>
 					</Grid>
 					<Divider />
 				</Grid>
-				{fieldsById.asociar_plan_compra.value === '1' && (
+				{fieldsById.asociarPlanCompra.value === '1' && (
 					<Grid container className={classes.wrapperPlan}>
 						<PlanDeCompra
 							dataSource={

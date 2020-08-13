@@ -33,7 +33,7 @@ const tableInit = {
 	pagination: null,
 }
 
-function Step4({ title = '', fieldsById, onChange, onFocusHandle }) {
+function Autorizacion({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
 	const [table, setTable] = useState(tableInit)
 	const {
@@ -135,4 +135,4 @@ function Step4({ title = '', fieldsById, onChange, onFocusHandle }) {
 	)
 }
 
-export default Step4
+export default Autorizacion

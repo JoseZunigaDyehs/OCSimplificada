@@ -42,10 +42,10 @@ function InformacionPago({
 						{title}
 					</Typography>
 					<Grid className={classes.wrapper}>
-						<RadioButton {...fieldsById.plazo_pago} {...inputProps} />
+						<RadioButton {...fieldsById.plazoPago} {...inputProps} />
 						{pago30Dias && (
 							<Grid container className={classes.wrapperMayor30}>
-								<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
+								<TextInput {...fieldsById.pagoJustificacion} {...inputProps} />
 							</Grid>
 						)}
 						<Grid container direction="column">
@@ -57,19 +57,19 @@ function InformacionPago({
 							</Typography>
 							<Grid container className={classes.mb} spacing={3}>
 								<TextInput
-									{...fieldsById.nombre_contacto_compra}
+									{...fieldsById.nombreContactoCompra}
 									{...inputProps}
 								/>
 								<TextInput
-									{...fieldsById.apellido_contacto_compra}
+									{...fieldsById.apellidoContactooCompra}
 									{...inputProps}
 								/>
 								<TextInput
-									{...fieldsById.telefono_contacto_compra}
+									{...fieldsById.telefonoContactoCompra}
 									{...inputProps}
 								/>
 								<TextInput
-									{...fieldsById.email_contacto_compra}
+									{...fieldsById.emailContactoCompra}
 									{...inputProps}
 								/>
 							</Grid>
@@ -83,22 +83,16 @@ function InformacionPago({
 								Ingresa el responsable del pago
 							</Typography>
 							<Grid container className={classes.mb} spacing={3}>
+								<TextInput {...fieldsById.nombreContactoPago} {...inputProps} />
 								<TextInput
-									{...fieldsById.nombre_contacto_pago}
+									{...fieldsById.apellidoContactoPago}
 									{...inputProps}
 								/>
 								<TextInput
-									{...fieldsById.apellido_contacto_pago}
+									{...fieldsById.telefonoContactoPago}
 									{...inputProps}
 								/>
-								<TextInput
-									{...fieldsById.telefono_contacto_pago}
-									{...inputProps}
-								/>
-								<TextInput
-									{...fieldsById.email_contacto_pago}
-									{...inputProps}
-								/>
+								<TextInput {...fieldsById.emailContactoPago} {...inputProps} />
 							</Grid>
 							<Grid container direction="column">
 								<Divider />
@@ -128,9 +122,12 @@ function InformacionPago({
 											Cambiar dirección
 										</Typography>
 									</Grid>
-									<TextInput {...fieldsById.indicaciones} {...inputProps} />
 									<TextInput
-										{...fieldsById.email_envio_factura}
+										{...fieldsById.indicacionesFactura}
+										{...inputProps}
+									/>
+									<TextInput
+										{...fieldsById.emailEnvioFactura}
 										{...inputProps}
 									/>
 								</Grid>

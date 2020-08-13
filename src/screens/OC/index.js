@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
-import { InformacionOC, InformacionPago, PlanDeCompras, Step4 } from './Steps'
+import {
+	InformacionOC,
+	InformacionPago,
+	PlanDeCompras,
+	Autorizacion,
+} from './Steps'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
@@ -29,6 +34,7 @@ const modalConfigInit = {
 }
 function OC() {
 	const classes = useStyles()
+	const [loading, setLoading] = useState(true)
 	const [modalConfig, setModalConfig] = useState(modalConfigInit)
 	const {
 		fieldsById,
@@ -39,7 +45,7 @@ function OC() {
 	} = useForm({
 		defaultFieldsById: OCForm.fieldsById,
 	})
-	const { setOrderState, isDisabledForm } = useOrden()
+	const { setOrderState, isDisabledForm, orden } = useOrden()
 	let history = useHistory()
 
 	const onClose = () => {
@@ -50,18 +56,41 @@ function OC() {
 		history.push('/autorizar')
 	}
 
+	useEffect(() => {
+		try {
+			setLoading(true)
+			//LLENAR LA WEA
+			const keys = Object.keys(fieldsById)
+			const nextFieldsById = fieldsById
+			keys.forEach(key => {
+				nextFieldsById[key] = {
+					...nextFieldsById[key],
+					value: orden[key],
+				}
+			})
+			setFieldsById(nextFieldsById)
+			setLoading(false)
+		} catch (error) {
+			// TODO: FEEDBACK
+		}
+	}, [])
+
 	//USE EFFECT INPUTS
 	useEffect(() => {
 		const togglePago30Dias = () => {
-			const isPago30Dias = fieldsById.plazo_pago.value === '3'
-			const { pago_justificacion } = fieldsById
+			const isPago30Dias = fieldsById.plazoPago.value === '3'
+			const { pagoJustificacion } = fieldsById
 			setOrderState({ pago30Dias: isPago30Dias })
-			pago_justificacion.required = isPago30Dias
-			setFieldsById({ ...fieldsById, pago_justificacion })
+			pagoJustificacion.required = isPago30Dias
+			setFieldsById({ ...fieldsById, pagoJustificacion })
 		}
 		togglePago30Dias()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fieldsById.plazo_pago.value])
+	}, [fieldsById.plazoPago.value])
+
+	if (loading) {
+		return 'LOADING'
+	}
 
 	const props = {
 		onChange: onChangefield,
@@ -77,7 +106,7 @@ function OC() {
 			<InformacionOC title="Información de la orden de compra" {...props} />
 			<InformacionPago title="Información sobre el pago" {...props} />
 			<PlanDeCompras title="Plan de compras" {...props} />
-			<Step4 title="Autorización" {...props} />
+			<Autorizacion title="Autorización" {...props} />
 			<Grid
 				item
 				md={12}

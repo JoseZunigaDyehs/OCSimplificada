@@ -15,13 +15,16 @@ const useStyles = makeStyles(({ spacing }) => ({
 function Layout({ children }) {
 	const { root, wrapper } = useStyles()
 	return (
-		<Grid container className={root} justify="center">
-			<Grid className={wrapper}>
-				<Header />
-				{children}
-			</Grid>
+		<Grid container className={root}>
+			<Header />
+			{children}
 		</Grid>
 	)
 }
 
 export default Layout
+
+// <Grid container className={root} justify="center">
+// <Grid className={wrapper}> */}
+// </Grid> */}
+// </Grid>

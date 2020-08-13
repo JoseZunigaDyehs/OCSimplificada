@@ -7,7 +7,7 @@ import Button from './Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Loader from './Loader'
-import { useStyles } from './styles/useModalWrapperStyles'
+import { useStyles } from '../styles/useModalWrapperStyles'
 
 //TODO: GENERAR MODAL POR TYPES: success, info, error,, default
 function ModalWrapper({

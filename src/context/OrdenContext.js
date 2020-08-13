@@ -40,10 +40,10 @@ function OrdenProvider({ children }) {
 			return true
 		}
 		const isValid = []
-		const { asociar_plan_compra, autoriza } = fieldsById
+		const { asociarPlanCompra, autoriza } = fieldsById
 		const { proyectosPlanCompra, autorizadores } = orden
-		if (asociar_plan_compra.value === '1' && proyectosPlanCompra.length === 0) {
-			isValid.push('asociar_plan_compra')
+		if (asociarPlanCompra.value === '1' && proyectosPlanCompra.length === 0) {
+			isValid.push('asociarPlanCompra')
 		}
 		if (autoriza.value === '2' && autorizadores.length === 0) {
 			isValid.push('autorizadores')
@@ -63,6 +63,7 @@ function OrdenProvider({ children }) {
 		}
 		getOrden()
 	}, [])
+	console.log(JSON.stringify(orden))
 	return (
 		<OrdenContext.Provider
 			value={{
