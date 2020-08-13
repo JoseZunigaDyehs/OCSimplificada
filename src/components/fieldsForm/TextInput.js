@@ -10,7 +10,13 @@ import {
 	faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
-const styles = makeStyles(({ spacing }) => ({
+const useTextAreaStyles = makeStyles(({ spacing }) => ({
+	textarea: {
+		padding: spacing(1),
+	},
+}))
+
+const styles = makeStyles(() => ({
 	root: {
 		'& input:valid + fieldset': {
 			borderWidth: 0,
@@ -28,9 +34,6 @@ const styles = makeStyles(({ spacing }) => ({
 	focused: {},
 	notchedOutline: {
 		borderWidth: 0,
-	},
-	textarea: {
-		padding: spacing(1),
 	},
 }))
 
@@ -60,7 +63,8 @@ function TextInput({
 	rows = 4,
 	...rest
 }) {
-	const classes = styles(isValid)
+	const classes = styles()
+	const classesTextArea = useTextAreaStyles()
 	return (
 		<InputWrapper
 			name={name}
@@ -75,7 +79,7 @@ function TextInput({
 				onChange={({ target: { name, value } }) => onChange({ name, value })}
 				id={name}
 				classes={classes}
-				className={type === 'textarea' ? classes.textarea : ''}
+				className={type === 'textarea' ? classesTextArea.textarea : ''}
 				multiline={type === 'textarea'}
 				rows={rows}
 				name={name}

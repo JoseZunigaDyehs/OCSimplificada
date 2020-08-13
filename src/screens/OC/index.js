@@ -80,8 +80,7 @@ function OC() {
 			<Step5 title="Autorización" {...props} />
 			<Grid
 				item
-				md={8}
-				xs={12}
+				md={12}
 				justify="space-between"
 				container
 				className={classes.root}

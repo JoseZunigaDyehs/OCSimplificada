@@ -61,7 +61,6 @@ function Select({
 	withoutSelectPlaceholder = true,
 	...rest
 }) {
-	const classes = useStyles()
 	const [open, setOpen] = useState(false)
 	const onToggleHandle = () => {
 		setOpen(!open)
@@ -83,7 +82,6 @@ function Select({
 				variant="outlined"
 				onChange={({ target: { value } }) => onChange({ name, value })}
 				id={name}
-				classes={classes}
 				name={name}
 				disabled={disabled}
 				value={value}

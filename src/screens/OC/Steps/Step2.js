@@ -2,55 +2,9 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { TextInput, RadioButton } from 'components/fieldsForm'
-import { makeStyles } from '@material-ui/core/styles'
 import { Divider, TextWrapper } from 'components'
 import { useOrden } from 'context'
-
-const useStyles = makeStyles(
-	({ spacing, fontSizes, breakpoints, palette, fontWeights }) => ({
-		root: {
-			flexGrow: 1,
-		},
-		title: {
-			marginBottom: spacing(1),
-			marginTop: spacing(3),
-		},
-		titleInput: {
-			fontWeight: fontWeights[3],
-			color: '#000',
-		},
-		wrapper: {
-			marginRight: spacing(4),
-			[breakpoints.down(`sm`)]: {
-				marginRight: spacing(0),
-				marginBottom: spacing(3),
-			},
-		},
-		button: {
-			color: palette.primary.main,
-			cursor: 'pointer',
-			marginLeft: spacing(1),
-		},
-		wrapperDirection: {
-			flexGrow: 1,
-			padding: spacing(1.5, 0, 0, 0),
-			marginBottom: spacing(1),
-		},
-		mb: {
-			marginBottom: spacing(1),
-		},
-		mt: {
-			marginTop: spacing(2),
-		},
-		mt3: {
-			marginTop: spacing(3),
-		},
-		noPaddingY: {
-			paddingTop: `${spacing(0)} !important`,
-			paddingBottom: `0 !important`,
-		},
-	})
-)
+import { useStyles } from '../styles/useStep2Styles'
 
 function Step2({
 	title = '',
@@ -90,7 +44,9 @@ function Step2({
 					<Grid className={classes.wrapper}>
 						<RadioButton {...fieldsById.plazo_pago} {...inputProps} />
 						{pago30Dias && (
-							<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
+							<Grid container className={classes.wrapperMayor30}>
+								<TextInput {...fieldsById.pago_justificacion} {...inputProps} />
+							</Grid>
 						)}
 						<Grid container direction="column">
 							<Typography className={`${classes.titleInput} ${classes.mt3}`}>

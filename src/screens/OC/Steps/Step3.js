@@ -26,6 +26,9 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 		margin: spacing(3, 0, 3, 0),
 	},
 	root: { flexGrow: 1 },
+	wrapperPlan: {
+		marginBottom: spacing(6),
+	},
 }))
 
 const tableInit = {
@@ -190,24 +193,26 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 					<Divider />
 				</Grid>
 				{fieldsById.asociar_plan_compra.value === '1' && (
-					<PlanDeCompra
-						dataSource={
-							isItem
-								? itemsByProyectoId[proyectoSelected.current]
-								: tableProyectos.dataSource
-						}
-						columns={isItem ? tableItemsColumns : tableProyectos.columns}
-						title="Selecciona año del proyecto y Unidad de compra"
-						subTitle={
-							isItem
-								? `Selecciona Ítems del proyecto ${projectName}`
-								: 'Selecciona Proyecto'
-						}
-						items={proyectosPlanCompra}
-						goBack={isItem ? goBack : null}
-						removeItem={handleRemoveItem}
-						isAutorizadores={false}
-					/>
+					<Grid container className={classes.wrapperPlan}>
+						<PlanDeCompra
+							dataSource={
+								isItem
+									? itemsByProyectoId[proyectoSelected.current]
+									: tableProyectos.dataSource
+							}
+							columns={isItem ? tableItemsColumns : tableProyectos.columns}
+							title="Selecciona año del proyecto y Unidad de compra"
+							subTitle={
+								isItem
+									? `Selecciona Ítems del proyecto ${projectName}`
+									: 'Selecciona Proyecto'
+							}
+							items={proyectosPlanCompra}
+							goBack={isItem ? goBack : null}
+							removeItem={handleRemoveItem}
+							isAutorizadores={false}
+						/>
+					</Grid>
 				)}
 			</Grid>
 		</Grid>

@@ -76,7 +76,7 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 		onFocusHandle: onFocusHandle,
 	}
 	return (
-		<Grid container direction="column" className={classes.wrapper}>
+		<Grid container direction="column">
 			<Grid container spacing={1} className={classes.root}>
 				<Grid item md={9} xs={12}>
 					<Typography className={classes.title} variant="h2">
@@ -105,7 +105,9 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 								className={classes.pointer}
 							>
 								<Typography variant="subtitle2">
-									Agregar instrucciones de despacho (opcional)
+									{`${
+										optional ? 'Quitar' : 'Agregar'
+									} instrucciones de despacho (opcional)`}
 								</Typography>
 								<FontAwesomeIcon
 									icon={optional ? faAngleUp : faAngleDown}

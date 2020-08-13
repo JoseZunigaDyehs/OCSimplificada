@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 function Product({ classes }) {
 	return (
 		<Grid container item md={12}>
-			<img className={classes.img} src="aslhkash"></img>
+			<img className={classes.img} alt="foto" src="aslhkash"></img>
 			<Grid>
 				<Typography className={classes.label}>kajsglkasgdlashg</Typography>
 				<Typography className={classes.id}>ID: 123123</Typography>
