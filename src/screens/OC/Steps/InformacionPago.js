@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid'
 import { TextInput, RadioButton } from 'components/fieldsForm'
 import { Divider, TextWrapper } from 'components'
 import { useOrden } from 'context'
-import { useStyles } from '../styles/useStep2Styles'
+import { useStyles } from '../styles/useInformacionPagoStyles'
 
-function Step2({
+function InformacionPago({
 	title = '',
 	fieldsById,
 	onChange,
@@ -144,4 +144,4 @@ function Step2({
 	)
 }
 
-export default Step2
+export default InformacionPago

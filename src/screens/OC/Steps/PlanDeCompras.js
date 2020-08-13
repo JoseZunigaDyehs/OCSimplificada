@@ -3,33 +3,9 @@ import { useOrden } from 'context'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { RadioButton } from 'components/fieldsForm'
-import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Button } from 'components'
 import PlanDeCompra from '../PlanDeCompra'
-
-const useStyles = makeStyles(({ spacing, breakpoints }) => ({
-	title: {
-		marginBottom: spacing(1),
-	},
-	wrapper: {
-		marginRight: spacing(4),
-		marginBottom: spacing(1),
-		[breakpoints.down(`sm`)]: {
-			marginRight: spacing(0),
-			marginBottom: spacing(3),
-		},
-	},
-	button: {
-		marginTop: spacing(1),
-	},
-	wrapperDirection: {
-		margin: spacing(3, 0, 3, 0),
-	},
-	root: { flexGrow: 1 },
-	wrapperPlan: {
-		marginBottom: spacing(6),
-	},
-}))
+import { useStyles } from '../styles/usePlanDeComprasStyles'
 
 const tableInit = {
 	columns: [],
@@ -40,7 +16,7 @@ const tableInit = {
 //TODO: Mover lógica de PlanDeCompra acá para ambas tablas, etc......
 //VOLVER
 //ELIMINAR
-function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
+function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
 	const [isItem, setIsItem] = useState(false)
 	const [tableProyectos, setTableProyectos] = useState(tableInit)
@@ -219,4 +195,4 @@ function Step3({ title = '', fieldsById, onChange, onFocusHandle }) {
 	)
 }
 
-export default Step3
+export default PlanDeCompras

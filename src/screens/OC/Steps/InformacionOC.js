@@ -8,9 +8,9 @@ import { TextWrapper, ListItems, DetalleProductos } from 'components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import ResumeOC from '../ResumeOC'
-import { useStyles } from '../styles/useStep1Styles'
+import { useStyles } from '../styles/useInformacionOCStyles'
 
-function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
+function InformacionOC({ title = '', fieldsById, onChange, onFocusHandle }) {
 	const classes = useStyles()
 	const [optional, setOptional] = useState(false)
 	const [comunas, setComunas] = useState([])
@@ -174,4 +174,4 @@ function Step1({ title = '', fieldsById, onChange, onFocusHandle }) {
 	)
 }
 
-export default Step1
+export default InformacionOC

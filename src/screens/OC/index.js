@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
-import { Step1, Step2, Step3, Step5 } from './Steps'
+import { InformacionOC, InformacionPago, PlanDeCompras, Step4 } from './Steps'
 import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
@@ -74,10 +74,10 @@ function OC() {
 	const isDisabled = false
 	return (
 		<Grid container>
-			<Step1 title="Información de la orden de compra" {...props} />
-			<Step2 title="Información sobre el pago" {...props} />
-			<Step3 title="Plan de compras" {...props} />
-			<Step5 title="Autorización" {...props} />
+			<InformacionOC title="Información de la orden de compra" {...props} />
+			<InformacionPago title="Información sobre el pago" {...props} />
+			<PlanDeCompras title="Plan de compras" {...props} />
+			<Step4 title="Autorización" {...props} />
 			<Grid
 				item
 				md={12}
