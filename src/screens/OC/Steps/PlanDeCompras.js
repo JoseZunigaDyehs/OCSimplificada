@@ -158,7 +158,7 @@ function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 			<Typography variant="h3" className={classes.title}>
 				{title}
 			</Typography>
-			<Grid container className={classes.root} spacing={3}>
+			<Grid container className={classes.root}>
 				<Grid item md={9} xs={12}>
 					<Grid className={classes.wrapper}>
 						<RadioButton

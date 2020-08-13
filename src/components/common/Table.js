@@ -9,14 +9,11 @@ import TableRow from '@material-ui/core/TableRow'
 import TablePagination from '@material-ui/core/TablePagination'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import { TextInput } from './fieldsForm'
+import { TextInput } from '../fieldsForm'
 import useForm from 'hooks/useForm'
 import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(({ spacing }) => ({
-	table: {
-		minWidth: 650,
-	},
 	wrapper: {
 		padding: spacing(2),
 	},
@@ -89,7 +86,7 @@ function Table({
 				{...fieldsById.search}
 			/>
 			<TableContainer component={Paper}>
-				<TableMui className={classes.table} aria-label="simple table">
+				<TableMui aria-label="simple table">
 					<TableHead>
 						<TableRow>
 							{columns.map(({ align = 'left', title, index }) => (
