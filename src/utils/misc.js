@@ -26,3 +26,20 @@ export const formatThousand = value => {
 	value = nfObject.format(value)
 	return value.replace(/,/g, `.`)
 }
+
+export const stringFromArray = array => {
+	let nextErrors = ``
+	array.forEach(e => {
+		nextErrors += `${e} \n`
+	})
+	return nextErrors
+}
+
+export const handleError = error => {
+	if (Array.isArray(error)) {
+		return stringFromArray(error)
+	} else if (typeof error === `string` && error.length > 0) {
+		return error
+	}
+	return `Ha ocurrido un problema inesperado, por favor intentar más tarde.`
+}

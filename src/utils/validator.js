@@ -22,7 +22,7 @@ export const validator = {
 	//String / min y max del string,
 	//pasandole un atributo min y max
 	range: ({ value, min, max }) => {
-		return value !== '' && value.length > min && value.length < max
+		return value !== '' && value.length >= min && value.length <= max
 	},
 	//String / valida Money
 	money: ({ value }) => {

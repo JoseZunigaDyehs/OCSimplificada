@@ -4,6 +4,7 @@ import ModalWrapper from './common/ModalWrapper'
 import Button from './common/Button'
 import Table from './common/Table'
 import Divider from './common/Divider'
+import SnackBar from './common/SnackBar'
 //
 import TextWrapper from './TextWrapper'
 import Header from './Header'
@@ -13,6 +14,7 @@ import ListItems from './ListItems'
 export {
 	Header,
 	ModalWrapper,
+	SnackBar,
 	Divider,
 	TextWrapper,
 	Loader,

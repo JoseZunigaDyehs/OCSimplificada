@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
-//import API from 'config/api'
+import API from 'config/api'
 import { Loader } from 'components'
 import { ordenDataMock } from 'mockup'
-import { sortBy } from 'utils'
+import { sortBy, handleError } from 'utils'
+import { useFeedback } from './FeedbackContext'
 
 const OrdenContext = React.createContext()
 
@@ -10,6 +11,7 @@ const OrdenContext = React.createContext()
 function OrdenProvider({ children }) {
 	const [loading, setLoading] = useState(true)
 	const [orden, setOrden] = useState(null)
+	const { setFeedback } = useFeedback()
 
 	const setOrderState = nextState => {
 		setOrden(prev => ({ ...prev, ...nextState }))
@@ -54,16 +56,23 @@ function OrdenProvider({ children }) {
 		const getOrden = async () => {
 			try {
 				setLoading(true)
-				//const nextUser = await API.me(null)
-				setOrden(ordenDataMock)
+				const response = await API.getInitialData()
+				setOrden({
+					...response,
+					autorizadoresData: [],
+					itemsByProyectoId: {},
+					proyectos: [],
+				})
+				//setOrden(ordenDataMock)
 				setLoading(false)
 			} catch (error) {
+				setFeedback({ message: handleError(error), open: true, type: 'error' })
 				setLoading(false)
 			}
 		}
 		getOrden()
 	}, [])
-	console.log(JSON.stringify(orden))
+	//console.log(JSON.stringify(orden))
 	return (
 		<OrdenContext.Provider
 			value={{

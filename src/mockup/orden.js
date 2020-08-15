@@ -29,8 +29,6 @@ export const unidadCompra = [
 	{ id: '1', label: 'Unidad 1' },
 	{ id: '2', label: 'Unidad 2' },
 	{ id: '3', label: 'Unidad 3' },
-	{ id: '4', label: 'Unidad 4' },
-	{ id: '5', label: 'Unidad 5' },
 ]
 export const proyectos = [
 	{ id: '1', nombre: 'Proyecto 1' },
@@ -131,8 +129,6 @@ const autorizadoresData = [
 	{ id: '4', nombre: 'Nombre 4', apellido: 'Apellido 4', cargo: 'Cargo 4' },
 ]
 
-//TODO: LLenar la data (FILL) en el useEffect ([])
-
 export const ordenDataMock = {
 	ordenId: '2241-09-AG20',
 	convenioMarco: '123-12-COtoS',
@@ -140,7 +136,6 @@ export const ordenDataMock = {
 	regionLabel: 'Metropolitana de Santiago',
 	withDireccionDespacho: true, // Si puede tener dirección de despacho
 	direccionDespacho: {
-		// TODO: Sacar  la modal
 		id: 1,
 		label: 'Primera direccion 1111',
 		comunaId: '13110',
@@ -151,13 +146,13 @@ export const ordenDataMock = {
 			{ nombre: 'Producto  2', unitario: 58890 },
 			{ nombre: 'Producto  3', unitario: 58890 },
 		],
-		subtotal: 143667844, // TODO: ESTO SACARLO DESDE EL FRONT????
+		subtotal: 143667844,
 	},
-	pago30Dias: true, // Si ha seleccionado pago mayor a 30 días //TODO: ESTO VERLO EN EL VALUE DEL INPUT SACARLO DE ARRIBA
+	pago30Dias: true,
 
-	nombreOC: 'Este es el nombre de la OC', // TODO: FILL
-	despachoObservacion: 'Este es la instruccion de despacho', //TODO: FILL
-	plazoPago: '1', //TODO: FILL
+	nombreOC: 'Este es el nombre de la OC',
+	despachoObservacion: 'Este es la instruccion de despacho',
+	plazoPago: '3',
 	pagoJustificacion: 'Esta es la justificación',
 	nombreContactoCompra: 'Maite',
 	apellidoContactooCompra: 'Ignacy',
@@ -178,14 +173,14 @@ export const ordenDataMock = {
 	documentosAdjuntos: [], // Listado y state
 
 	direccionesFactura, // Listado
-	proyectos, //Listado
-	autorizadoresData, // Listado
-	itemsByProyectoId, // Listado Items por proyecto (Plandecompras)
+	proyectos: [], //Listado
+	autorizadoresData: [], // Listado
+	itemsByProyectoId: {}, // Listado Items por proyecto (Plandecompras)
 	resumeOC: {
 		razonSocialProveedor: 'Razón Social Proveedor',
 		rut: '96.000.000-0',
 		neto: 5000133,
-		impuestos: 60987, // TODO: ESTO SACARLO DESDE EL FRONT????
-		total: 1080954, // TODO: ESTO SACARLO DESDE EL FRONT????
+		impuestos: 60987,
+		total: 1080954,
 	},
 }

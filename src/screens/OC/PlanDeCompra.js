@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Select } from 'components/fieldsForm'
 import { Table, Divider, ListItems, Button } from 'components'
 import Grid from '@material-ui/core/Grid'
@@ -9,7 +9,10 @@ import {
 } from './data'
 import useForm from 'hooks/useForm'
 import { makeStyles } from '@material-ui/core/styles'
-import { sortBy } from 'utils'
+import { sortBy, handleError } from 'utils'
+import API from 'config/api'
+import { useFeedback } from 'context'
+import { unidadCompra, itemsByProyectoId } from 'mockup'
 
 const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 	title: {
@@ -41,7 +44,6 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }) => ({
 function PlanDeCompra({
 	title = '',
 	subTitle = '',
-	dataSource = [],
 	columns = [],
 	items,
 	goBack = null,
@@ -49,7 +51,16 @@ function PlanDeCompra({
 	isAutorizadores = true,
 }) {
 	const classes = useStyles()
-	const { fieldsById, onFocusHandle, onChangefield, setFieldsById } = useForm({
+	const [loading, setLoading] = useState(false)
+	const [dataSource, setDataSource] = useState([])
+	const { setFeedback } = useFeedback()
+	const {
+		fieldsById,
+		onFocusHandle,
+		onChangefield,
+		setFieldsById,
+		setLoadingField,
+	} = useForm({
 		defaultFieldsById: isAutorizadores
 			? autorizadoresfiltersFieldsById
 			: itemsAsociadosfiltersFieldsById,
@@ -59,35 +70,95 @@ function PlanDeCompra({
 		if (!isAutorizadores) {
 			const {
 				anios: { value },
-				unidad_compra,
 			} = fieldsById
 			if (value !== -1) {
-				if (unidad_compra.value !== -1) {
-					//TODO: Buscar DATA (API)
+				const getUnidadCompraByAnio = async value => {
+					try {
+						setLoadingField({ name: 'unidad_compra', loading: true })
+						//const items = await API.getUnidadCompraByAnio(value)
+						setTimeout(() => {
+							setFieldsById({
+								...fieldsById,
+								unidad_compra: {
+									...fieldsById.unidad_compra,
+									items: unidadCompra,
+									disabled: false,
+									loading: false,
+									value: -1,
+									isValid: true,
+									status: 'default',
+								},
+							})
+						}, 1000)
+					} catch (error) {
+						setLoadingField({ name: 'unidad_compra', loading: false })
+						setFeedback({
+							message: handleError(error),
+							type: 'error',
+							open: true,
+						})
+					}
 				}
-				setFieldsById({
-					...fieldsById,
-					unidad_compra: {
-						...fieldsById.unidad_compra,
-						disabled: false,
-					},
-				})
+				getUnidadCompraByAnio(value)
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fieldsById.anios])
+	}, [fieldsById.anios.value])
 	useEffect(() => {
 		const {
 			unidad_compra: { value },
 		} = fieldsById
 		if (value !== -1) {
 			//TODO: Traer DATA por búsqueda (API)
+			const getItemsByProyectoId = async () => {
+				try {
+					setLoading(true)
+					//const itemsByProyectoId = await API.getItemsByProyectoId(value)
+					setTimeout(() => {
+						setDataSource(itemsByProyectoId[value])
+						setLoading(false)
+					}, 1000)
+				} catch (error) {
+					setLoading(false)
+					setFeedback({
+						message: handleError(error),
+						type: 'error',
+						open: true,
+					})
+				}
+			}
+			getItemsByProyectoId()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fieldsById.unidad_compra.value])
+	useEffect(() => {
+		const getUnidadCompra = async value => {
+			try {
+				setLoadingField({ name: 'unidad_compra', loading: true })
+				//const items = await API.getUnidadCompra()
+				setTimeout(() => {
+					setFieldsById({
+						...fieldsById,
+						unidad_compra: {
+							...fieldsById.unidad_compra,
+							items: unidadCompra,
+							loading: false,
+						},
+					})
+				}, 1000)
+			} catch (error) {
+				setLoadingField({ name: 'unidad_compra', loading: false })
+				setFeedback({
+					message: handleError(error),
+					type: 'error',
+					open: true,
+				})
+			}
+		}
+		getUnidadCompra()
+	}, [])
 
 	const nextDataSource = sortBy({ array: dataSource, key: 'nombre' })
-
 	return (
 		<Grid item sm={12}>
 			<Grid container className={classes.wrapper} spacing={3}>
@@ -121,7 +192,11 @@ function PlanDeCompra({
 						className={classes.wrapperSectionTable}
 					>
 						{subTitle && <Typography>{subTitle}</Typography>}
-						<Table columns={columns} dataSource={nextDataSource} />
+						<Table
+							loading={loading}
+							columns={columns}
+							dataSource={nextDataSource}
+						/>
 					</Grid>
 				</Grid>
 				<Grid item md={4} sm={12}>

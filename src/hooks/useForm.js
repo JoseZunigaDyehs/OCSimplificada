@@ -59,13 +59,20 @@ function useForm({ defaultFieldsById }) {
 	}
 	const onChangefield = ({ name, value }) => {
 		const nextField = fieldsById[name]
-		nextField.value = value
+		let nextValue = value
+		if (nextField.rule.type === 'range') {
+			nextValue = value.substr(0, nextField.rule.max)
+		}
+		nextField.value = nextValue
 		nextField.isValid = validate(nextField)
 		nextField.status = getStatus({ ...nextField })
 		setFieldsById(prev => ({
 			...prev,
 			[name]: { ...[name], ...nextField },
 		}))
+	}
+	const setLoadingField = ({ name, loading }) => {
+		setFieldsById({ ...fieldsById, [name]: { ...fieldsById[name], loading } })
 	}
 	return {
 		fieldsById,
@@ -74,6 +81,7 @@ function useForm({ defaultFieldsById }) {
 		setFieldsById,
 		format,
 		isAllValid,
+		setLoadingField,
 	}
 }
 

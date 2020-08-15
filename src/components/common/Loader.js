@@ -5,16 +5,16 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(({ spacing, palette }) => ({
 	loading: {
-		padding: spacing(5),
-		background: `white`,
+		background: `trasparent`,
 	},
 	icon: {
 		color: palette.primary.main,
 	},
 }))
 
-function Loader({ height = `100vh` }) {
+function Loader({ height = `100vh`, type = 'default' }) {
 	const classes = useStyles()
+	const sizeIcon = type == 'input' ? '20px' : '56px'
 	return (
 		<Grid
 			className={classes.loading}
@@ -25,7 +25,13 @@ function Loader({ height = `100vh` }) {
 			alignItems="center"
 			style={{ height }}
 		>
-			<CircularProgress className={classes.icon} />
+			<CircularProgress
+				style={{
+					height: sizeIcon,
+					width: sizeIcon,
+				}}
+				className={classes.icon}
+			/>
 		</Grid>
 	)
 }

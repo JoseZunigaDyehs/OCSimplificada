@@ -37,7 +37,7 @@ const styles = makeStyles(() => ({
 	},
 }))
 
-function IconInput({ status }) {
+function IconInput({ status, type }) {
 	if (status === 'default' || status === 'focused') return null
 	return (
 		<InputAdornment>
@@ -61,6 +61,7 @@ function TextInput({
 	status,
 	onFocusHandle,
 	rows = 4,
+	mode,
 	...rest
 }) {
 	const classes = styles()
@@ -76,6 +77,11 @@ function TextInput({
 			{...rest}
 		>
 			<OutlinedInput
+				startAdornment={
+					mode === 'phone' ? (
+						<InputAdornment position="start">+56</InputAdornment>
+					) : null
+				}
 				onChange={({ target: { name, value } }) => onChange({ name, value })}
 				id={name}
 				classes={classes}
@@ -86,7 +92,7 @@ function TextInput({
 				disabled={disabled}
 				placeholder={placeholder}
 				value={value === null ? '' : value}
-				endAdornment={<IconInput status={status} />}
+				endAdornment={<IconInput status={status} type={type} />}
 				onFocus={({ target: { name } }) => {
 					onFocusHandle({ name, isFocused: true })
 				}}

@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import { TextInput } from '../fieldsForm'
 import useForm from 'hooks/useForm'
 import Typography from '@material-ui/core/Typography'
+import Loader from './Loader'
 
 const useStyles = makeStyles(({ spacing }) => ({
 	wrapper: {
@@ -26,6 +27,7 @@ function Table({
 	columns = [],
 	totalData = 100,
 	getData = () => {},
+	loading = false,
 }) {
 	const classes = useStyles()
 	const [dataFiltered, setDataFiltered] = useState(dataSource)
@@ -87,36 +89,44 @@ function Table({
 			/>
 			<TableContainer component={Paper}>
 				<TableMui aria-label="simple table">
-					<TableHead>
-						<TableRow>
-							{columns.map(({ align = 'left', title, index }) => (
-								<TableCell key={index} align={align}>
-									{title}
-								</TableCell>
-							))}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{dataFiltered.length === 0 && (
-							<Grid className={classes.wrapper}>
-								<Typography>No existen datos</Typography>
-							</Grid>
-						)}
-						{dataFiltered.map((row, i) => (
-							<TableRow key={i}>
-								{columns.map(({ index, align = 'left', render = null }, j) => (
-									<TableCell
-										key={`${j * i}-${index}`}
-										component="th"
-										scope="row"
-										align={align}
-									>
-										{render ? render(row) : row[index]}
-									</TableCell>
+					{loading ? (
+						<Loader height="100px" />
+					) : (
+						<React.Fragment>
+							<TableHead>
+								<TableRow>
+									{columns.map(({ align = 'left', title, index }) => (
+										<TableCell key={index} align={align}>
+											{title}
+										</TableCell>
+									))}
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{dataFiltered.length === 0 && (
+									<Grid className={classes.wrapper}>
+										<Typography>No existen datos</Typography>
+									</Grid>
+								)}
+								{dataFiltered.map((row, i) => (
+									<TableRow key={i}>
+										{columns.map(
+											({ index, align = 'left', render = null }, j) => (
+												<TableCell
+													key={`${j * i}-${index}`}
+													component="th"
+													scope="row"
+													align={align}
+												>
+													{render ? render(row) : row[index]}
+												</TableCell>
+											)
+										)}
+									</TableRow>
 								))}
-							</TableRow>
-						))}
-					</TableBody>
+							</TableBody>
+						</React.Fragment>
+					)}
 				</TableMui>
 			</TableContainer>
 			<TablePagination

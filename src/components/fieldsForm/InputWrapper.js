@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { useStyles } from '../styles/useInputWrapperStyles'
+import Loader from 'components/common/Loader'
 
 function InputWrapper({
 	label,
@@ -12,6 +13,7 @@ function InputWrapper({
 	value,
 	md = 12,
 	paddingPosition,
+	loading,
 	children,
 }) {
 	const classes = useStyles()
@@ -52,7 +54,7 @@ function InputWrapper({
 					type === 'radio' ? classes.noBorder : classes[status]
 				}`}
 			>
-				{children}
+				{loading ? <Loader height="40px" type="input" /> : children}
 			</Grid>
 			<Grid container justify="space-between" className={classes.bottomWrapper}>
 				<Typography color="error" className={classes.invalidText}>

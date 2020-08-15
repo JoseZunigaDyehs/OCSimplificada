@@ -10,7 +10,7 @@ import { OCForm } from './data'
 import useForm from 'hooks/useForm'
 import ModalConfig from './ModalConfig'
 import { useOrden } from 'context'
-import { Button } from 'components'
+import { Button, Loader } from 'components'
 import { goBack } from 'utils'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
@@ -89,7 +89,7 @@ function OC() {
 	}, [fieldsById.plazoPago.value])
 
 	if (loading) {
-		return 'LOADING'
+		return <Loader />
 	}
 
 	const props = {
@@ -98,8 +98,7 @@ function OC() {
 		onFocusHandle: onFocusHandle,
 		setModalConfig: setModalConfig,
 	}
-	const isInvalid = isAllValid()
-	// const isDisabled = isDisabledForm({ fieldsById, isInvalid })
+	// const isDisabled = isDisabledForm({ fieldsById, isAllValid })
 	const isDisabled = false
 	return (
 		<Grid container>

@@ -26,6 +26,7 @@ function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 		orden: { proyectosPlanCompra, itemsByProyectoId, proyectos },
 		removeProyectosPlanDeCompra,
 	} = useOrden()
+	console.log(proyectos)
 
 	const handleAsociar = id => {
 		const nextProyectosPlanCompra = proyectosPlanCompra
@@ -152,7 +153,7 @@ function PlanDeCompras({ title = '', fieldsById, onChange, onFocusHandle }) {
 	}, [proyectoSelected.current, itemsByProyectoId])
 	const project = proyectos.find(x => x.id === proyectoSelected.current)
 	const projectName = project ? project.nombre : ''
-
+	console.log(itemsByProyectoId)
 	return (
 		<Grid container direction="column">
 			<Typography variant="h3" className={classes.title}>
