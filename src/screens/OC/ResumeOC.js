@@ -3,6 +3,8 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { Divider } from 'components'
 import { makeStyles } from '@material-ui/core/styles'
+import { useOrden } from 'context'
+import { formatThousand } from 'utils'
 
 const useStyles = makeStyles(
 	({ spacing, fontSizes, shadows, fontWeights, palette }) => ({
@@ -42,6 +44,11 @@ const useStyles = makeStyles(
 
 function ResumeOC() {
 	const classes = useStyles()
+	const {
+		orden: {
+			resumeOC: { impuestos, neto, razonSocialProveedor, rut, total },
+		},
+	} = useOrden()
 	return (
 		<Grid className={classes.wrapperResume} container direction="column">
 			<Typography
@@ -50,8 +57,8 @@ function ResumeOC() {
 			>
 				RESUMEN DE TU ORDEN DE COMPRA
 			</Typography>
-			<Typography>Razón Social Proveedor</Typography>
-			<Typography className={classes.mb2}>RUT: 96.000.000.0</Typography>
+			<Typography>{razonSocialProveedor}</Typography>
+			<Typography className={classes.mb2}>RUT: {rut}</Typography>
 			<Grid item xs={12}>
 				<Divider />
 			</Grid>
@@ -66,7 +73,7 @@ function ResumeOC() {
 					variant="caption"
 					className={`${classes.titleResume} ${classes.fwLight} ${classes.mb1}`}
 				>
-					$500.133
+					${formatThousand(neto)}
 				</Typography>
 			</Grid>
 			<Grid container justify="space-between">
@@ -77,7 +84,7 @@ function ResumeOC() {
 					Impuestos
 				</Typography>
 				<Typography variant="caption" className={classes.titleResume}>
-					$60.987
+					${formatThousand(impuestos)}
 				</Typography>
 			</Grid>
 			<Grid item xs={12} className={classes.mb1}>
@@ -91,7 +98,7 @@ function ResumeOC() {
 				</Grid>
 				<Grid item md={6} container justify="flex-end">
 					<Typography variant="h4" className={classes.titleBold}>
-						$ 1.080.954
+						${formatThousand(total)}
 					</Typography>
 				</Grid>
 			</Grid>

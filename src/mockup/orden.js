@@ -139,12 +139,13 @@ export const ordenDataMock = {
 		id: 1,
 		label: 'Primera direccion 1111',
 		comunaId: '13110',
+		comunaLabel: 'Santiago',
 	},
 	detalleProductos: {
 		productos: [
-			{ nombre: 'Producto  1', unitario: 58890 },
-			{ nombre: 'Producto  2', unitario: 58890 },
-			{ nombre: 'Producto  3', unitario: 58890 },
+			{ nombre: 'Producto  1', unitario: 58890, cantidad: 2, id: 123456 },
+			{ nombre: 'Producto  2', unitario: 58890, cantidad: 1, id: 123457 },
+			{ nombre: 'Producto  3', unitario: 58890, cantidad: 1, id: 123458 },
 		],
 		subtotal: 143667844,
 	},
@@ -155,7 +156,7 @@ export const ordenDataMock = {
 	plazoPago: '3',
 	pagoJustificacion: 'Esta es la justificación',
 	nombreContactoCompra: 'Maite',
-	apellidoContactooCompra: 'Ignacy',
+	apellidoContactoCompra: 'Ignacy',
 	telefonoContactoCompra: '987675536', //TODO: Agregar el +56
 	emailContactoCompra: 'ma.ignacy@gmail.com',
 	nombreContactoPago: 'Maite',
@@ -182,5 +183,12 @@ export const ordenDataMock = {
 		neto: 5000133,
 		impuestos: 60987,
 		total: 1080954,
+	},
+	totals: {
+		totalConvenio: 120000,
+		subtotal: 120000,
+		iva: 22800,
+		impuestos: 0,
+		totalFinal: 142800,
 	},
 }

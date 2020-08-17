@@ -57,13 +57,13 @@ function OrdenProvider({ children }) {
 			try {
 				setLoading(true)
 				const response = await API.getInitialData()
-				setOrden({
-					...response,
-					autorizadoresData: [],
-					itemsByProyectoId: {},
-					proyectos: [],
-				})
-				//setOrden(ordenDataMock)
+				// setOrden({
+				// 	...response,
+				// 	autorizadoresData: [],
+				// 	itemsByProyectoId: {},
+				// 	proyectos: [],
+				// })
+				setOrden(ordenDataMock)
 				setLoading(false)
 			} catch (error) {
 				setFeedback({ message: handleError(error), open: true, type: 'error' })
@@ -72,7 +72,7 @@ function OrdenProvider({ children }) {
 		}
 		getOrden()
 	}, [])
-	//console.log(JSON.stringify(orden))
+	console.log(orden)
 	return (
 		<OrdenContext.Provider
 			value={{

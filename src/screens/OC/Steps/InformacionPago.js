@@ -61,7 +61,7 @@ function InformacionPago({
 									{...inputProps}
 								/>
 								<TextInput
-									{...fieldsById.apellidoContactooCompra}
+									{...fieldsById.apellidoContactoCompra}
 									{...inputProps}
 								/>
 								<TextInput

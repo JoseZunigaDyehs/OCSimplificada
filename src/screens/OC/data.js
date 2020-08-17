@@ -67,8 +67,8 @@ export const OCForm = {
 			rule: { type: 'range', min: 1, max: 50 },
 			md: 3,
 		},
-		apellidoContactooCompra: {
-			name: 'apellidoContactooCompra',
+		apellidoContactoCompra: {
+			name: 'apellidoContactoCompra',
 			label: 'Apellido',
 			required: true,
 			isValid: true,

@@ -8,6 +8,7 @@ import Resume from './Resume'
 import Pago from './Pago'
 import Totals from './Totals'
 import NotifyModal from './NotifyModal'
+import { useOrden } from 'context'
 
 const useStyles = makeStyles(({ spacing, palette, fontWeights }) => ({
 	root: {
@@ -46,14 +47,35 @@ const useStyles = makeStyles(({ spacing, palette, fontWeights }) => ({
 	},
 }))
 
-//TODO: Llenar data desde context
-//TODO: API para guardar
-//TODO: Levantar Modal de Notificación
 function Autorizar() {
 	const classes = useStyles()
 	const [modal, setModal] = useState(false)
+	const {
+		orden: {
+			detalleProductos,
+			regionLabel,
+			withDireccionDespacho,
+			direccionDespacho,
+			plazoPago,
+			nombreContactoCompra,
+			apellidoContactoCompra,
+			direccionEnvioFactura,
+			totals,
+		},
+	} = useOrden()
 	const onAccept = () => {
 		setModal(true)
+	}
+	const resumeProps = {
+		regionLabel,
+		withDireccionDespacho,
+		direccionDespacho: `${direccionDespacho.label}, ${direccionDespacho.comunaLabel}`,
+		detalleProductos,
+	}
+	const pagoProps = {
+		plazoPago,
+		contacto: `${nombreContactoCompra} ${apellidoContactoCompra}`,
+		direccionEnvioFactura,
 	}
 	return (
 		<Grid container className={classes.root}>
@@ -61,9 +83,9 @@ function Autorizar() {
 				<Typography variant="h3">Resumen</Typography>
 				<Typography variant="subtitle2">Producto/Servicio</Typography>
 			</Grid>
-			<Resume classes={classes} />
-			<Pago classes={classes} />
-			<Totals classes={classes} />
+			<Resume {...resumeProps} classes={classes} />
+			<Pago {...pagoProps} classes={classes} />
+			<Totals {...totals} classes={classes} />
 			<Grid
 				item
 				xs={12}
